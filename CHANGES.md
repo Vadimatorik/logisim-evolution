@@ -3,6 +3,7 @@
 # Changes #
 
 * @dev (????-??-??)
+  * Added TTL 74390: dual decade ripple counter (@Vadimatorik).
 
 * v5.0.0 (2026-09-12)
   * Improved visual representation of Pull Resistor component (@V-Zemlyakov).
