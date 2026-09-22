@@ -33,10 +33,11 @@ import java.awt.Graphics2D;
  *
  * <p>Model based on the
  * <a href="https://assets.nexperia.com/documents/data-sheet/74HC_HCT123.pdf">74HC123 datasheet</a>.
- * Each half follows the datasheet function table. External timing pins are not logic nets. Pulse
- * width uses the 5 V formula {@code tW = 0.45 × Rext(kΩ) × Cext(pF)} nanoseconds, for Cext above
- * 10 nF, and is counted in simulator ticks: {@code max(1, round(tW × tickFrequency))}. The width
- * is captured when the pulse starts. A short pulse at a low tick rate therefore lasts one tick.
+ * Each half follows the datasheet function table. External timing pins are not logic nets: the
+ * simulator has no analog RC model. Pulse width uses the 5 V formula {@code tW = 0.45 × Rext(kΩ) ×
+ * Cext(pF)} nanoseconds, for Cext above 10 nF, and is counted in simulator ticks: {@code max(1,
+ * round(tW × tickFrequency))}. The width is stored on the instance when the pulse starts. A short
+ * pulse at a low tick rate therefore lasts one tick. There is no HDL model.
  */
 public class Ttl74123 extends AbstractTtlGate implements TickAware {
   /**
@@ -74,7 +75,7 @@ public class Ttl74123 extends AbstractTtlGate implements TickAware {
   public static final Attribute<Integer> CEXT_2 =
       Attributes.forIntegerRange("2Cext", S.getter("ttl74123Cext2"), 10_000, 1_000_000_000);
 
-  private static final int DELAY = 1;
+  private static final int DELAY = 4;
   private static final int HALVES = 2;
   private static final int DEFAULT_REXT_KOHM = 10;
   private static final int DEFAULT_CEXT_PF = 100_000;
@@ -97,10 +98,6 @@ public class Ttl74123 extends AbstractTtlGate implements TickAware {
   private static final int[] RD_PORTS = {PORT_INDEX_1RD, PORT_INDEX_2RD};
   private static final int[] Q_PORTS = {PORT_INDEX_1Q, PORT_INDEX_2Q};
   private static final int[] QBAR_PORTS = {PORT_INDEX_1QBAR, PORT_INDEX_2QBAR};
-  private static final Attribute<Integer>[] REXT = attributePair(REXT_1, REXT_2);
-  private static final Attribute<Integer>[] CEXT = attributePair(CEXT_1, CEXT_2);
-
-  private double tickFrequencyOverrideHz = Double.NaN;
 
   /** Creates a 74123 dual retriggerable monostable. */
   public Ttl74123() {
@@ -152,14 +149,9 @@ public class Ttl74123 extends AbstractTtlGate implements TickAware {
   }
 
   /**
-   * Supplies the tick frequency used to convert R and C when the simulator is not available.
-   * Unit tests have no project.
+   * Ends any pulse whose captured width has elapsed. Returns true when an output must change.
+   * {@link #tick} performs the same update for a placed component.
    */
-  void setTickFrequencyForTest(double hertz) {
-    tickFrequencyOverrideHz = hertz;
-  }
-
-  /** Ends any pulse whose captured width has elapsed. Returns true when an output must change. */
   boolean expire(InstanceState state, int ticks) {
     final var data = (MonostableData) state.getData();
     return data != null && data.expire(ticks);
@@ -202,8 +194,8 @@ public class Ttl74123 extends AbstractTtlGate implements TickAware {
     for (var half = 0; half < HALVES; half++) {
       final var ticks =
           widthTicks(
-              painter.getAttributeValue(REXT[half]),
-              painter.getAttributeValue(CEXT[half]),
+              painter.getAttributeValue(rextAttribute(half)),
+              painter.getAttributeValue(cextAttribute(half)),
               frequency);
       final var active = data != null && data.halves[half].active;
       gfx.setColor(active ? Value.TRUE.getColor() : Color.BLACK);
@@ -224,8 +216,8 @@ public class Ttl74123 extends AbstractTtlGate implements TickAware {
       section.startedAt = state.getTickCount();
       section.widthTicks =
           widthTicks(
-              state.getAttributeValue(REXT[half]),
-              state.getAttributeValue(CEXT[half]),
+              state.getAttributeValue(rextAttribute(half)),
+              state.getAttributeValue(cextAttribute(half)),
               tickFrequencyHz(state));
     }
     section.inputA = inputA;
@@ -253,10 +245,15 @@ public class Ttl74123 extends AbstractTtlGate implements TickAware {
     return risingB || fallingA || risingReset;
   }
 
+  private static Attribute<Integer> rextAttribute(int half) {
+    return half == 0 ? REXT_1 : REXT_2;
+  }
+
+  private static Attribute<Integer> cextAttribute(int half) {
+    return half == 0 ? CEXT_1 : CEXT_2;
+  }
+
   private double tickFrequencyHz(InstanceState state) {
-    if (!Double.isNaN(tickFrequencyOverrideHz)) {
-      return tickFrequencyOverrideHz;
-    }
     final var project = projectOf(state);
     if (project != null && project.getSimulator() != null) {
       final var frequency = project.getSimulator().getTickFrequency();
@@ -282,12 +279,6 @@ public class Ttl74123 extends AbstractTtlGate implements TickAware {
       state.setData(data);
     }
     return data;
-  }
-
-  @SuppressWarnings("unchecked")
-  private static Attribute<Integer>[] attributePair(
-      Attribute<Integer> first, Attribute<Integer> second) {
-    return new Attribute[] {first, second};
   }
 
   private static final class Half {
