@@ -3,10 +3,12 @@
  * Open Serial Monitor at 115200 baud and send any character to start.
  * The last line is "RESULT PASS" or "RESULT FAIL ...".
  *
- * PE, CEP and CET are active low. U/D high counts up. CP counts on the rising
- * edge. TC is active low and follows the current count without a clock.
- * Outputs are push-pull, so Q and TC are read directly. Until the check
- * starts, CP stays low and PE, CEP and CET stay high.
+ * CEP, CET, PE and TC are active low. A high U/D counts up. CP counts or loads
+ * on the rising edge. A low PE loads D0-D3 even when both count enables are
+ * low. TC is low only when CET is low and the code is terminal for the
+ * direction: 15 while counting up, 0 while counting down. Outputs are
+ * push-pull. CP stays low and PE, CEP and CET stay high until the check starts.
+ * D13 follows Q1, so the board LED tracks that bit.
  */
 
 const uint8_t PIN_UD = 2;
@@ -27,15 +29,16 @@ const uint8_t PIN_TC = A1;
 bool failed = false;
 char resultLine[96];
 
-void settle() { delay(1); }
-
-void noteFailure(const char* step, uint8_t expectedQ, bool expectedTcHigh, uint8_t actualQ,
-                 bool actualTcHigh) {
+void noteFailure(const char* step, uint8_t expectedQ, bool expectedTcLow, uint8_t actualQ,
+                 bool actualTcLow) {
   if (failed) return;
   failed = true;
-  snprintf(resultLine, sizeof(resultLine), "RESULT FAIL %s expected Q %X TC %c got Q %X TC %c",
-           step, expectedQ, expectedTcHigh ? 'H' : 'L', actualQ, actualTcHigh ? 'H' : 'L');
+  snprintf(resultLine, sizeof(resultLine),
+           "RESULT FAIL %s expected Q=%02X TC=%c got Q=%02X TC=%c", step, expectedQ,
+           expectedTcLow ? 'L' : 'H', actualQ, actualTcLow ? 'L' : 'H');
 }
+
+void settle() { delay(1); }
 
 void setData(uint8_t value) {
   digitalWrite(PIN_D0, (value & 1) ? HIGH : LOW);
@@ -53,17 +56,16 @@ uint8_t readQ() {
   return value;
 }
 
-void expect(uint8_t q, bool tcHigh, const char* step) {
-  if (failed) return;
+void expectState(uint8_t expectedQ, bool expectedTcLow, const char* step) {
   settle();
   const uint8_t actualQ = readQ();
-  const bool actualTcHigh = digitalRead(PIN_TC) == HIGH;
-  if (actualQ != q || actualTcHigh != tcHigh) {
-    noteFailure(step, q, tcHigh, actualQ, actualTcHigh);
+  const bool actualTcLow = digitalRead(PIN_TC) == LOW;
+  if (actualQ != expectedQ || actualTcLow != expectedTcLow) {
+    noteFailure(step, expectedQ, expectedTcLow, actualQ, actualTcLow);
   }
 }
 
-void rising() {
+void pulse() {
   digitalWrite(PIN_CP, LOW);
   settle();
   digitalWrite(PIN_CP, HIGH);
@@ -76,7 +78,7 @@ void load(uint8_t value) {
   digitalWrite(PIN_CEP, HIGH);
   digitalWrite(PIN_CET, HIGH);
   digitalWrite(PIN_PE, LOW);
-  rising();
+  pulse();
   digitalWrite(PIN_PE, HIGH);
 }
 
@@ -89,85 +91,72 @@ void armCount(bool up) {
 }
 
 void runChecks() {
-  const uint8_t loads[] = {0, 1, 7, 15, 10};
-  for (uint8_t index = 0; index < sizeof(loads); index++) {
-    load(loads[index]);
-    expect(loads[index], true, "load");
+  const uint8_t codes[] = {0, 1, 7, 10, 15};
+  for (uint8_t index = 0; index < 5; index++) {
+    load(codes[index]);
+    expectState(codes[index], false, "load");
   }
-  if (failed) return;
 
-  load(0);
-  armCount(true);
-  expect(0, true, "up-start");
-  for (uint8_t count = 1; count <= 15; count++) {
-    rising();
-    expect(count, count != 15, "up");
-  }
-  rising();
-  expect(0, true, "up-wrap");
-  if (failed) return;
-
-  digitalWrite(PIN_UD, LOW);
-  settle();
-  expect(0, false, "down-at-zero");
-  rising();
-  expect(15, true, "down-from-zero");
-  for (uint8_t count = 14; count > 0; count--) {
-    rising();
-    expect(count, true, "down");
-  }
-  rising();
-  expect(0, false, "down-wrap");
-  if (failed) return;
-
-  load(15);
-  armCount(true);
-  expect(15, false, "cet-low-at-15");
-  digitalWrite(PIN_CET, HIGH);
-  settle();
-  expect(15, true, "cet-high-at-15");
-  rising();
-  expect(15, true, "cet-hold");
-
-  digitalWrite(PIN_CET, LOW);
-  digitalWrite(PIN_CEP, HIGH);
-  settle();
-  expect(15, false, "cep-high-tc");
-  rising();
-  expect(15, false, "cep-hold");
-  if (failed) return;
-
-  setData(3);
+  setData(5);
+  digitalWrite(PIN_UD, HIGH);
   digitalWrite(PIN_CEP, LOW);
   digitalWrite(PIN_CET, LOW);
   digitalWrite(PIN_PE, LOW);
-  digitalWrite(PIN_UD, HIGH);
-  rising();
-  expect(3, true, "load-priority");
+  pulse();
   digitalWrite(PIN_PE, HIGH);
-
-  digitalWrite(PIN_CP, LOW);
-  settle();
-  expect(3, true, "falling-edge");
-  digitalWrite(PIN_CP, HIGH);
-  settle();
-  expect(4, true, "rising-after-fall");
-  if (failed) return;
+  expectState(5, false, "load-over-count");
 
   load(0);
   armCount(true);
+  expectState(0, false, "up-0");
+  for (uint8_t count = 1; count <= 15; count++) {
+    pulse();
+    expectState(count, count == 15, count == 15 ? "up-15" : "up");
+  }
+  pulse();
+  expectState(0, false, "up-wrap");
+
+  load(15);
+  digitalWrite(PIN_UD, HIGH);
   digitalWrite(PIN_CEP, HIGH);
+  digitalWrite(PIN_CET, LOW);
+  digitalWrite(PIN_PE, HIGH);
   settle();
-  expect(0, true, "direction-up");
+  expectState(15, true, "cep-hold-tc");
+  pulse();
+  expectState(15, true, "cep-hold");
+
+  digitalWrite(PIN_CET, HIGH);
+  settle();
+  expectState(15, false, "cet-high-tc");
+  pulse();
+  expectState(15, false, "cet-hold");
+
+  load(0);
+  armCount(true);
+  expectState(0, false, "dir-up-at-0");
   digitalWrite(PIN_UD, LOW);
   settle();
-  expect(0, false, "direction-down");
+  expectState(0, true, "dir-down-at-0");
+
+  for (uint8_t count = 15;; count--) {
+    pulse();
+    expectState(count, count == 0, count == 0 ? "down-0" : "down");
+    if (count == 0) break;
+  }
+
   digitalWrite(PIN_UD, HIGH);
   settle();
-  expect(0, true, "direction-up-again");
+  expectState(0, false, "before-fall");
+  digitalWrite(PIN_CP, LOW);
+  settle();
+  expectState(0, false, "falling-edge");
+  pulse();
+  expectState(1, false, "rising-after-fall");
 }
 
 void setup() {
+  Serial.begin(115200);
   pinMode(PIN_UD, OUTPUT);
   pinMode(PIN_CP, OUTPUT);
   pinMode(PIN_D0, OUTPUT);
@@ -182,24 +171,19 @@ void setup() {
   pinMode(PIN_Q2, INPUT);
   pinMode(PIN_Q3, INPUT);
   pinMode(PIN_TC, INPUT);
-
   digitalWrite(PIN_CP, LOW);
+  digitalWrite(PIN_UD, HIGH);
   digitalWrite(PIN_PE, HIGH);
   digitalWrite(PIN_CEP, HIGH);
   digitalWrite(PIN_CET, HIGH);
-  digitalWrite(PIN_UD, HIGH);
   setData(0);
-
-  Serial.begin(115200);
-  Serial.println("74HC169 bench. Send any character to start.");
+  Serial.println("74HC169 ready. Send any character to start.");
 }
 
 void loop() {
-  if (Serial.available() == 0) return;
-  while (Serial.available() > 0) Serial.read();
+  if (!Serial.available()) return;
+  while (Serial.available()) Serial.read();
   failed = false;
-  Serial.println("RUN");
   runChecks();
-  if (!failed) Serial.println("RESULT PASS");
-  else Serial.println(resultLine);
+  Serial.println(failed ? resultLine : "RESULT PASS");
 }
