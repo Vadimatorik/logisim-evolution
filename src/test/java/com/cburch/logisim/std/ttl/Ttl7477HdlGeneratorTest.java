@@ -1,0 +1,83 @@
+/*
+ * Logisim-evolution - digital logic design tool and simulator
+ * Copyright by the Logisim-evolution developers
+ *
+ * https://github.com/logisim-evolution/
+ *
+ * This is free software released under GNU GPLv3 license
+ */
+
+package com.cburch.logisim.std.ttl;
+
+import static com.cburch.logisim.fpga.hdlgenerator.HdlText.containsIgnoringCase;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.cburch.logisim.fpga.hdlgenerator.HdlGeneratorFactory;
+import com.cburch.logisim.prefs.AppPreferences;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+/** HDL text for the 74HC77 quad bistable transparent latch. */
+class Ttl7477HdlGeneratorTest {
+
+  private final String originalHdlType = AppPreferences.HdlType.get();
+
+  @AfterEach
+  void restoreHdlType() {
+    AppPreferences.HdlType.set(originalHdlType);
+  }
+
+  @Test
+  void vhdlFollowsEachPairWhileItsEnableIsHigh() {
+    final var hdl = functionality(HdlGeneratorFactory.VHDL);
+
+    assertTrue(containsIgnoringCase(hdl, "Q1 <= state(0);"));
+    assertTrue(containsIgnoringCase(hdl, "Q4 <= state(3);"));
+    assertTrue(containsIgnoringCase(hdl, "IF (LE12 = '1') THEN"));
+    assertTrue(containsIgnoringCase(hdl, "state(0) <= D1;"));
+    assertTrue(containsIgnoringCase(hdl, "state(1) <= D2;"));
+    assertTrue(containsIgnoringCase(hdl, "IF (LE34 = '1') THEN"));
+    assertTrue(containsIgnoringCase(hdl, "state(2) <= D3;"));
+    assertTrue(containsIgnoringCase(hdl, "state(3) <= D4;"));
+    assertFalse(containsIgnoringCase(hdl, "rising_edge"));
+    assertFalse(containsIgnoringCase(hdl, "nQ"));
+  }
+
+  @Test
+  void verilogFollowsEachPairWhileItsEnableIsHigh() {
+    final var hdl = functionality(HdlGeneratorFactory.VERILOG);
+
+    assertTrue(hdl.contains("assign Q1 = state[0];"));
+    assertTrue(hdl.contains("assign Q4 = state[3];"));
+    assertTrue(hdl.contains("always @(*)"));
+    assertTrue(hdl.contains("if (LE12 == 1) begin"));
+    assertTrue(hdl.contains("state[0] = D1;"));
+    assertTrue(hdl.contains("state[1] = D2;"));
+    assertTrue(hdl.contains("if (LE34 == 1) begin"));
+    assertTrue(hdl.contains("state[2] = D3;"));
+    assertTrue(hdl.contains("state[3] = D4;"));
+    assertFalse(hdl.contains("posedge"));
+    assertFalse(hdl.contains("nQ"));
+  }
+
+  @Test
+  void exposedPowerPinsAreNotAnHdlTarget() {
+    final var generator = new Ttl7477HdlGenerator();
+    final var attrs = new Ttl7477().createAttributeSet();
+
+    attrs.setValue(TtlLibrary.VCC_GND, false);
+    assertTrue(generator.isHdlSupportedTarget(attrs));
+
+    attrs.setValue(TtlLibrary.VCC_GND, true);
+    assertFalse(generator.isHdlSupportedTarget(attrs));
+
+    assertFalse(generator.isHdlSupportedTarget(null));
+  }
+
+  private static String functionality(String hdlType) {
+    AppPreferences.HdlType.set(hdlType);
+    final var attrs = new Ttl7477().createAttributeSet();
+    return String.join("\n", new Ttl7477HdlGenerator().getModuleFunctionality(null, attrs).get());
+  }
+}
