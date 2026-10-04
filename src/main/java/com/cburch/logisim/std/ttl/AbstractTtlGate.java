@@ -47,6 +47,8 @@ public abstract class AbstractTtlGate extends InstanceFactory {
   private final HashSet<Byte> unusedPins = new HashSet<>();
   private final byte vccPin;
   private final byte gndPin;
+  /** Physical pins on the same side as pin 1. An even DIP package uses half the pin count. */
+  private final byte pinsOnPin1Side;
 
   /**
    * @param name         name to display in the center of the TTl
@@ -75,6 +77,7 @@ public abstract class AbstractTtlGate extends InstanceFactory {
         height,
         pins,
         (byte) (pins / 2),
+        (byte) (pins / 2),
         generator);
   }
 
@@ -95,10 +98,14 @@ public abstract class AbstractTtlGate extends InstanceFactory {
       int height,
       byte vccPin,
       byte gndPin,
+      byte pinsOnPin1Side,
       HdlGeneratorFactory generator) {
     super(name, generator);
     if (vccPin < 1 || vccPin > pins || gndPin < 1 || gndPin > pins || vccPin == gndPin) {
       throw new IllegalArgumentException("Invalid TTL power pin mapping");
+    }
+    if (pinsOnPin1Side < 1 || pinsOnPin1Side >= pins) {
+      throw new IllegalArgumentException("Invalid TTL pin-1 side count");
     }
     setIconName("ttl.gif");
     setAttributes(
@@ -110,6 +117,7 @@ public abstract class AbstractTtlGate extends InstanceFactory {
     this.pinNumber = pins;
     this.vccPin = vccPin;
     this.gndPin = gndPin;
+    this.pinsOnPin1Side = pinsOnPin1Side;
     if (outputPorts != null) {
       for (final var outPort : outputPorts) {
         this.outputPorts.add(outPort);
@@ -130,7 +138,7 @@ public abstract class AbstractTtlGate extends InstanceFactory {
     this.height = height;
   }
 
-  /** See {@link #AbstractTtlGate(String, byte, byte[], byte[], byte[], String[], boolean, int, byte, byte,
+  /** See {@link #AbstractTtlGate(String, byte, byte[], byte[], byte[], String[], boolean, int, byte, byte, byte,
    * HdlGeneratorFactory)}. */
   protected AbstractTtlGate(
       String name,
@@ -152,6 +160,38 @@ public abstract class AbstractTtlGate extends InstanceFactory {
         DEFAULT_HEIGHT,
         vccPin,
         gndPin,
+        (byte) (pins / 2),
+        generator);
+  }
+
+  /**
+   * Creates a package whose pin-1 side does not hold half of the pins.
+   *
+   * <p>The highest-numbered pin stays opposite pin 1. {@code pinsOnPin1Side} is the physical pin
+   * count on that side, so a 5-lead package with three pins beside pin 1 uses {@code 3}.
+   */
+  protected AbstractTtlGate(
+      String name,
+      byte pins,
+      byte[] outputPorts,
+      byte[] notUsedPins,
+      String[] ttlPortNames,
+      byte vccPin,
+      byte gndPin,
+      byte pinsOnPin1Side,
+      HdlGeneratorFactory generator) {
+    this(
+        name,
+        pins,
+        outputPorts,
+        notUsedPins,
+        null,
+        ttlPortNames,
+        false,
+        DEFAULT_HEIGHT,
+        vccPin,
+        gndPin,
+        pinsOnPin1Side,
         generator);
   }
 
@@ -234,7 +274,7 @@ public abstract class AbstractTtlGate extends InstanceFactory {
   @Override
   public Bounds getOffsetBounds(AttributeSet attrs) {
     final var dir = attrs.getValue(StdAttr.FACING);
-    return Bounds.create(0, -30, this.pinNumber * 10, height).rotate(Direction.EAST, dir, 0, 0);
+    return Bounds.create(0, -30, packageLength(), height).rotate(Direction.EAST, dir, 0, 0);
   }
 
   @Override
@@ -285,25 +325,8 @@ public abstract class AbstractTtlGate extends InstanceFactory {
       g.setColor(new Color(AppPreferences.COMPONENT_COLOR.get()));
     }
     for (byte i = 0; i < this.pinNumber; i++) {
-      if (i < this.pinNumber / 2) {
-        if (dir == Direction.WEST || dir == Direction.EAST) xp = i * 20 + (10 - PIN_WIDTH / 2) + x;
-        else yp = i * 20 + (10 - PIN_WIDTH / 2) + y;
-      } else {
-        if (dir == Direction.WEST || dir == Direction.EAST) {
-          xp = (i - this.pinNumber / 2) * 20 + (10 - PIN_WIDTH / 2) + x;
-          yp = height + y - PIN_HEIGHT;
-        } else {
-          yp = (i - this.pinNumber / 2) * 20 + (10 - PIN_WIDTH / 2) + y;
-          xp = width + x - PIN_HEIGHT;
-        }
-      }
-      if (dir == Direction.WEST || dir == Direction.EAST) {
-        // fill the background of white if selected from preferences
-        g.drawRect(xp, yp, PIN_WIDTH, PIN_HEIGHT);
-      } else {
-        // fill the background of white if selected from preferences
-        g.drawRect(xp, yp, PIN_HEIGHT, PIN_WIDTH);
-      }
+      final var lead = pinLead(dir, x, y, width, height, i + 1);
+      g.drawRect(lead[0], lead[1], lead[2], lead[3]);
     }
     if (dir == Direction.SOUTH) {
       // fill the background of white if selected from preferences
@@ -389,30 +412,11 @@ public abstract class AbstractTtlGate extends InstanceFactory {
           else // east
             g.fillArc(xp - 7, yp + height / 2 - 7, 14, 14, 270, 180);
         }
-        if (i < this.pinNumber / 2) {
-          if (dir == Direction.WEST || dir == Direction.EAST)
-            xp = i * 20 + (10 - PIN_WIDTH / 2) + x;
-          else yp = i * 20 + (10 - PIN_WIDTH / 2) + y;
-        } else {
-          if (dir == Direction.WEST || dir == Direction.EAST) {
-            xp = (i - this.pinNumber / 2) * 20 + (10 - PIN_WIDTH / 2) + x;
-            yp = height + y - PIN_HEIGHT;
-          } else {
-            yp = (i - this.pinNumber / 2) * 20 + (10 - PIN_WIDTH / 2) + y;
-            xp = width + x - PIN_HEIGHT;
-          }
-        }
-        if (dir == Direction.WEST || dir == Direction.EAST) {
-          g.setColor(Color.LIGHT_GRAY);
-          g.fillRect(xp, yp, PIN_WIDTH, PIN_HEIGHT);
-          g.setColor(Color.BLACK);
-          g.drawRect(xp, yp, PIN_WIDTH, PIN_HEIGHT);
-        } else {
-          g.setColor(Color.LIGHT_GRAY);
-          g.fillRect(xp, yp, PIN_HEIGHT, PIN_WIDTH);
-          g.setColor(Color.BLACK);
-          g.drawRect(xp, yp, PIN_HEIGHT, PIN_WIDTH);
-        }
+        final var lead = pinLead(dir, x, y, width, height, i + 1);
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect(lead[0], lead[1], lead[2], lead[3]);
+        g.setColor(Color.BLACK);
+        g.drawRect(lead[0], lead[1], lead[2], lead[3]);
       }
 
       g.setColor(Color.LIGHT_GRAY.brighter());
@@ -437,6 +441,46 @@ public abstract class AbstractTtlGate extends InstanceFactory {
         drawPowerPinLabels(g, xp, yp, packageWidth, packageHeight, 4, 8, 4, 0);
       else drawPowerPinLabels(g, xp, yp, packageWidth, packageHeight, 4, 10, 0, 0);
     } else paintInternalBase(painter);
+  }
+
+  /** Length of the long package edge. Equal pin counts keep the historical {@code pinNumber * 10}. */
+  private int packageLength() {
+    final var opposite = this.pinNumber - this.pinsOnPin1Side;
+    return Math.max(this.pinsOnPin1Side, opposite) * 20;
+  }
+
+  /**
+   * Lead rectangle for one physical pin: x, y, width, height. The notch end is slot 0, shared by
+   * pin 1 and the highest-numbered pin.
+   */
+  private int[] pinLead(Direction dir, int x, int y, int width, int height, int physicalPin) {
+    final var onPin1Side = physicalPin <= pinsOnPin1Side;
+    final var center = (onPin1Side ? physicalPin - 1 : pinNumber - physicalPin) * 20 + 10;
+    if (dir == Direction.EAST) {
+      return new int[] {x + center - PIN_WIDTH / 2, onPin1Side ? y + height - PIN_HEIGHT : y, PIN_WIDTH, PIN_HEIGHT};
+    }
+    if (dir == Direction.WEST) {
+      return new int[] {
+        x + width - center - PIN_WIDTH / 2,
+        onPin1Side ? y : y + height - PIN_HEIGHT,
+        PIN_WIDTH,
+        PIN_HEIGHT
+      };
+    }
+    if (dir == Direction.NORTH) {
+      return new int[] {
+        onPin1Side ? x + width - PIN_HEIGHT : x,
+        y + height - center - PIN_WIDTH / 2,
+        PIN_HEIGHT,
+        PIN_WIDTH
+      };
+    }
+    return new int[] {
+      onPin1Side ? x : x + width - PIN_HEIGHT,
+      y + center - PIN_WIDTH / 2,
+      PIN_HEIGHT,
+      PIN_WIDTH
+    };
   }
 
   private void drawPowerPinLabels(
@@ -467,7 +511,7 @@ public abstract class AbstractTtlGate extends InstanceFactory {
       int lowerInset,
       int upperXOffset,
       int lowerXOffset) {
-    final var isLowerPin = pin <= pinNumber / 2;
+    final var isLowerPin = pin <= pinsOnPin1Side;
     final var pinX =
         isLowerPin ? x + (pin - 1) * 20 + 10 : x + (pinNumber - pin) * 20 + 10;
     GraphicsUtil.drawCenteredText(
@@ -565,35 +609,21 @@ public abstract class AbstractTtlGate extends InstanceFactory {
       final var physicalPin = (byte) (i + 1);
       final var isoutput = outputPorts.contains(physicalPin);
       final var isinout = inoutPorts.contains(physicalPin);
-      // set the position
-      if (i < this.pinNumber / 2) {
-        if (dir == Direction.EAST) {
-          dx = i * 20 + 10;
-          dy = height - 30;
-        } else if (dir == Direction.WEST) {
-          dx = -10 - 20 * i;
-          dy = 30 - height;
-        } else if (dir == Direction.NORTH) {
-          dx = width - 30;
-          dy = -10 - 20 * i;
-        } else { // SOUTH
-          dx = 30 - width;
-          dy = i * 20 + 10;
-        }
-      } else {
-        if (dir == Direction.EAST) {
-          dx = width - (i - this.pinNumber / 2) * 20 - 10;
-          dy = -30;
-        } else if (dir == Direction.WEST) {
-          dx = -width + (i - this.pinNumber / 2) * 20 + 10;
-          dy = 30;
-        } else if (dir == Direction.NORTH) {
-          dx = -30;
-          dy = -height + (i - this.pinNumber / 2) * 20 + 10;
-        } else { // SOUTH
-          dx = 30;
-          dy = height - (i - this.pinNumber / 2) * 20 - 10;
-        }
+      // Pin 1 stays at the notch. The highest pin stays opposite pin 1.
+      final var onPin1Side = physicalPin <= pinsOnPin1Side;
+      final var along = (onPin1Side ? physicalPin - 1 : pinNumber - physicalPin) * 20 + 10;
+      if (dir == Direction.EAST) {
+        dx = along;
+        dy = onPin1Side ? height - 30 : -30;
+      } else if (dir == Direction.WEST) {
+        dx = -along;
+        dy = onPin1Side ? 30 - height : 30;
+      } else if (dir == Direction.NORTH) {
+        dx = onPin1Side ? width - 30 : -30;
+        dy = -along;
+      } else { // SOUTH
+        dx = onPin1Side ? 30 - width : 30;
+        dy = along;
       }
       // Set the port (output/input)
       if (unusedPins.contains(physicalPin)) {
