@@ -236,23 +236,23 @@ class Ttl74256Test {
 
   @Test
   void startupFollowsTheMemoryPreference() {
-    final var previous = AppPreferences.Memory_Startup_Unknown.get();
+    final var previous = Boolean.TRUE.equals(AppPreferences.Memory_Startup_Unknown.get());
     try {
-      AppPreferences.Memory_Startup_Unknown.set(false);
+      setStartupUnknown(false);
       final var cleared = new Ttl74256();
       final var clearedState = new TtlTestInstanceState(cleared, false);
       drive(clearedState, 0, Value.TRUE, Value.TRUE, Value.TRUE, Value.TRUE);
       cleared.propagate(clearedState);
       assertNibbles(clearedState, 0x0, 0x0);
 
-      AppPreferences.Memory_Startup_Unknown.set(true);
+      setStartupUnknown(true);
       final var unknown = new Ttl74256();
       final var unknownState = new TtlTestInstanceState(unknown, false);
       drive(unknownState, 0, Value.FALSE, Value.FALSE, Value.TRUE, Value.TRUE);
       unknown.propagate(unknownState);
       assertAll(unknownState, Value.UNKNOWN);
     } finally {
-      AppPreferences.Memory_Startup_Unknown.set(previous);
+      setStartupUnknown(previous);
     }
   }
 
@@ -277,6 +277,21 @@ class Ttl74256Test {
     power(state, Value.TRUE, Value.TRUE);
     gate.propagate(state);
     assertAll(state, Value.UNKNOWN);
+  }
+
+  /**
+   * Preference updates arrive on the preferences event thread, so a freshly stored value is not
+   * visible until that thread has applied it.
+   */
+  private static void setStartupUnknown(boolean unknown) {
+    AppPreferences.Memory_Startup_Unknown.set(unknown);
+    final var deadline = System.nanoTime() + 2_000_000_000L;
+    while (Boolean.TRUE.equals(AppPreferences.Memory_Startup_Unknown.get()) != unknown) {
+      if (System.nanoTime() > deadline) {
+        throw new AssertionError("MemStartUnknown did not become " + unknown);
+      }
+      Thread.onSpinWait();
+    }
   }
 
   private static void reset(Ttl74256 gate, TtlTestInstanceState state) {
