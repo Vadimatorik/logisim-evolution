@@ -234,7 +234,10 @@ public abstract class AbstractTtlGate extends InstanceFactory {
   @Override
   public Bounds getOffsetBounds(AttributeSet attrs) {
     final var dir = attrs.getValue(StdAttr.FACING);
-    return Bounds.create(0, -30, this.pinNumber * 10, height).rotate(Direction.EAST, dir, 0, 0);
+    // An odd pin count has one more lead on the far side. That row needs a full 20px slot, so the
+    // body is 10px longer than pinNumber * 10. Even counts stay at the historical length.
+    final var length = 20 * ((this.pinNumber + 1) / 2);
+    return Bounds.create(0, -30, length, height).rotate(Direction.EAST, dir, 0, 0);
   }
 
   @Override
