@@ -1,0 +1,88 @@
+/*
+ * Self-check for a 74HC40 wired to an Arduino Nano as described in ../README.md.
+ * Open Serial Monitor at 115200 baud and send any character to start.
+ * The last line is "RESULT PASS" or "RESULT FAIL ...".
+ *
+ * Each output is low only when all four inputs of that NAND buffer are high.
+ * Outputs are push-pull, so no bias resistor is used.
+ */
+
+const uint8_t GATE1_IN[4] = {2, 3, 4, 5};
+const uint8_t GATE2_IN[4] = {6, 7, 8, 9};
+const uint8_t PIN_1Y = 10;
+const uint8_t PIN_2Y = 11;
+
+bool failed = false;
+char resultLine[160];
+
+void noteFailure(const char* step, int expected, int actual) {
+  if (failed) return;
+  failed = true;
+  snprintf(resultLine, sizeof(resultLine), "RESULT FAIL %s expected=0x%02X actual=0x%02X", step,
+           expected, actual);
+}
+
+void applyInputs(int pattern) {
+  for (uint8_t bit = 0; bit < 4; bit++) {
+    digitalWrite(GATE1_IN[bit], (pattern >> bit) & 1 ? HIGH : LOW);
+    digitalWrite(GATE2_IN[bit], (pattern >> (bit + 4)) & 1 ? HIGH : LOW);
+  }
+}
+
+int readY() {
+  int value = 0;
+  if (digitalRead(PIN_1Y) == HIGH) value |= 1;
+  if (digitalRead(PIN_2Y) == HIGH) value |= 2;
+  return value;
+}
+
+int expectedY(int pattern) {
+  int value = 0;
+  if ((pattern & 0x0F) != 0x0F) value |= 1;
+  if ((pattern & 0xF0) != 0xF0) value |= 2;
+  return value;
+}
+
+void expectY(const char* step, int expected) {
+  delay(1);
+  const int actual = readY();
+  Serial.print(step);
+  Serial.print(" expected=0x");
+  Serial.print(expected, HEX);
+  Serial.print(" actual=0x");
+  Serial.print(actual, HEX);
+  Serial.println(expected == actual ? " PASS" : " FAIL");
+  if (expected != actual) noteFailure(step, expected, actual);
+}
+
+void checkEveryCombination() {
+  for (int pattern = 0; pattern < 256; pattern++) {
+    applyInputs(pattern);
+    char step[24];
+    snprintf(step, sizeof(step), "in=0x%02X", pattern);
+    expectY(step, expectedY(pattern));
+  }
+}
+
+void setup() {
+  Serial.begin(115200);
+  for (uint8_t bit = 0; bit < 4; bit++) {
+    pinMode(GATE1_IN[bit], OUTPUT);
+    pinMode(GATE2_IN[bit], OUTPUT);
+  }
+  pinMode(PIN_1Y, INPUT);
+  pinMode(PIN_2Y, INPUT);
+  applyInputs(0xFF);
+
+  Serial.println("74HC40 bench. Send any character to start.");
+  while (Serial.available() == 0) {
+  }
+  while (Serial.available() > 0) {
+    Serial.read();
+  }
+
+  checkEveryCombination();
+  Serial.println(failed ? resultLine : "RESULT PASS");
+}
+
+void loop() {}
