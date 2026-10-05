@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="en">
+    <title>74156</title>
+    <link rel="stylesheet" type="text/css" href="../../style.css">
+  </head>
+  <body>
+    <div class="maindiv">
+      <h1>74156</h1>
+      <p>
+        The 74156 is a digital model of a dual 2-line to 4-line decoder/demultiplexer with
+        open-collector outputs. It follows the HD74HC156 / 74HC156 function table. It does not
+        model output current or the voltage an external pull-up may rise to.
+      </p>
+      <p>
+        A and B are shared. A is the least significant bit. Section 1 (1Y0 to 1Y3) pulls one
+        output low only when 1G is low and 1C is high. Section 2 (2Y0 to 2Y3) pulls one output
+        low only when 2G is low and 2C is low. Every output that is not selected is released.
+        In the simulator a released output is an unknown value. Place a pull resistor on each
+        output to read it as high, and to wire-AND several open-collector outputs together.
+      </p>
+      <p>
+        Used as a demultiplexer, the selected output of section 1 is the inverse of 1C, and the
+        selected output of section 2 follows 2C. Tie 1C to 2C and 1G to 2G to decode three bits
+        into eight open-collector outputs.
+      </p>
+      <p>
+        The HDL model emits the same function as strong low and high levels, the result seen
+        with pull-ups. It does not emit high-impedance.
+      </p>
+      <p><b>Back to</b> <a href="index.html">TTL library</a></p>
+    </div>
+  </body>
+</html>
