@@ -74,15 +74,15 @@ public class Ttl74114 extends AbstractTtlGate {
   private static final int COMPLEMENTARY_RESET = (1 << NQ1_BIT) | (1 << NQ2_BIT);
   private static final byte[] OUTPUT_PINS = {5, 6, 8, 9};
   private static final String[] PORT_NAMES = {
-    "nCLR (Clear, active LOW)",
+    "nCLR (Clear, active low)",
     "1K",
     "1J",
-    "1PR (Preset, active LOW)",
+    "1PR (Preset, active low)",
     "1Q",
     "1nQ",
     "2nQ",
     "2Q",
-    "2PR (Preset, active LOW)",
+    "2PR (Preset, active low)",
     "2J",
     "2K",
     "CLK (Clock, falling edge)"
