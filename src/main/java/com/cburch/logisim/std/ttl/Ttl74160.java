@@ -66,14 +66,14 @@ public class Ttl74160 extends AbstractTtlGate {
   private static final BitWidth WIDTH = BitWidth.create(4);
   private static final byte[] OUTPUT_PORTS = {11, 12, 13, 14, 15};
   private static final String[] PORT_NAMES = {
-    "MR / CLR (master reset, active LOW)",
+    "MR / CLR (master reset, active low)",
     "CP / CLK (clock)",
     "D0 / A",
     "D1 / B",
     "D2 / C",
     "D3 / D",
     "CEP / ENP (count enable)",
-    "PE / LOAD (parallel enable, active LOW)",
+    "PE / LOAD (parallel enable, active low)",
     "CET / ENT (count enable carry)",
     "Q3 / QD",
     "Q2 / QC",
