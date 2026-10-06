@@ -13,12 +13,12 @@ import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 
 /**
- * TTL 744050: hex non-inverting HIGH-to-LOW level shifter.
+ * TTL 744050: hex non-inverting high-to-low level shifter.
  *
  * <p>Simulation follows the
  * <a href="https://assets.nexperia.com/documents/data-sheet/74HC4050.pdf">74HC4050</a> data sheet.
  * Each output copies its input. Pin 1 is VCC, pin 8 is GND, and pins 13 and 16 are not connected.
- * Inputs that tolerate a higher voltage than VCC, and the HIGH-to-LOW level shift itself, are
+ * Inputs that tolerate a higher voltage than VCC, and the high-to-low level shift itself, are
  * electrical properties and are not part of this digital model. An unknown or error value on an
  * input is copied to the matching output.
  */
