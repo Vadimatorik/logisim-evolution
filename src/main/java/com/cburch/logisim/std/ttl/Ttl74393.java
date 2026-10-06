@@ -59,8 +59,8 @@ public class Ttl74393 extends AbstractTtlGate {
   private static final BitWidth WIDTH = BitWidth.create(BITS);
   private static final byte[] OUTPUT_PINS = {3, 4, 5, 6, 8, 9, 10, 11};
   private static final String[] PORT_NAMES = {
-    "1CP (Clock input, HIGH-to-LOW)",
-    "1MR (Master reset, active HIGH)",
+    "1CP (Clock input, high-to-low)",
+    "1MR (Master reset, active high)",
     "1Q0",
     "1Q1",
     "1Q2",
@@ -69,8 +69,8 @@ public class Ttl74393 extends AbstractTtlGate {
     "2Q2",
     "2Q1",
     "2Q0",
-    "2MR (Master reset, active HIGH)",
-    "2CP (Clock input, HIGH-to-LOW)"
+    "2MR (Master reset, active high)",
+    "2CP (Clock input, high-to-low)"
   };
   private static final int[] OUTPUT_PORT_INDEXES = {
     PORT_INDEX_1Q0,
