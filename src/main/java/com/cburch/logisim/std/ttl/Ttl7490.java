@@ -69,10 +69,10 @@ public class Ttl7490 extends AbstractTtlGate {
   private static final byte[] UNUSED_PINS = {4, 13};
   private static final String[] PORT_NAMES = {
     "CKB (Clock B)",
-    "R0(1) (Reset, active HIGH)",
-    "R0(2) (Reset, active HIGH)",
-    "R9(1) (Set to 9, active HIGH)",
-    "R9(2) (Set to 9, active HIGH)",
+    "R0(1) (Reset, active high)",
+    "R0(2) (Reset, active high)",
+    "R9(1) (Set to 9, active high)",
+    "R9(2) (Set to 9, active high)",
     "QC",
     "QB",
     "QD",
