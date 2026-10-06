@@ -14,6 +14,7 @@
   * Added TTL 74237: 3-to-8 line decoder/demultiplexer with address latches (@Vadimatorik).
   * Added TTL 74249: BCD to 7-segment decoder (@Vadimatorik).
   * Added TTL 7426: quad 2-input high-voltage NAND gate with open-collector outputs (@Vadimatorik).
+  * Added TTL 7428: quad 2-input NOR buffer (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
