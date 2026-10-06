@@ -120,16 +120,16 @@ public class Ttl74593 extends AbstractTtlGate {
     "F/QF",
     "G/QG",
     "H/QH",
-    "CLOAD (counter load, active LOW)",
-    "RCO (ripple carry, active LOW)",
-    "CCLR (counter clear, active LOW)",
+    "CLOAD (counter load, active low)",
+    "RCO (ripple carry, active low)",
+    "CCLR (counter clear, active low)",
     "CCK (counter clock)",
-    "CCKEN (counter clock enable, active LOW)",
-    "CCKEN (counter clock enable, active HIGH)",
+    "CCKEN (counter clock enable, active low)",
+    "CCKEN (counter clock enable, active high)",
     "RCK (register clock)",
-    "RCKEN (register clock enable, active LOW)",
-    "G (output enable, active LOW)",
-    "G (output enable, active HIGH)"
+    "RCKEN (register clock enable, active low)",
+    "G (output enable, active low)",
+    "G (output enable, active high)"
   };
   private static final String[] PIN_NAMES = {
     "QA", "QB", "QC", "QD", "QE", "QF", "QG", "QH", "CLD", null,
