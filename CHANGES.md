@@ -3,6 +3,7 @@
 # Changes #
 
 * @dev (????-??-??)
+  * Added TTL 744050: hex non-inverting HIGH-to-LOW level shifter (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
