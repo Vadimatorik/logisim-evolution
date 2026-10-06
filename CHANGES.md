@@ -5,6 +5,7 @@
 * @dev (????-??-??)
   * Added TTL 7409: quad 2-input AND gate with open-drain outputs (@Vadimatorik).
   * Added TTL 74122: retriggerable monostable multivibrator with clear (@Vadimatorik).
+  * Added TTL 74136: quad 2-input XOR gate with open-drain outputs (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
