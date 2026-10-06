@@ -67,20 +67,20 @@ public class Ttl74279 extends AbstractTtlGate {
     new Latch(new byte[] {S4}, R4, Q4)
   };
   private static final String[] PORT_NAMES = {
-    "1R reset (active LOW)",
-    "1S1 set (active LOW)",
-    "1S2 set (active LOW)",
+    "1R reset (active low)",
+    "1S1 set (active low)",
+    "1S2 set (active low)",
     "1Q",
-    "2R reset (active LOW)",
-    "2S set (active LOW)",
+    "2R reset (active low)",
+    "2S set (active low)",
     "2Q",
     "3Q",
-    "3R reset (active LOW)",
-    "3S1 set (active LOW)",
-    "3S2 set (active LOW)",
+    "3R reset (active low)",
+    "3S1 set (active low)",
+    "3S2 set (active low)",
     "4Q",
-    "4R reset (active LOW)",
-    "4S set (active LOW)"
+    "4R reset (active low)",
+    "4S set (active low)"
   };
 
   /** Creates a 74279 quad S-R latch. */
