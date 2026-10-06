@@ -1,0 +1,80 @@
+/*
+ * Logisim-evolution - digital logic design tool and simulator
+ * Copyright by the Logisim-evolution developers
+ *
+ * https://github.com/logisim-evolution/
+ *
+ * This is free software released under GNU GPLv3 license
+ */
+
+package com.cburch.logisim.std.ttl;
+
+import static com.cburch.logisim.fpga.hdlgenerator.HdlText.containsIgnoringCase;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.cburch.logisim.fpga.hdlgenerator.HdlGeneratorFactory;
+import com.cburch.logisim.prefs.AppPreferences;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+/** HDL text for the 74593 register, counter and 3-state bus. */
+class Ttl74593HdlGeneratorTest {
+  private final String originalHdlType = AppPreferences.HdlType.get();
+
+  @AfterEach
+  void restoreHdlType() {
+    AppPreferences.HdlType.set(originalHdlType);
+  }
+
+  @Test
+  void vhdlLoadsTheRegisterAndReleasesTheBus() {
+    final var hdl = functionality(HdlGeneratorFactory.VHDL);
+
+    assertTrue(containsIgnoringCase(hdl, "QA <= counter(0) when G = '1' and nG = '0' else 'Z';"));
+    assertTrue(containsIgnoringCase(hdl, "QH <= counter(7) when G = '1' and nG = '0' else 'Z';"));
+    assertTrue(containsIgnoringCase(hdl, "nRCO <= '0' when counter = \"11111111\" else '1';"));
+    assertTrue(containsIgnoringCase(hdl, "if (tick2 = '1' and nRCKEN = '0') then"));
+    assertTrue(containsIgnoringCase(hdl, "inputReg <= QH & QG & QF & QE & QD & QC & QB & QA;"));
+    assertTrue(containsIgnoringCase(hdl, "if (nCCLR = '0') then"));
+    assertTrue(containsIgnoringCase(hdl, "elsif (nCLOAD = '0') then"));
+    assertTrue(containsIgnoringCase(hdl, "and (CCKEN = '1' or nCCKEN = '0')"));
+    assertTrue(containsIgnoringCase(hdl, "counter <= std_logic_vector(unsigned(counter) + 1);"));
+  }
+
+  @Test
+  void verilogLoadsTheRegisterAndReleasesTheBus() {
+    final var hdl = functionality(HdlGeneratorFactory.VERILOG);
+
+    assertTrue(hdl.contains("assign QA = (G == 1 && nG == 0) ? counter[0] : 1'bz;"));
+    assertTrue(hdl.contains("assign QH = (G == 1 && nG == 0) ? counter[7] : 1'bz;"));
+    assertTrue(hdl.contains("assign nRCO = (counter == 8'b11111111) ? 1'b0 : 1'b1;"));
+    assertTrue(hdl.contains("if (tick2 == 1 && nRCKEN == 0)"));
+    assertTrue(hdl.contains("inputReg <= {QH, QG, QF, QE, QD, QC, QB, QA};"));
+    assertTrue(hdl.contains("if (nCCLR == 0) counter <= 8'b0;"));
+    assertTrue(hdl.contains("else if (nCLOAD == 0) counter <= inputReg;"));
+    assertTrue(hdl.contains("else if (tick == 1 && (CCKEN == 1 || nCCKEN == 0))"));
+    assertTrue(hdl.contains("counter <= counter + 1;"));
+  }
+
+  @Test
+  void exposedPowerPinsAreNotAnHdlTarget() {
+    final var generator = new Ttl74593HdlGenerator();
+    final var attrs = new Ttl74593().createAttributeSet();
+
+    attrs.setValue(TtlLibrary.VCC_GND, false);
+    assertTrue(generator.isHdlSupportedTarget(attrs));
+
+    attrs.setValue(TtlLibrary.VCC_GND, true);
+    assertFalse(generator.isHdlSupportedTarget(attrs));
+
+    assertFalse(generator.isHdlSupportedTarget(null));
+  }
+
+  private static String functionality(String hdlType) {
+    AppPreferences.HdlType.set(hdlType);
+    final var attrs = new Ttl74593().createAttributeSet();
+    return String.join(
+        "\n", new Ttl74593HdlGenerator().getModuleFunctionality(null, attrs).get());
+  }
+}
