@@ -148,6 +148,7 @@
   * Added TTL 744017: Johnson decade counter with 10 decoded outputs (@Vadimatorik).
   * Added TTL 744040: 12-stage binary ripple counter (@Vadimatorik).
   * Added TTL 744075: triple 3-input OR gate (@Vadimatorik).
+  * Added TTL 744094: 8-bit shift-and-store register with three-state outputs (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
