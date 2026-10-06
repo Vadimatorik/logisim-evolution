@@ -13,6 +13,8 @@ import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 
+import java.awt.Graphics;
+
 /**
  * TTL 74x4075: triple 3-input OR gate.
  *
@@ -56,18 +58,19 @@ public class Ttl744075 extends AbstractTtlGate {
     super(_ID, (byte) 14, OUTPUT_PINS, PORT_NAMES, new Ttl744075HdlGenerator());
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, true, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "2A", "2B", "1A", "1B", "1C", "1Y", null,
-          "2C", "2Y", "3Y", "3A", "3B", "3C", null
-        });
+    super.paintBase(painter, false, false);
+    final var g = painter.getGraphics();
+    final int bottom = y + height - PIN_HEIGHT;
+    final int top = y + PIN_HEIGHT;
+    // 1A, 1B, 1C and 1Y are bottom pins 3 to 6.
+    paintOrToPin(g, x + 100, y + 44, x + 110, bottom, new int[] {x + 50, x + 70, x + 90}, bottom);
+    // 3A, 3B and 3C are top pins 11 to 13, and 3Y is top pin 10.
+    paintOrToPin(g, x + 80, y + 16, x + 90, top, new int[] {x + 70, x + 50, x + 30}, top);
+    // 2A and 2B are bottom pins 1 and 2. 2C is top pin 8 and 2Y is top pin 9.
+    paintOrToPin(g, x + 100, y + 30, x + 110, top, new int[] {x + 10, x + 30}, bottom);
+    g.drawPolyline(new int[] {x + 130, x + 130, x + 84}, new int[] {top, y + 34, y + 34}, 3);
   }
 
   @Override
@@ -80,4 +83,27 @@ public class Ttl744075 extends AbstractTtlGate {
   private static Value or3(InstanceState state, int portA, int portB, int portC) {
     return state.getPortValue(portA).or(state.getPortValue(portB)).or(state.getPortValue(portC));
   }
+
+  /** Draws one right-facing OR and wires its inputs and output to the given pin columns. */
+  private static void paintOrToPin(
+      Graphics g,
+      int outX,
+      int outY,
+      int outputPinX,
+      int outputPinY,
+      int[] inputX,
+      int inputPinY) {
+    final int width = 16;
+    final int height = 12;
+    Drawgates.paintOr(g, outX, outY, width, height, false, false);
+    g.drawPolyline(
+        new int[] {outX, outputPinX, outputPinX}, new int[] {outY, outY, outputPinY}, 3);
+    final int inputEdge = outX - width;
+    for (var i = 0; i < inputX.length; i++) {
+      final int entry = outY - 4 + i * 4;
+      g.drawPolyline(
+          new int[] {inputX[i], inputX[i], inputEdge}, new int[] {inputPinY, entry, entry}, 3);
+    }
+  }
+
 }
