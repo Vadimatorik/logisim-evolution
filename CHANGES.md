@@ -130,6 +130,7 @@
   * Added TTL 74199: 8-bit parallel-access shift register (@Vadimatorik).
   * Added TTL 741G125: single bus buffer, three-state output, active-low enable (@Vadimatorik).
   * Added TTL 7422: dual 4-input NAND gate with open-collector outputs (@Vadimatorik).
+  * Added TTL 74221: dual non-retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
