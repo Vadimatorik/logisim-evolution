@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="en">
+    <title>74121</title>
+    <link rel="stylesheet" type="text/css" href="../../style.css">
+  </head>
+  <body>
+    <div class="maindiv">
+      <h1>74121</h1>
+      <p>
+        The 74121 is a digital model of a non-retriggerable monostable. It follows the SN74121
+        function table and pinout. It does not simulate the analog capacitor. The external timing
+        pins are attributes, not wires. There is no HDL model.
+      </p>
+      <p>
+        For a capacitor above 1000 pF the pulse width is
+        <code>tW = 0.7 × R(kΩ) × C(pF)</code> nanoseconds. That width is converted to simulator
+        ticks at the circuit tick frequency and is remembered when the pulse starts. A later change
+        of R or C applies on the next trigger. If the tick frequency is low, a short pulse lasts
+        one tick: at 1 Hz that is one second. Raise the tick frequency to observe a shorter pulse.
+      </p>
+      <p>
+        The device is not retriggerable and has no reset. A new edge during the pulse does not
+        extend it, and the inputs cannot cut it short. Schmitt thresholds on B, the correction for
+        a small capacitor, and the pulse with no external capacitor are not modeled.
+      </p>
+      <p>
+        Rext is an integer number of kiloohms from 2 to 40. The data sheet starts at 1.4 kΩ, which
+        an integer attribute cannot store. Cext is in picofarads, from 1000 pF upward. Choosing the
+        internal resistor uses the typical 2 kΩ instead of Rext.
+      </p>
+      <p><b>Back to</b> <a href="index.html">TTL library</a></p>
+    </div>
+  </body>
+</html>
