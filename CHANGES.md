@@ -21,6 +21,7 @@
   * Added TTL 74147: 10-line to 4-line priority encoder (@Vadimatorik).
   * Added TTL 74152: 8-line to 1 line data selector (@Vadimatorik).
   * Added TTL 74154: 4-line to 16-line decoder/demultiplexer (@Vadimatorik).
+  * Added TTL 7416: hex inverter with open-collector outputs (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
