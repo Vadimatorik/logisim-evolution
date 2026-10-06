@@ -69,14 +69,14 @@ public class Ttl744520 extends AbstractTtlGate {
     "1Q1",
     "1Q2",
     "1Q3",
-    "1MR (master reset, active HIGH)",
+    "1MR (master reset, active high)",
     "2CP0 (clock, rising edge; TI: 2CP)",
     "2CP1 (clock, falling edge; TI: 2E)",
     "2Q0",
     "2Q1",
     "2Q2",
     "2Q3",
-    "2MR (master reset, active HIGH)"
+    "2MR (master reset, active high)"
   };
   private static final int[] COUNTER1_OUTPUTS = {
     PORT_INDEX_1Q0, PORT_INDEX_1Q1, PORT_INDEX_1Q2, PORT_INDEX_1Q3
