@@ -107,6 +107,7 @@
   * Added TTL 747032: quad 2-input OR gate with Schmitt-trigger inputs (@Vadimatorik).
   * Added TTL 7473: dual negative-edge J-K flip-flop with clear (@Vadimatorik).
   * Added TTL 7475: quad bistable transparent latch (@Vadimatorik).
+  * Added TTL 7477: quad bistable transparent latch (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
