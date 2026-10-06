@@ -78,9 +78,9 @@ public class Ttl74247 extends AbstractTtlGate {
   private static final String[] PORT_NAMES = {
     "B",
     "C",
-    "LT (lamp test, active LOW)",
+    "LT (lamp test, active low)",
     "BI/RBO (blanking input / ripple blanking output)",
-    "RBI (ripple blanking, active LOW)",
+    "RBI (ripple blanking, active low)",
     "D",
     "A",
     "e",
