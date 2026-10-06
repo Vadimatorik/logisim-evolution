@@ -110,7 +110,7 @@ public class Ttl74646 extends AbstractTtlGate {
   private static final String[] PORT_NAMES = {
     "CPAB (A-to-B clock, rising edge)",
     "SAB (HIGH selects stored A for the B bus)",
-    "DIR (HIGH sends A to B)",
+    "DIR (high sends A to B)",
     "A0",
     "A1",
     "A2",
@@ -127,7 +127,7 @@ public class Ttl74646 extends AbstractTtlGate {
     "B2",
     "B1",
     "B0",
-    "nOE (output enable, active LOW)",
+    "nOE (output enable, active low)",
     "SBA (HIGH selects stored B for the A bus)",
     "CPBA (B-to-A clock, rising edge)"
   };
