@@ -66,7 +66,7 @@ public class Ttl74197 extends AbstractTtlGate {
   private static final BitWidth WIDTH = BitWidth.create(BITS);
   private static final byte[] OUTPUT_PORTS = {2, 5, 9, 12};
   private static final String[] PORT_NAMES = {
-    "PL (Parallel load, active LOW)",
+    "PL (Parallel load, active low)",
     "Q2",
     "P2",
     "P0",
@@ -77,7 +77,7 @@ public class Ttl74197 extends AbstractTtlGate {
     "P1",
     "P3",
     "Q3",
-    "MR (Master reset, active LOW)"
+    "MR (Master reset, active low)"
   };
 
   /** Creates a 74197 presettable binary ripple counter. */
