@@ -73,6 +73,7 @@
   * Added TTL 744514: 4-to-16 line decoder/demultiplexer with input latches (@Vadimatorik).
   * Added TTL 744515: 4-to-16 line decoder/demultiplexer with input latches (@Vadimatorik).
   * Added TTL 744518: dual synchronous BCD counter (@Vadimatorik).
+  * Added TTL 744520: dual synchronous 4-bit binary counter (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
