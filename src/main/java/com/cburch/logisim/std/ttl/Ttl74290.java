@@ -68,10 +68,10 @@ public class Ttl74290 extends AbstractTtlGate {
   private static final byte[] UNUSED_PINS = {4, 13};
   private static final String[] PORT_NAMES = {
     "CP1 (Clock, divide-by-5)",
-    "MR1 (Master reset, active HIGH)",
-    "MR2 (Master reset, active HIGH)",
-    "MS1 (Master set to 9, active HIGH)",
-    "MS2 (Master set to 9, active HIGH)",
+    "MR1 (Master reset, active high)",
+    "MR2 (Master reset, active high)",
+    "MS1 (Master set to 9, active high)",
+    "MS2 (Master set to 9, active high)",
     "Q2",
     "Q1",
     "Q3",
