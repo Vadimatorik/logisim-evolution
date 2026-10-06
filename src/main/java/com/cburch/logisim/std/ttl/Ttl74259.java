@@ -76,8 +76,8 @@ public class Ttl74259 extends AbstractTtlGate {
     "Q6",
     "Q7",
     "D data",
-    "LE / G (latch enable, active LOW)",
-    "MR / CLR (conditional reset, active LOW)"
+    "LE / G (latch enable, active low)",
+    "MR / CLR (conditional reset, active low)"
   };
 
   /** Creates a 74259 8-bit addressable latch. */
