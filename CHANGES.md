@@ -77,6 +77,7 @@
   * Added TTL 744518: dual synchronous BCD counter (@Vadimatorik).
   * Added TTL 744520: dual synchronous 4-bit binary counter (@Vadimatorik).
   * Added TTL 744543: BCD to 7-segment latch/decoder/driver for LCD (@Vadimatorik).
+  * Added TTL 744724: 8-bit addressable latch (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
