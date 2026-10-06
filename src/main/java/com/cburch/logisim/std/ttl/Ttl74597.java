@@ -79,10 +79,10 @@ public class Ttl74597 extends AbstractTtlGate {
     "D6",
     "D7",
     "Q / Q7",
-    "MR (master reset, active LOW)",
+    "MR (master reset, active low)",
     "SHCP",
     "STCP",
-    "PL (parallel load, active LOW)",
+    "PL (parallel load, active low)",
     "DS",
     "D0"
   };
