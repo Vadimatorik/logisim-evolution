@@ -85,7 +85,7 @@ public class Ttl74640 extends AbstractTtlGate {
     2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18
   };
   private static final String[] PORT_NAMES = {
-    "DIR (direction, HIGH sends A to B)",
+    "DIR (direction, high sends A to B)",
     "A1",
     "A2",
     "A3",
@@ -102,7 +102,7 @@ public class Ttl74640 extends AbstractTtlGate {
     "B3",
     "B2",
     "B1",
-    "nOE (output enable, active LOW)"
+    "nOE (output enable, active low)"
   };
 
   /** Creates a 74640 octal inverting bus transceiver. */
