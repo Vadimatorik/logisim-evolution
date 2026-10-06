@@ -77,7 +77,7 @@ public class Ttl74533 extends AbstractTtlGate {
   private static final byte[] OUTPUT_PINS = {Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7};
   private static final byte[] DATA_PINS = {D0, D1, D2, D3, D4, D5, D6, D7};
   private static final String[] PORT_NAMES = {
-    "OE (output enable, active LOW)",
+    "OE (output enable, active low)",
     "Q0",
     "D0",
     "D1",
@@ -86,7 +86,7 @@ public class Ttl74533 extends AbstractTtlGate {
     "D2",
     "D3",
     "Q3",
-    "LE (latch enable, active HIGH)",
+    "LE (latch enable, active high)",
     "Q4",
     "D4",
     "D5",
