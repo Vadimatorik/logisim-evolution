@@ -151,6 +151,7 @@
   * Added TTL 744040: 12-stage binary ripple counter (@Vadimatorik).
   * Added TTL 744075: triple 3-input OR gate (@Vadimatorik).
   * Added TTL 744094: 8-bit shift-and-store register with three-state outputs (@Vadimatorik).
+  * Added TTL 7448: BCD to 7-segment decoder/driver with active-high outputs (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
