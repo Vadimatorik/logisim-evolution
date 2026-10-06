@@ -74,8 +74,8 @@ public class Ttl74156 extends AbstractTtlGate {
   };
 
   private static final String[] PORT_NAMES = {
-    "1C Enable (active HIGH)",
-    "1nG Enable (active LOW)",
+    "1C Enable (active high)",
+    "1nG Enable (active low)",
     "B Address (MSB)",
     "1nY3 Open-collector output",
     "1nY2 Open-collector output",
@@ -86,8 +86,8 @@ public class Ttl74156 extends AbstractTtlGate {
     "2nY2 Open-collector output",
     "2nY3 Open-collector output",
     "A Address (LSB)",
-    "2nG Enable (active LOW)",
-    "2nC Enable (active LOW)"
+    "2nG Enable (active low)",
+    "2nC Enable (active low)"
   };
 
   /** Creates a 74156 dual 2-line to 4-line decoder/demultiplexer. */
