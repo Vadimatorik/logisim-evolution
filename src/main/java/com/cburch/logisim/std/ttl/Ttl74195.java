@@ -63,14 +63,14 @@ public class Ttl74195 extends AbstractTtlGate {
   private static final int WIDTH = 4;
   private static final byte[] OUTPUT_PINS = {NQ3, Q3, Q2, Q1, Q0};
   private static final String[] PORT_NAMES = {
-    "MR (Master reset, active LOW)",
+    "MR (Master reset, active low)",
     "J (First stage J)",
-    "K (First stage K, active LOW)",
+    "K (First stage K, active low)",
     "D0",
     "D1",
     "D2",
     "D3",
-    "PE (Parallel enable, active LOW)",
+    "PE (Parallel enable, active low)",
     "CP (Clock)",
     "nQ3",
     "Q3",
