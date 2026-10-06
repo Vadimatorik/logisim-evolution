@@ -77,14 +77,14 @@ public class Ttl74323 extends AbstractTtlGate {
   private static final byte[] OUTPUT_PINS = {Q0, Q7};
   private static final String[] PORT_NAMES = {
     "S0 (mode select)",
-    "nOE1 (output enable, active LOW)",
-    "nOE2 (output enable, active LOW)",
+    "nOE1 (output enable, active low)",
+    "nOE2 (output enable, active low)",
     "IO6",
     "IO4",
     "IO2",
     "IO0",
     "Q0 (serial output)",
-    "nCLR (synchronous clear, active LOW)",
+    "nCLR (synchronous clear, active low)",
     "SR (shift-right serial input)",
     "CP (clock)",
     "IO1",
