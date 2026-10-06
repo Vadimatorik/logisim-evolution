@@ -56,6 +56,7 @@
   * Added TTL 74374: octal positive-edge D flip-flop with three-state outputs (@Vadimatorik).
   * Added TTL 74375: quad bistable transparent latch (@Vadimatorik).
   * Added TTL 74386: quad 2-input XOR gate (@Vadimatorik).
+  * Added TTL 74393: dual 4-bit binary ripple counter (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
