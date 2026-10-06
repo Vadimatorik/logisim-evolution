@@ -15,6 +15,7 @@
   * Added TTL 74113: dual negative-edge-triggered J-K flip-flops with preset (@Vadimatorik).
   * Added TTL 7412: triple 3-input NAND gate with open-drain outputs (@Vadimatorik).
   * Added TTL 74145: BCD to decimal decoder/driver (open-collector) (@Vadimatorik).
+  * Added TTL 74147: 10-line to 4-line priority encoder (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
