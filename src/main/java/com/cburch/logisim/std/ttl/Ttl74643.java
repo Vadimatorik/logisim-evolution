@@ -103,7 +103,7 @@ public class Ttl74643 extends AbstractTtlGate {
     "B3",
     "B2",
     "B1",
-    "nOE (output enable, active LOW)"
+    "nOE (output enable, active low)"
   };
 
   /** Creates a 74643 octal bus transceiver with true and inverting outputs. */
