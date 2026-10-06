@@ -69,14 +69,14 @@ public class Ttl74669 extends AbstractTtlGate {
     "B",
     "C",
     "D",
-    "ENP (Enable P, active LOW)",
-    "LOAD (Parallel load, active LOW)",
-    "ENT (Enable T, active LOW)",
+    "ENP (Enable P, active low)",
+    "LOAD (Parallel load, active low)",
+    "ENT (Enable T, active low)",
     "QD",
     "QC",
     "QB",
     "QA",
-    "RCO (Ripple carry, active LOW)"
+    "RCO (Ripple carry, active low)"
   };
 
   /** Creates a 74669 synchronous 4-bit up/down counter. */
