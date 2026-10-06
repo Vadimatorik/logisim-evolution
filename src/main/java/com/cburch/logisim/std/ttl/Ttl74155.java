@@ -85,8 +85,8 @@ public class Ttl74155 extends AbstractTtlGate {
   private static final byte[] OUTPUTS = {Y1_3, Y1_2, Y1_1, Y1_0, Y2_0, Y2_1, Y2_2, Y2_3};
 
   private static final String[] PORT_NAMES = {
-    "1C Data input (active HIGH)",
-    "1G Strobe (active LOW)",
+    "1C Data input (active high)",
+    "1G Strobe (active low)",
     "B Address (MSB)",
     "1Y3",
     "1Y2",
@@ -97,8 +97,8 @@ public class Ttl74155 extends AbstractTtlGate {
     "2Y2",
     "2Y3",
     "A Address (LSB)",
-    "2G Strobe (active HIGH)",
-    "2C Data input (active LOW)"
+    "2G Strobe (active high)",
+    "2C Data input (active low)"
   };
 
   /** Creates a 74155 dual 2-line to 4-line decoder/demultiplexer. */
