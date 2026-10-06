@@ -58,7 +58,7 @@ public class Ttl744075 extends AbstractTtlGate {
     super(_ID, (byte) 14, OUTPUT_PINS, PORT_NAMES, new Ttl744075HdlGenerator());
   }
 
-    @Override
+  @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
