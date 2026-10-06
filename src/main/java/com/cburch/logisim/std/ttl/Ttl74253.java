@@ -66,7 +66,7 @@ public class Ttl74253 extends AbstractTtlGate {
   private static final byte[] OUTPUTS = {L1_Y, L2_Y};
 
   private static final String[] PORT_NAMES = {
-    "n1OE (Output enable, active LOW)",
+    "n1OE (Output enable, active low)",
     "S1 (Select, MSB)",
     "1I3",
     "1I2",
@@ -79,7 +79,7 @@ public class Ttl74253 extends AbstractTtlGate {
     "2I2",
     "2I3",
     "S0 (Select, LSB)",
-    "n2OE (Output enable, active LOW)"
+    "n2OE (Output enable, active low)"
   };
 
   /** Creates a 74253 dual 4-line to 1-line data selector with 3-state outputs. */
