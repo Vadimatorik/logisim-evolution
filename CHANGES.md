@@ -80,6 +80,7 @@
   * Added TTL 744543: BCD to 7-segment latch/decoder/driver for LCD (@Vadimatorik).
   * Added TTL 744724: 8-bit addressable latch (@Vadimatorik).
   * Added TTL 74534: octal D-type flip-flop, positive-edge, inverting 3-state outputs (@Vadimatorik).
+  * Added TTL 74540: octal inverting buffers with three-state outputs (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
