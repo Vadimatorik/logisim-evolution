@@ -30,8 +30,15 @@ public class Ttl7408 extends AbstractTtlGate {
     }
   }
 
+  private static final byte pinCount = 14;
+  private static final byte[] outPins = {3, 6, 8, 11};
+
   public Ttl7408() {
-    super(_ID, (byte) 14, new byte[] {3, 6, 8, 11}, true, new AndGateHdlGeneratorFactory());
+    super(_ID, pinCount, outPins, true, new AndGateHdlGeneratorFactory());
+  }
+
+  public Ttl7408(String name) {
+    super(name, pinCount, outPins, true, new AndGateHdlGeneratorFactory());
   }
 
   @Override
