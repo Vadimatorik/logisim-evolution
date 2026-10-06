@@ -64,12 +64,12 @@ public class Ttl7477 extends AbstractTtlGate {
   private static final String[] PORT_NAMES = {
     "1D data",
     "2D data",
-    "LE34 latch enable for latches 3 and 4 (active HIGH)",
+    "LE34 latch enable for latches 3 and 4 (active high)",
     "3D data",
     "4D data",
     "4Q",
     "3Q",
-    "LE12 latch enable for latches 1 and 2 (active HIGH)",
+    "LE12 latch enable for latches 1 and 2 (active high)",
     "2Q",
     "1Q"
   };
