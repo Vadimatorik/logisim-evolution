@@ -88,18 +88,27 @@ public class Ttl7440 extends AbstractTtlGate {
     return (byte) (dsPinNr - 4);
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, true, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "1A", "1B", null, "1C", "1D", "1Y", null,
-          "2Y", "2A", "2B", null, "2C", "2D", null
-        });
+    super.paintBase(painter, false, false);
+    final var g = painter.getGraphics();
+    // Same pin columns as the 7420: 1Y on pin 6, 2Y on pin 8, and pins 3 and 11 unused.
+    Drawgates.paintAnd(g, x + 117, y + 20, 10, 10, true);
+    Drawgates.paintAnd(g, x + 97, y + 40, 10, 10, true);
+    g.drawLine(x + 121, y + 20, x + 130, y + 20);
+    g.drawLine(x + 130, y + PIN_HEIGHT, x + 130, y + 20);
+    g.drawLine(x + 101, y + 40, x + 110, y + 40);
+    g.drawLine(x + 110, y + height - PIN_HEIGHT, x + 110, y + 40);
+    for (var i = 0; i < 5; i++) {
+      if (i == 2) {
+        continue;
+      }
+      g.drawLine(
+          x + 10 + i * 20, y + height - PIN_HEIGHT, x + 10 + i * 20, y + 36 + i * 2);
+      g.drawLine(x + 10 + i * 20, y + 36 + i * 2, x + 87, y + 36 + i * 2);
+      g.drawLine(x + 30 + i * 20, y + PIN_HEIGHT, x + 30 + i * 20, y + 24 - i * 2);
+      g.drawLine(x + 30 + i * 20, y + 24 - i * 2, x + 107, y + 24 - i * 2);
+    }
   }
 
   @Override
