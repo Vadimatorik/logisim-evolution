@@ -60,7 +60,7 @@ public class Ttl741G125 extends AbstractTtlGate {
 
   private static final byte[] OUTPUT_PORTS = {Y};
   private static final String[] PORT_NAMES = {
-    "nOE (output enable, active LOW)", "A", "Y"
+    "nOE (output enable, active low)", "A", "Y"
   };
 
   /** Creates a 741G125 single bus buffer with a 3-state output. */
