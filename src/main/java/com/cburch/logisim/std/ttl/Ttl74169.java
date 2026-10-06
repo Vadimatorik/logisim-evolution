@@ -69,14 +69,14 @@ public class Ttl74169 extends AbstractTtlGate {
     "D1",
     "D2",
     "D3",
-    "CEP (Count enable, active LOW)",
-    "PE (Parallel enable, active LOW)",
-    "CET (Count enable carry, active LOW)",
+    "CEP (Count enable, active low)",
+    "PE (Parallel enable, active low)",
+    "CET (Count enable carry, active low)",
     "Q3",
     "Q2",
     "Q1",
     "Q0",
-    "TC (Terminal count, active LOW)"
+    "TC (Terminal count, active low)"
   };
 
   /** Creates a 74169 synchronous 4-bit up/down counter. */
