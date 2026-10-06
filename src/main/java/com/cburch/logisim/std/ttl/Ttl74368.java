@@ -70,7 +70,7 @@ public class Ttl74368 extends AbstractTtlGate {
   private static final int GROUP1_SIZE = 4;
 
   private static final String[] PORT_NAMES = {
-    "n1OE Output enable 1 (active LOW)",
+    "n1OE Output enable 1 (active low)",
     "1A",
     "1Y",
     "2A",
@@ -83,7 +83,7 @@ public class Ttl74368 extends AbstractTtlGate {
     "5A",
     "6Y",
     "6A",
-    "n2OE Output enable 2 (active LOW)"
+    "n2OE Output enable 2 (active low)"
   };
 
   /** Creates a 74368 hex inverting buffer/line driver with three-state outputs. */
