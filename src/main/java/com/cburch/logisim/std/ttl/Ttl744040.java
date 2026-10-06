@@ -69,7 +69,7 @@ public class Ttl744040 extends AbstractTtlGate {
     "Q2",
     "Q1",
     "CP (Clock input)",
-    "MR (Master reset, active HIGH)",
+    "MR (Master reset, active high)",
     "Q9",
     "Q8",
     "Q10",
