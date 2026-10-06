@@ -7,6 +7,7 @@
   * Added TTL 74122: retriggerable monostable multivibrator with clear (@Vadimatorik).
   * Added TTL 74136: quad 2-input XOR gate with open-drain outputs (@Vadimatorik).
   * Added TTL 7415: triple 3-input AND gate (open-collector) (@Vadimatorik).
+  * Added TTL 74150: 16-line to 1-line data selector (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
