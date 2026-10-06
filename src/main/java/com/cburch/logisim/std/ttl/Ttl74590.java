@@ -91,12 +91,12 @@ public class Ttl74590 extends AbstractTtlGate {
     "Q5",
     "Q6",
     "Q7",
-    "RCO (ripple carry, active LOW)",
-    "MRC (master reset counter, active LOW)",
+    "RCO (ripple carry, active low)",
+    "MRC (master reset counter, active low)",
     "CPC (counter clock)",
-    "CE (count enable, active LOW)",
+    "CE (count enable, active low)",
     "CPR (register clock)",
-    "OE (output enable, active LOW)",
+    "OE (output enable, active low)",
     "Q0"
   };
   private static final String[] PIN_NAMES = {
