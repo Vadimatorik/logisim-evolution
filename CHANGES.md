@@ -16,6 +16,7 @@
   * Added TTL 7426: quad 2-input high-voltage NAND gate with open-collector outputs (@Vadimatorik).
   * Added TTL 7428: quad 2-input NOR buffer (@Vadimatorik).
   * Added TTL 74293: 4-bit binary ripple counter with corner power pins (@Vadimatorik).
+  * Added TTL 7433: quad 2-input NOR gate with open-collector outputs (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
