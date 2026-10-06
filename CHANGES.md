@@ -153,6 +153,7 @@
   * Added TTL 744094: 8-bit shift-and-store register with three-state outputs (@Vadimatorik).
   * Added TTL 7448: BCD to 7-segment decoder/driver with active-high outputs (@Vadimatorik).
   * Added TTL 74533: octal inverting transparent latch with 3-state outputs (@Vadimatorik).
+  * Added TTL 74592: 8-bit input register feeding an 8-bit binary counter (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
