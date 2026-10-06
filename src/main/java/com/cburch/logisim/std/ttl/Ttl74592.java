@@ -78,11 +78,11 @@ public class Ttl74592 extends AbstractTtlGate {
     "F",
     "G",
     "RCO (ripple carry, high at 255)",
-    "CCLR (counter clear, active LOW)",
+    "CCLR (counter clear, active low)",
     "CCK (counter clock)",
-    "CCKEN (counter clock enable, active LOW)",
+    "CCKEN (counter clock enable, active low)",
     "RCK (register clock)",
-    "CLOAD (counter load, active LOW)",
+    "CLOAD (counter load, active low)",
     "H (register input, MSB)"
   };
   private static final String[] PIN_NAMES = {
