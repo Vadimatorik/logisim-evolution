@@ -61,6 +61,7 @@
   * Added TTL 74393: dual 4-bit binary ripple counter (@Vadimatorik).
   * Added TTL 74399: quad 2-port register (@Vadimatorik).
   * Added TTL 744015: dual 4-bit static shift register (@Vadimatorik).
+  * Added TTL 744020: 14-stage binary ripple counter (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
