@@ -77,8 +77,8 @@ public class Ttl744724 extends AbstractTtlGate {
     "Q6",
     "Q7",
     "D data",
-    "E (enable, active LOW)",
-    "CL (clear, active HIGH)"
+    "E (enable, active low)",
+    "CL (clear, active high)"
   };
 
   /** Creates a 744724 8-bit addressable latch. */
