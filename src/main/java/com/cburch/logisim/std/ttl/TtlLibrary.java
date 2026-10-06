@@ -31,6 +31,7 @@ public class TtlLibrary extends Library {
   private static final FactoryDescription[] DESCRIPTIONS = {
       new FactoryDescription(Ttl7400.class, S.getter("TTL7400"), "ttl.gif"),
       new FactoryDescription(Ttl7402.class, S.getter("TTL7402"), "ttl.gif"),
+      new FactoryDescription(Ttl7403.class, S.getter("TTL7403"), "ttl.gif"),
       new FactoryDescription(Ttl7404.class, S.getter("TTL7404"), "ttl.gif"),
       new FactoryDescription(Ttl7408.class, S.getter("TTL7408"), "ttl.gif"),
       new FactoryDescription(Ttl7410.class, S.getter("TTL7410"), "ttl.gif"),
