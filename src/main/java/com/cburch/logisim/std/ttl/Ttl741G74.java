@@ -90,8 +90,8 @@ public class Ttl741G74 extends AbstractTtlGate {
     "D",
     "nQ",
     "Q",
-    "RD (reset, active LOW)",
-    "SD (set, active LOW)"
+    "RD (reset, active low)",
+    "SD (set, active low)"
   };
   private static final String[] PIN_NAMES = {"CP", "D", "nQ", null, "Q", "RD", "SD", null};
 
