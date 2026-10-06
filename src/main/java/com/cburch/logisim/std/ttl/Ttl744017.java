@@ -72,10 +72,10 @@ public class Ttl744017 extends AbstractTtlGate {
     "Q8",
     "Q4",
     "Q9",
-    "Q5-9 (carry, active LOW)",
-    "CP1 (clock, HIGH-to-LOW)",
-    "CP0 (clock, LOW-to-HIGH)",
-    "MR (master reset, active HIGH)"
+    "Q5-9 (carry, active low)",
+    "CP1 (clock, high-to-low)",
+    "CP0 (clock, low-to-high)",
+    "MR (master reset, active high)"
   };
   /** Decoded outputs Q0 to Q9, in count order. */
   private static final int[] DECODED_PORTS = {
