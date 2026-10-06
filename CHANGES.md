@@ -36,6 +36,7 @@
   * Added TTL 74156: dual 2-line to 4-line decoder/demultiplexer with open-collector outputs (@Vadimatorik).
   * Added TTL 74260: dual 5-input NOR gate (@Vadimatorik).
   * Added TTL 74323: 8-bit universal shift register with synchronous clear and three-state outputs (@Vadimatorik).
+  * Added TTL 7435: hex noninverting buffer with open-collector outputs (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
