@@ -117,6 +117,7 @@
   * Added TTL 7407: hex buffer with open-drain outputs (@Vadimatorik).
   * Added TTL 74107: dual negative-edge J-K flip-flops with reset (@Vadimatorik).
   * Added TTL 74112: dual negative-edge J-K flip-flop with preset and clear (@Vadimatorik).
+  * Added TTL 74114: dual negative-edge-triggered J-K flip-flops with preset, common clear and common clock (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
