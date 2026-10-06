@@ -91,8 +91,8 @@ public class Ttl74575 extends AbstractTtlGate {
   private static final byte[] OUTPUT_PINS = {15, 16, 17, 18, 19, 20, 21, 22};
   private static final byte[] UNUSED_PINS = {11, 13, 23};
   private static final String[] PORT_NAMES = {
-    "nCLR (synchronous clear, active LOW)",
-    "nOE (output enable, active LOW)",
+    "nCLR (synchronous clear, active low)",
+    "nOE (output enable, active low)",
     "D1",
     "D2",
     "D3",
