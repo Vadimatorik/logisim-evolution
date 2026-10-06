@@ -42,6 +42,7 @@
   * Added TTL 74423: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Added TTL 744510: synchronous BCD up/down counter (@Vadimatorik).
   * Added TTL 747001: quad 2-input AND gate (Schmitt trigger) (@Vadimatorik).
+  * Added TTL 747002: quad 2-input NOR gate with Schmitt-trigger inputs (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
