@@ -60,8 +60,8 @@ public class Ttl74293 extends AbstractTtlGate {
     "QA",
     "A (Clock A, falling edge)",
     "B (Clock B, falling edge)",
-    "R0(1) (Reset, active HIGH)",
-    "R0(2) (Reset, active HIGH)"
+    "R0(1) (Reset, active high)",
+    "R0(2) (Reset, active high)"
   };
   private static final BitWidth WIDTH = BitWidth.create(4);
 
