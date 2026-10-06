@@ -77,7 +77,7 @@ public class Ttl74353 extends AbstractTtlGate {
   private static final byte[] OUTPUTS = {Y1, Y2};
 
   private static final String[] PORT_NAMES = {
-    "1G (Output strobe, active LOW)",
+    "1G (Output strobe, active low)",
     "B (Select, MSB)",
     "1C3",
     "1C2",
@@ -90,7 +90,7 @@ public class Ttl74353 extends AbstractTtlGate {
     "2C2",
     "2C3",
     "A (Select, LSB)",
-    "2G (Output strobe, active LOW)"
+    "2G (Output strobe, active low)"
   };
 
   /** Creates a 74353 dual 4-line to 1-line data selector with 3-state inverted outputs. */
