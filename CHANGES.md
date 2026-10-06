@@ -23,6 +23,7 @@
   * Added TTL 7440103: 8-bit synchronous binary down counter (@Vadimatorik).
   * Added TTL 744050: hex non-inverting HIGH-to-LOW level shifter (@Vadimatorik).
   * Added TTL 744072: dual 4-input OR gate (@Vadimatorik).
+  * Added TTL 7445: BCD-to-decimal decoder/driver (open-collector) (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
