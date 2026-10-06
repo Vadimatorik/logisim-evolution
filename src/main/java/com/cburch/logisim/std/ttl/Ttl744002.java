@@ -12,6 +12,9 @@ package com.cburch.logisim.std.ttl;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
+import com.cburch.logisim.prefs.AppPreferences;
+
+import java.awt.Graphics;
 
 /**
  * TTL 74x4002: dual 4-input NOR gate.
@@ -26,6 +29,8 @@ import com.cburch.logisim.instance.InstanceState;
  * low. Nanosecond delays are not modeled.
  */
 public class Ttl744002 extends AbstractTtlGate {
+  private static final int GATE_WIDTH = 28;
+  private static final int GATE_HEIGHT = 16;
   /**
    * Unique identifier of the tool, used as reference in project files. Do NOT change as it will
    * prevent project files from loading.
@@ -77,18 +82,14 @@ public class Ttl744002 extends AbstractTtlGate {
     return (byte) (dsPinNr <= D1 ? dsPinNr - 1 : dsPinNr - 4);
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, true, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "1Y", "1A", "1B", "1C", "1D", null, null, null,
-          "2A", "2B", "2C", "2D", "2Y", null
-        });
+    super.paintBase(painter, false, false);
+    final var g = painter.getGraphics();
+    final var inset = AppPreferences.GATE_SHAPE.get().equals(AppPreferences.SHAPE_SHAPED) ? 4 : 0;
+    // 1Y and 2Y sit to the left of their inputs, as on the 4072. Pins 6 and 8 stay open.
+    paintHalf(g, x, y, height, false, inset);
+    paintHalf(g, x, y, height, true, inset);
   }
 
   @Override
@@ -121,4 +122,31 @@ public class Ttl744002 extends AbstractTtlGate {
     }
     return Value.TRUE;
   }
+
+  /**
+   * Draws one NOR gate. Pin columns are 20 apart and start at {@code x + 10}. The bottom half uses
+   * pins 1 to 5; the top half uses pins 9 to 13.
+   */
+  private static void paintHalf(Graphics g, int x, int y, int height, boolean top, int inset) {
+    final int gateX = top ? x + 40 : x + 96;
+    final int gateY = top ? y + 22 : y + 38;
+    final int outputX = top ? x + 30 : x + 10;
+    final int pinY = top ? y + PIN_HEIGHT : y + height - PIN_HEIGHT;
+    final int[] columns =
+        top
+            ? new int[] {x + 50, x + 70, x + 90, x + 110}
+            : new int[] {x + 30, x + 50, x + 70, x + 90};
+    Drawgates.paintOr(g, gateX, gateY, GATE_WIDTH, GATE_HEIGHT, true, true);
+    g.drawPolyline(new int[] {gateX - 4, outputX, outputX}, new int[] {gateY, gateY, pinY}, 3);
+    final var inputX = gateX + GATE_WIDTH - inset;
+    for (var i = 0; i < columns.length; i++) {
+      final var rail = top ? y + 10 + i : y + 48 + i;
+      final var entry = top ? y + 16 + i * 4 : y + 32 + i * 4;
+      g.drawPolyline(
+          new int[] {columns[i], columns[i], inputX, inputX},
+          new int[] {pinY, rail, rail, entry},
+          4);
+    }
+  }
+
 }
