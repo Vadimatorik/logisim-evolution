@@ -156,6 +156,7 @@ public class TtlLibrary extends Library {
       new FactoryDescription(Ttl74251.class, S.getter("TTL74251"), "ttl.gif"),
       new FactoryDescription(Ttl74258.class, S.getter("TTL74258"), "ttl.gif"),
       new FactoryDescription(Ttl74259.class, S.getter("TTL74259"), "ttl.gif"),
+      new FactoryDescription(Ttl74253.class, S.getter("TTL74253"), "ttl.gif"),
       new FactoryDescription(Ttl74266.class, S.getter("TTL74266"), "ttl.gif"),
       new FactoryDescription(Ttl74273.class, S.getter("TTL74273"), "ttl.gif"),
       new FactoryDescription(Ttl74279.class, S.getter("TTL74279"), "ttl.gif"),
