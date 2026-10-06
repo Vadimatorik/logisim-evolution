@@ -54,10 +54,10 @@ public class Ttl7473 extends AbstractTtlGate {
   private static final byte[] OUTPUT_PORTS = {8, 9, 12, 13};
   private static final String[] PORT_NAMES = {
     "1CP (Clock 1, falling edge)",
-    "1R (Reset 1, active LOW)",
+    "1R (Reset 1, active low)",
     "1K",
     "2CP (Clock 2, falling edge)",
-    "2R (Reset 2, active LOW)",
+    "2R (Reset 2, active low)",
     "2J",
     "2nQ",
     "2Q",
