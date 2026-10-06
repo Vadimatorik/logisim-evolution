@@ -12,6 +12,8 @@ package com.cburch.logisim.std.ttl;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 
+import java.awt.Graphics;
+
 /**
  * TTL 74x386: quad 2-input exclusive-OR gate.
  *
@@ -59,17 +61,20 @@ public class Ttl74386 extends AbstractTtlGate {
     super(_ID, (byte) 14, OUTPUT_PINS, PORT_NAMES, new Ttl74386HdlGenerator());
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, true, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "1A", "1B", "1Y", "2Y", "2A", "2B", null, "3A", "3B", "3Y", "4Y", "4A", "4B", null
-        });
+    super.paintBase(painter, false, false);
+    final var g = painter.getGraphics();
+    final int bottom = y + height - PIN_HEIGHT;
+    final int top = y + PIN_HEIGHT;
+    // Pins 1 to 3 are 1A, 1B and 1Y.
+    paintXorToPin(g, x + 44, y + 44, bottom, new int[] {x + 10, x + 30}, x + 50);
+    // Pin 4 is 2Y, to the left of 2A and 2B on pins 5 and 6.
+    paintXorToPin(g, x + 96, y + 30, bottom, new int[] {x + 90, x + 110}, x + 70);
+    // Pins 8 to 10 are 3A, 3B and 3Y. 3Y is the leftmost of the three.
+    paintXorToPin(g, x + 108, y + 16, top, new int[] {x + 130, x + 110}, x + 90);
+    // Pins 12 and 13 are 4A and 4B, to the left of 4Y on pin 11.
+    paintXorToPin(g, x + 60, y + 16, top, new int[] {x + 50, x + 30}, x + 70);
   }
 
   @Override
@@ -78,4 +83,21 @@ public class Ttl74386 extends AbstractTtlGate {
       state.setPort(gate[2], state.getPortValue(gate[0]).xor(state.getPortValue(gate[1])), DELAY);
     }
   }
+
+  /**
+   * Draws one right-facing XOR and wires it to pin columns that all lie on the same package side.
+   */
+  private static void paintXorToPin(
+      Graphics g, int outX, int outY, int pinY, int[] inputX, int outputPinX) {
+    final int width = 16;
+    final int height = 12;
+    Drawgates.paintXor(g, outX, outY, width, height, false);
+    g.drawPolyline(new int[] {outX, outputPinX, outputPinX}, new int[] {outY, outY, pinY}, 3);
+    final int inputEdge = outX - width;
+    for (var i = 0; i < inputX.length; i++) {
+      final int entry = outY - height / 4 + i * (height / 2);
+      g.drawPolyline(new int[] {inputX[i], inputX[i], inputEdge}, new int[] {pinY, entry, entry}, 3);
+    }
+  }
+
 }
