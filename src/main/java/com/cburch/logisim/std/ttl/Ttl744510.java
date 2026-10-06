@@ -95,14 +95,14 @@ public class Ttl744510 extends AbstractTtlGate {
   private static final int WIDTH = 4;
   private static final byte[] OUTPUT_PINS = {Q3, Q0, TC, Q1, Q2};
   private static final String[] PORT_NAMES = {
-    "PL (parallel load, active HIGH)",
+    "PL (parallel load, active high)",
     "Q3",
     "D3",
     "D0",
-    "CE (count enable, active LOW)",
+    "CE (count enable, active low)",
     "Q0",
-    "TC (terminal count, active LOW)",
-    "MR (master reset, active HIGH)",
+    "TC (terminal count, active low)",
+    "MR (master reset, active high)",
     "UP/DN (HIGH counts up)",
     "Q1",
     "D1",
