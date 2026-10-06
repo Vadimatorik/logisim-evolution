@@ -200,6 +200,7 @@ public class TtlLibrary extends Library {
       new FactoryDescription(Ttl747032.class, S.getter("TTL747032"), "ttl.gif"),
       new FactoryDescription(Ttl747266.class, S.getter("TTL747266"), "ttl.gif"),
       new FactoryDescription(Ttl7440103.class, S.getter("TTL7440103"), "ttl.gif"),
+      new FactoryDescription(Ttl748154.class, S.getter("TTL748154"), "ttl.gif"),
   };
 
   static final Attribute<Boolean> VCC_GND =
