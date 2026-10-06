@@ -189,10 +189,11 @@ public class Drawgates {
     final var gfx = painter.getGraphics();
     final var pinCount = physicalPinNames.length;
     final var pinsPerRow = pinCount / 2;
+    final var packageLength = 20 * ((pinCount + 1) / 2);
     gfx.drawRect(
         x + 10,
         y + AbstractTtlGate.PIN_HEIGHT + 10,
-        pinCount * 10 - 20,
+        packageLength - 20,
         height - 2 * AbstractTtlGate.PIN_HEIGHT - 20);
     for (var index = 0; index < pinCount; index++) {
       final var name = physicalPinNames[index];
