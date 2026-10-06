@@ -84,7 +84,7 @@ public class Ttl744515 extends AbstractTtlGate {
   private static final byte[] ADDRESS = {A0, A1, A2, A3};
 
   private static final String[] PORT_NAMES = {
-    "LE Latch enable (active HIGH)",
+    "LE Latch enable (active high)",
     "A0 Address (LSB)",
     "A1 Address",
     "Q7",
@@ -105,7 +105,7 @@ public class Ttl744515 extends AbstractTtlGate {
     "Q10",
     "A2 Address",
     "A3 Address (MSB)",
-    "nE Enable (active LOW)"
+    "nE Enable (active low)"
   };
 
   /** Creates a 744515 4-to-16 line decoder/demultiplexer with input latches. */
