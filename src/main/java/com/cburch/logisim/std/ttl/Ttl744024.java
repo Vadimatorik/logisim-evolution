@@ -57,7 +57,7 @@ public class Ttl744024 extends AbstractTtlGate {
   private static final byte[] UNUSED_PINS = {8, 10, 13};
   private static final String[] PORT_NAMES = {
     "CP (Clock input)",
-    "MR (Master reset, active HIGH)",
+    "MR (Master reset, active high)",
     "Q7",
     "Q6",
     "Q5",
