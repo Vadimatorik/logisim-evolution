@@ -28,6 +28,7 @@
   * Added TTL 74168: synchronous presettable BCD decade up/down counter (@Vadimatorik).
   * Added TTL 74169: 4-bit synchronous up/down binary counter (@Vadimatorik).
   * Added TTL 74176: presettable decade counter/latch (@Vadimatorik).
+  * Added TTL 74177: presettable binary counter/latch (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
