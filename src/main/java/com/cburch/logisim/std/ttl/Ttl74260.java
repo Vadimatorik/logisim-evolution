@@ -13,6 +13,8 @@ import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 
+import java.awt.Graphics;
+
 /**
  * TTL 74x260: dual 5-input NOR gate.
  *
@@ -81,17 +83,21 @@ public class Ttl74260 extends AbstractTtlGate {
     return (byte) (dsPinNr <= Y2 ? dsPinNr - 1 : dsPinNr - 2);
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, true, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "1A", "1B", "1C", "2E", "1Y", "2Y", null, "2A", "2B", "2C", "2D", "1D", "1E", null
-        });
+    super.paintBase(painter, false, false);
+    final var g = painter.getGraphics();
+    final int bottom = y + height - PIN_HEIGHT;
+    final int top = y + PIN_HEIGHT;
+    // Gate 1 output is pin 5. Inputs 1A to 1C are bottom pins 1 to 3; 1D and 1E are top pins 12
+    // and 13.
+    paintNorToPin(g, x + 78, y + 42, x + 90, bottom);
+    wireInputs(g, new int[] {x + 10, x + 30, x + 50}, bottom, x + 62, y + 36);
+    wireInputs(g, new int[] {x + 50, x + 30}, top, x + 62, y + 44);
+    // Gate 2 output is pin 6. 2E is bottom pin 4 and 2A to 2D are top pins 8 to 11.
+    paintNorToPin(g, x + 104, y + 22, x + 110, bottom);
+    wireInputs(g, new int[] {x + 70}, bottom, x + 88, y + 28);
+    wireInputs(g, new int[] {x + 130, x + 110, x + 90, x + 70}, top, x + 88, y + 14);
   }
 
   @Override
@@ -124,4 +130,21 @@ public class Ttl74260 extends AbstractTtlGate {
     }
     return Value.TRUE;
   }
+
+  /** Draws one right-facing NOR whose output runs to {@code outputPinX} on the bottom side. */
+  private static void paintNorToPin(
+      Graphics g, int outX, int outY, int outputPinX, int outputPinY) {
+    Drawgates.paintOr(g, outX, outY, 16, 14, true, false);
+    g.drawPolyline(
+        new int[] {outX + 4, outputPinX, outputPinX}, new int[] {outY, outY, outputPinY}, 3);
+  }
+
+  /** Fans the given pin columns into the input side of a gate. */
+  private static void wireInputs(Graphics g, int[] pinX, int pinY, int inputEdge, int entryY) {
+    for (var i = 0; i < pinX.length; i++) {
+      final int entry = entryY + i * 3;
+      g.drawPolyline(new int[] {pinX[i], pinX[i], inputEdge}, new int[] {pinY, entry, entry}, 3);
+    }
+  }
+
 }
