@@ -19,6 +19,7 @@
   * Added TTL 7433: quad 2-input NOR gate with open-collector outputs (@Vadimatorik).
   * Added TTL 74352: dual 4-line to 1-line data selector with inverted outputs (@Vadimatorik).
   * Added TTL 7437: quad 2-input NAND buffer (@Vadimatorik).
+  * Added TTL 7440102: 8-bit synchronous BCD down counter (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
