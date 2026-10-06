@@ -74,7 +74,7 @@ public class Ttl74199 extends AbstractTtlGate {
   private static final byte[] OUTPUT_PINS = {Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7};
   private static final String[] PORT_NAMES = {
     "J (First stage J)",
-    "K (First stage K, active LOW)",
+    "K (First stage K, active low)",
     "D0",
     "Q0",
     "D1",
@@ -83,9 +83,9 @@ public class Ttl74199 extends AbstractTtlGate {
     "Q2",
     "D3",
     "Q3",
-    "CE (Clock enable, active LOW)",
+    "CE (Clock enable, active low)",
     "CP (Clock)",
-    "MR (Master reset, active LOW)",
+    "MR (Master reset, active low)",
     "Q4",
     "D4",
     "Q5",
@@ -94,7 +94,7 @@ public class Ttl74199 extends AbstractTtlGate {
     "D6",
     "Q7",
     "D7",
-    "PE (Parallel enable, active LOW)"
+    "PE (Parallel enable, active low)"
   };
   private static final String[] PIN_NAMES = {
     "J", "K", "D0", "Q0", "D1", "Q1", "D2", "Q2", "D3", "Q3", "CE", null,
