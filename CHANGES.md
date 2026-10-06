@@ -40,6 +40,7 @@
   * Added TTL 74390: dual decade ripple counter (@Vadimatorik).
   * Added TTL 7440: dual 4-input NAND buffer (@Vadimatorik).
   * Added TTL 74423: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
+  * Added TTL 744510: synchronous BCD up/down counter (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
