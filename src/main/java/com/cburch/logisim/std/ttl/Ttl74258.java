@@ -78,7 +78,7 @@ public class Ttl74258 extends AbstractTtlGate {
     "4Y inverted output",
     "4I1 / 4B data from source 1",
     "4I0 / 4A data from source 0",
-    "OE / G (output enable, active LOW)"
+    "OE / G (output enable, active low)"
   };
 
   /** Creates a 74258 quad inverting selector with three-state outputs. */
