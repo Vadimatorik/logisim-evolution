@@ -102,6 +102,7 @@
   * Added TTL 74652: octal bus transceivers and registers with three-state outputs (@Vadimatorik).
   * Added TTL 74669: synchronous 4-bit up/down binary counter (@Vadimatorik).
   * Added TTL 74682: 8-bit magnitude comparator (@Vadimatorik).
+  * Added TTL 74688: 8-bit identity comparator (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
