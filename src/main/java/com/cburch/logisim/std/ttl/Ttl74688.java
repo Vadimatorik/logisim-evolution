@@ -70,7 +70,7 @@ public class Ttl74688 extends AbstractTtlGate {
   private static final byte[] OUTPUTS = {PQ};
 
   private static final String[] PORT_NAMES = {
-    "nE / nOE enable (active LOW)",
+    "nE / nOE enable (active low)",
     "P0",
     "Q0",
     "P1",
@@ -87,7 +87,7 @@ public class Ttl74688 extends AbstractTtlGate {
     "Q6",
     "P7",
     "Q7",
-    "nP=Q equal (active LOW)"
+    "nP=Q equal (active low)"
   };
 
   /** Creates a 74688 8-bit identity comparator. */
