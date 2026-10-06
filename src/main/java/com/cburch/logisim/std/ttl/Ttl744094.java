@@ -78,7 +78,7 @@ public class Ttl744094 extends AbstractTtlGate {
     "QP5",
     "QP6",
     "QP7",
-    "OE (Output enable, active HIGH)"
+    "OE (Output enable, active high)"
   };
   private static final String[] PIN_NAMES = {
     "STR", "D", "CP", "QP0", "QP1", "QP2", "QP3", null,
