@@ -83,7 +83,7 @@ public class Ttl74260 extends AbstractTtlGate {
     return (byte) (dsPinNr <= Y2 ? dsPinNr - 1 : dsPinNr - 2);
   }
 
-    @Override
+  @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
