@@ -79,8 +79,8 @@ public class Ttl74256 extends AbstractTtlGate {
     "Q2b",
     "Q3b",
     "Db data",
-    "nE (enable, active LOW)",
-    "nCL / MR (clear, active LOW)"
+    "nE (enable, active low)",
+    "nCL / MR (clear, active low)"
   };
 
   /** Creates a 74256 dual 4-bit addressable latch. */
