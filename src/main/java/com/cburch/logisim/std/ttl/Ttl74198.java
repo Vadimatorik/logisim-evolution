@@ -88,7 +88,7 @@ public class Ttl74198 extends AbstractTtlGate {
     "D3",
     "Q3",
     "CP (clock)",
-    "MR (master reset, active LOW)",
+    "MR (master reset, active low)",
     "DSL (shift-left serial input)",
     "D4",
     "Q4",
