@@ -97,6 +97,7 @@
   * Added TTL 74599: 8-bit shift register with open-collector output latches (@Vadimatorik).
   * Added TTL 74640: octal inverting bus transceivers with three-state outputs (@Vadimatorik).
   * Added TTL 74643: octal bus transceiver with true and inverting three-state outputs (@Vadimatorik).
+  * Added TTL 74645: octal non-inverting bus transceivers with three-state outputs (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
