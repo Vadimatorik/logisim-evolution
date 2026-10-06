@@ -80,11 +80,23 @@ public class Ttl741G125 extends AbstractTtlGate {
     return (byte) (dsPinNr < GND ? dsPinNr - 1 : dsPinNr - 2);
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, true, false);
-    Drawgates.paintPortNamesByPin(
-        painter, x, y, height, new String[] {"nOE", "A", null, "Y", null});
+    super.paintBase(painter, false, false);
+    final var g = painter.getGraphics();
+    final int outX = x + 28;
+    final int outY = y + height / 2;
+    Drawgates.paintBuffer(g, outX, outY, 12, 10);
+    // Y is the top pin opposite A.
+    g.drawLine(outX - 4, outY, x + 20, outY);
+    g.drawLine(x + 20, outY, x + 20, y + PIN_HEIGHT);
+    // A is the second pin on the pin-1 side.
+    g.drawLine(x + 30, y + height - PIN_HEIGHT, x + 30, outY);
+    g.drawLine(x + 30, outY, outX - 12, outY);
+    // nOE is active low, so the enable wire meets the buffer at a bubble.
+    g.drawLine(x + 10, y + height - PIN_HEIGHT, x + 10, outY + 7);
+    g.drawLine(x + 10, outY + 7, outX - 8, outY + 7);
+    g.drawOval(outX - 11, outY + 4, 3, 3);
   }
 
   @Override
