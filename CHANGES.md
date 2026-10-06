@@ -90,6 +90,7 @@
   * Added TTL 74589: 8-bit shift register with input latch and 3-state output (@Vadimatorik).
   * Added TTL 74593: 8-bit binary counter with input register and 3-state outputs (@Vadimatorik).
   * Added TTL 74594: 8-bit shift register with output register (@Vadimatorik).
+  * Added TTL 74595: 8-bit serial-in, parallel-out shift register with output latch (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
