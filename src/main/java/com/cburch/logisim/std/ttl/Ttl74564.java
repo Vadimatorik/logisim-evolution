@@ -89,7 +89,7 @@ public class Ttl74564 extends AbstractTtlGate {
   };
   private static final byte[] OUTPUT_PINS = {12, 13, 14, 15, 16, 17, 18, 19};
   private static final String[] PORT_NAMES = {
-    "nOE (output enable, active LOW)",
+    "nOE (output enable, active low)",
     "D0",
     "D1",
     "D2",
