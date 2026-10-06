@@ -34,6 +34,7 @@
   * Added TTL 74195: 4-bit parallel-access shift register (@Vadimatorik).
   * Added TTL 74196: presettable decade ripple counter (@Vadimatorik).
   * Added TTL 74198: 8-bit bidirectional universal shift register (@Vadimatorik).
+  * Added TTL 741G74: single D flip-flop with set and reset (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
