@@ -139,6 +139,7 @@
   * Added TTL 74256: dual 4-bit addressable latch (@Vadimatorik).
   * Added TTL 74257: quad 2-line to 1-line data selector with three-state outputs (@Vadimatorik).
   * Added TTL 74353: dual 4-line to 1-line data selector with three-state inverted outputs (@Vadimatorik).
+  * Added TTL 74365: hex buffer/line driver with three-state outputs (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
