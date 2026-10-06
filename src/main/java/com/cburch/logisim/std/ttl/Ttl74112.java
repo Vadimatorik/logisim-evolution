@@ -82,17 +82,17 @@ public class Ttl74112 extends AbstractTtlGate {
     "1CP (Clock, falling edge)",
     "1K",
     "1J",
-    "1SD (Set, active LOW)",
+    "1SD (Set, active low)",
     "1Q",
     "1nQ",
     "2nQ",
     "2Q",
-    "2SD (Set, active LOW)",
+    "2SD (Set, active low)",
     "2J",
     "2K",
     "2CP (Clock, falling edge)",
-    "2RD (Reset, active LOW)",
-    "1RD (Reset, active LOW)"
+    "2RD (Reset, active low)",
+    "1RD (Reset, active low)"
   };
   private static final int[][] HALVES = {
     {
