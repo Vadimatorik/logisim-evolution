@@ -62,7 +62,7 @@ public class Ttl74573 extends AbstractTtlGate {
   private static final BitWidth WIDTH = BitWidth.create(BITS);
   private static final byte[] OUTPUT_PINS = {12, 13, 14, 15, 16, 17, 18, 19};
   private static final String[] PORT_NAMES = {
-    "nOE (output enable, active LOW)",
+    "nOE (output enable, active low)",
     "D0",
     "D1",
     "D2",
@@ -71,7 +71,7 @@ public class Ttl74573 extends AbstractTtlGate {
     "D5",
     "D6",
     "D7",
-    "LE (latch enable, active HIGH)",
+    "LE (latch enable, active high)",
     "Q7",
     "Q6",
     "Q5",
