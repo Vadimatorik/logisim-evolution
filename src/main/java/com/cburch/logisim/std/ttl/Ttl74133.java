@@ -91,18 +91,30 @@ public class Ttl74133 extends AbstractTtlGate {
     return (byte) ((dsPinNr <= GND) ? dsPinNr - 1 : dsPinNr - 2);
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, true, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "A", "B", "C", "D", "E", "F", "G", null,
-          "Y", "H", "I", "J", "K", "L", "M", null
-        });
+    super.paintBase(painter, false, false);
+    final var g = painter.getGraphics();
+    final int gateX = x + 140;
+    final int gateY = y + 30;
+    Drawgates.paintAnd(g, gateX, gateY, 16, 22, true);
+    g.drawLine(gateX + 4, gateY, x + 150, gateY);
+    g.drawLine(x + 150, y + PIN_HEIGHT, x + 150, gateY);
+    final int back = gateX - 16;
+    // A to G are bottom pins 1 to 7. Pin 8 is GND.
+    for (var i = 0; i < 7; i++) {
+      final int pinX = x + 10 + i * 20;
+      final int rail = y + 20 + i * 2;
+      g.drawLine(pinX, y + height - PIN_HEIGHT, pinX, rail);
+      g.drawLine(pinX, rail, back, rail);
+    }
+    // H to M are top pins 10 to 15. Pin 9 is Y and pin 16 is VCC.
+    for (var i = 0; i < 6; i++) {
+      final int pinX = x + 130 - i * 20;
+      final int rail = y + 18 + i * 2;
+      g.drawLine(pinX, y + PIN_HEIGHT, pinX, rail);
+      g.drawLine(pinX, rail, back, rail);
+    }
   }
 
   @Override
