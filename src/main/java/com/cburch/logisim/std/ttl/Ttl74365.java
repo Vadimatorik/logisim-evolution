@@ -63,7 +63,7 @@ public class Ttl74365 extends AbstractTtlGate {
   private static final byte[] OUTPUTS = {Y1, Y2, Y3, Y4, Y5, Y6};
 
   private static final String[] PORT_NAMES = {
-    "nOE1 Output enable 1 (active LOW)",
+    "nOE1 Output enable 1 (active low)",
     "1A",
     "1Y",
     "2A",
@@ -76,7 +76,7 @@ public class Ttl74365 extends AbstractTtlGate {
     "5A",
     "6Y",
     "6A",
-    "nOE2 Output enable 2 (active LOW)"
+    "nOE2 Output enable 2 (active low)"
   };
 
   /** Creates a 74365 hex buffer/line driver with three-state outputs. */
