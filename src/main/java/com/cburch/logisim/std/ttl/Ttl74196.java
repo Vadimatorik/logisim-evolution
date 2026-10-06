@@ -75,7 +75,7 @@ public class Ttl74196 extends AbstractTtlGate {
   private static final int CLOCK_1 = 1;
   private static final byte[] OUTPUT_PINS = {2, 5, 9, 12};
   private static final String[] PORT_NAMES = {
-    "PL (parallel load, active LOW)",
+    "PL (parallel load, active low)",
     "Q2",
     "P2",
     "P0",
@@ -86,7 +86,7 @@ public class Ttl74196 extends AbstractTtlGate {
     "P1",
     "P3",
     "Q3",
-    "MR (master reset, active LOW)"
+    "MR (master reset, active low)"
   };
   private static final String[] PIN_NAMES = {
     "PL", "Q2", "P2", "P0", "Q0", "CP1", null,
