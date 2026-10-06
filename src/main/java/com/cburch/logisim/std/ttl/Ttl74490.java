@@ -61,18 +61,18 @@ public class Ttl74490 extends AbstractTtlGate {
   private static final byte[] OUTPUT_PORTS = {3, 5, 6, 7, 9, 10, 11, 13};
   private static final String[] PORT_NAMES = {
     "1CLK (clock, falling edge)",
-    "1CLR (clear, active HIGH)",
+    "1CLR (clear, active high)",
     "1QA",
-    "1SET9 (set to 9, active HIGH)",
+    "1SET9 (set to 9, active high)",
     "1QB",
     "1QC",
     "1QD",
     "2QD",
     "2QC",
     "2QB",
-    "2SET9 (set to 9, active HIGH)",
+    "2SET9 (set to 9, active high)",
     "2QA",
-    "2CLR (clear, active HIGH)",
+    "2CLR (clear, active high)",
     "2CLK (clock, falling edge)"
   };
 
