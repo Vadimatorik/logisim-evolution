@@ -125,6 +125,7 @@
   * Added TTL 74132: quad 2-input NAND gate (Schmitt trigger) (@Vadimatorik).
   * Added TTL 74137: 3-line to 8-line decoder/demultiplexer with address latches (@Vadimatorik).
   * Added TTL 74174: hex D-type flip-flop with asynchronous clear (@Vadimatorik).
+  * Added TTL 74190: synchronous presettable BCD up/down counter (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
