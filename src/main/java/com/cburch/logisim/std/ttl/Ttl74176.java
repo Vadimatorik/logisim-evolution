@@ -78,7 +78,7 @@ public class Ttl74176 extends AbstractTtlGate {
   private static final int DIVIDE_BY_FIVE_TERMINAL = 4;
   private static final byte[] OUTPUT_PINS = {QC, QA, QB, QD};
   private static final String[] PORT_NAMES = {
-    "LOAD (count/load, active LOW)",
+    "LOAD (count/load, active low)",
     "QC",
     "C",
     "A",
@@ -89,7 +89,7 @@ public class Ttl74176 extends AbstractTtlGate {
     "B",
     "D",
     "QD",
-    "CLR (clear, active LOW)"
+    "CLR (clear, active low)"
   };
   private static final String[] PIN_NAMES = {
     "LOAD", "QC", "C", "A", "QA", "CLK2", null,
