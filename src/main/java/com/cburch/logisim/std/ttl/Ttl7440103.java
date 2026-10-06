@@ -83,19 +83,19 @@ public class Ttl7440103 extends AbstractTtlGate {
   private static final byte[] PRESET_PINS = {P0, P1, P2, P3, P4, P5, P6, P7};
   private static final String[] PORT_NAMES = {
     "CP (clock)",
-    "MR (asynchronous reset, active LOW)",
-    "TE (terminal enable, active LOW)",
+    "MR (asynchronous reset, active low)",
+    "TE (terminal enable, active low)",
     "P0",
     "P1",
     "P2",
     "P3",
-    "PL (asynchronous preset, active LOW)",
+    "PL (asynchronous preset, active low)",
     "P4",
     "P5",
     "P6",
     "P7",
-    "TC (terminal count, active LOW)",
-    "PE (synchronous preset, active LOW)"
+    "TC (terminal count, active low)",
+    "PE (synchronous preset, active low)"
   };
   private static final String[] PIN_NAMES = {
     "CP", "MR", "TE", "P0", "P1", "P2", "P3", null,
