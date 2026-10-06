@@ -76,7 +76,7 @@ public class Ttl74589 extends AbstractTtlGate {
     "G parallel data",
     "H parallel data",
     "QH serial output (3-state)",
-    "OE output enable (active LOW)",
+    "OE output enable (active low)",
     "SCK shift clock",
     "RCK latch clock",
     "SLOAD (LOW: parallel load, HIGH: shift)",
