@@ -70,7 +70,7 @@ public class Ttl74682 extends AbstractTtlGate {
   private static final byte[] OUTPUTS = {PGTQ, PQ};
 
   private static final String[] PORT_NAMES = {
-    "nP>Q greater (active LOW)",
+    "nP>Q greater (active low)",
     "P0",
     "Q0",
     "P1",
@@ -87,7 +87,7 @@ public class Ttl74682 extends AbstractTtlGate {
     "Q6",
     "P7",
     "Q7",
-    "nP=Q equal (active LOW)"
+    "nP=Q equal (active low)"
   };
 
   /** Creates a 74682 8-bit magnitude comparator. */
