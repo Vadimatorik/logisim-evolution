@@ -81,7 +81,7 @@ public class Ttl74257 extends AbstractTtlGate {
     "4Y",
     "4I1",
     "4I0",
-    "nOE (Output enable, active LOW)"
+    "nOE (Output enable, active low)"
   };
 
   /** Creates a 74257 quad 2-line to 1-line data selector with 3-state outputs. */
