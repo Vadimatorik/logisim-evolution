@@ -12,6 +12,7 @@
   * Added TTL 7417: hex buffer with open-collector outputs (@Vadimatorik).
   * Added TTL 74197: presettable 4-bit binary ripple counter (@Vadimatorik).
   * Added TTL 74237: 3-to-8 line decoder/demultiplexer with address latches (@Vadimatorik).
+  * Added TTL 74249: BCD to 7-segment decoder (@Vadimatorik).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
