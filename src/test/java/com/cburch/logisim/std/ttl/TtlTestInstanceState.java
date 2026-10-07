@@ -33,6 +33,7 @@ final class TtlTestInstanceState implements InstanceState {
   private final Instance instance;
   private final Map<Integer, Value> portValues = new HashMap<>();
   private InstanceData data;
+  private int tickCount;
 
   TtlTestInstanceState(InstanceFactory factory, boolean showPowerPins) {
     attrs = factory.createAttributeSet();
@@ -50,6 +51,10 @@ final class TtlTestInstanceState implements InstanceState {
 
   void setPortValue(int portIndex, Value value) {
     portValues.put(portIndex, value);
+  }
+
+  void setTickCount(int ticks) {
+    tickCount = ticks;
   }
 
   @Override
@@ -97,7 +102,7 @@ final class TtlTestInstanceState implements InstanceState {
 
   @Override
   public int getTickCount() {
-    return 0;
+    return tickCount;
   }
 
   @Override
