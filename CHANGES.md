@@ -157,6 +157,7 @@
   * Added TTL 74533: octal inverting transparent latch with 3-state outputs (@Vadimatorik).
   * Added TTL 74592: 8-bit input register feeding an 8-bit binary counter (@Vadimatorik).
   * Added TTL 74123: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
+  * The 74123 pulse width follows simulation time instead of the tick frequency (@Vadimatorik).
   * Fixed ArrayIndexOutOfBoundsException during signal history deduplication and improved ChronoPanel buffer safety (@V-Zemlyakov).
   * Added TTL 744060: 14-stage binary ripple counter (@Vadimatorik).
   * Preserved pin and anchor edits in custom circuit appearances when saving [#3025] (@hewzhew).
