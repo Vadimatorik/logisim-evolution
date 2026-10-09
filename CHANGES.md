@@ -42,6 +42,7 @@
   * Added TTL 744059: programmable divide-by-n counter (@Vadimatorik).
   * Added TTL 74543: octal registered transceiver with three-state outputs (@Vadimatorik).
   * Added TTL 74544: octal inverting registered transceiver with three-state outputs (@Vadimatorik).
+  * Added TTL 74923: 20-key encoder (@Vadimatorik).
   * Added TTL 74390: dual decade ripple counter (@Vadimatorik).
   * Added TTL 7440: dual 4-input NAND buffer (@Vadimatorik).
   * Added TTL 74423: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
