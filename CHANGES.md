@@ -44,6 +44,7 @@
   * Added TTL 74544: octal inverting registered transceiver with three-state outputs (@Vadimatorik).
   * Added TTL 74923: 20-key encoder (@Vadimatorik).
   * Added TTL 74243: quad non-inverting bus transceivers with three-state outputs (@Vadimatorik).
+  * Added TTL 744022: Johnson octal counter with 8 decoded outputs (@Vadimatorik).
   * Added TTL 74390: dual decade ripple counter (@Vadimatorik).
   * Added TTL 7440: dual 4-input NAND buffer (@Vadimatorik).
   * Added TTL 74423: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
