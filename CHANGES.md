@@ -40,6 +40,7 @@
   * Added TTL 74239: dual 2-line to 4-line decoder/demultiplexer (@Vadimatorik).
   * Added TTL 74242: quad bus transceivers with three-state inverting outputs (@Vadimatorik).
   * Added TTL 744059: programmable divide-by-n counter (@Vadimatorik).
+  * Added TTL 74543: octal registered transceiver with three-state outputs (@Vadimatorik).
   * Added TTL 74390: dual decade ripple counter (@Vadimatorik).
   * Added TTL 7440: dual 4-input NAND buffer (@Vadimatorik).
   * Added TTL 74423: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
