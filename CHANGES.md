@@ -6,10 +6,8 @@
   * Added TTL 7409: quad 2-input AND gate with open-drain outputs (@Vadimatorik).
   * Added TTL 74122: retriggerable monostable multivibrator with clear (@Vadimatorik).
   * Added TTL 74136: quad 2-input XOR gate with open-drain outputs (@Vadimatorik).
-  * Added TTL 7415: triple 3-input AND gate (open-collector) (@Vadimatorik).
   * Added TTL 74150: 16-line to 1-line data selector (@Vadimatorik).
   * Added TTL 74155: dual 2-line to 4-line decoder/demultiplexer (@Vadimatorik).
-  * Added TTL 7417: hex buffer with open-collector outputs (@Vadimatorik).
   * Added TTL 74197: presettable 4-bit binary ripple counter (@Vadimatorik).
   * Added TTL 74237: 3-to-8 line decoder/demultiplexer with address latches (@Vadimatorik).
   * Added TTL 74249: BCD to 7-segment decoder (@Vadimatorik).
@@ -46,8 +44,17 @@
   * Added TTL 74243: quad non-inverting bus transceivers with three-state outputs (@Vadimatorik).
   * Added TTL 744022: Johnson octal counter with 8 decoded outputs (@Vadimatorik).
   * Added TTL 74922: 16-key matrix encoder (@Vadimatorik).
+  * Added (V)HDL generators for SquareRoot and Exponentiator Components (@zOnlyKroks)
+  * Added an "On reset / load" attribute to the DIP switch, to keep switch positions across reset and reload
+    [#3066] (@Kejoki).
+  * Fixed FPGA short-circuit false positives for splitter paths sharing the same driver bit
+    [#3076] (@hewzhew).
+  * Unified the Logisim-evolution spelling in component appearance labels and Russian SoC messages
+    [#3008] (@hewzhew).
+  * Fixed FPGA net tracing through unconnected splitter bits and resulting false short-circuit errors
+    [#3063] (@hewzhew).
+  * Showed source line numbers and applicable set/sequence numbers for failed command-line test vectors [#3060] (@goudan789).
   * Added TTL 74390: dual decade ripple counter (@Vadimatorik).
-  * Added TTL 7440: dual 4-input NAND buffer (@Vadimatorik).
   * Added TTL 74423: dual retriggerable monostable multivibrator with reset (@Vadimatorik).
   * Added TTL 744510: synchronous BCD up/down counter (@Vadimatorik).
   * Added TTL 747001: quad 2-input AND gate (Schmitt trigger) (@Vadimatorik).
@@ -55,6 +62,7 @@
   * Added TTL 744028: BCD-to-decimal decoder (@Vadimatorik).
   * Added TTL 74520: 8-bit identity comparator (@Vadimatorik).
   * Added TTL 74521: 8-bit identity comparator (@Vadimatorik).
+  * Added NE555 Timer IC component with Astable and Monostable modes to Extra I/O library (@V-Zemlyakov).
   * Optimized file dialog performance via startup background warmup and introduced scoped directory memory to isolate
     circuit projects, image exports, and SoC software directories (@V-Zemlyakov).
   * Added TTL 741G00: single 2-input NAND gate (@Vadimatorik).
@@ -62,12 +70,10 @@
   * Added TTL 7403: quad 2-input NAND gate with open-drain outputs (@Vadimatorik).
   * Added TTL 74109: dual positive-edge J-K flip-flop with preset and clear (@Vadimatorik).
   * Added TTL 74113: dual negative-edge-triggered J-K flip-flops with preset (@Vadimatorik).
-  * Added TTL 7412: triple 3-input NAND gate with open-drain outputs (@Vadimatorik).
   * Added TTL 74145: BCD to decimal decoder/driver (open-collector) (@Vadimatorik).
   * Added TTL 74147: 10-line to 4-line priority encoder (@Vadimatorik).
   * Added TTL 74152: 8-line to 1 line data selector (@Vadimatorik).
   * Added TTL 74154: 4-line to 16-line decoder/demultiplexer (@Vadimatorik).
-  * Added TTL 7416: hex inverter with open-collector outputs (@Vadimatorik).
   * Added TTL 74160: synchronous BCD decade counter with asynchronous reset (@Vadimatorik).
   * Added TTL 74162: synchronous presettable BCD decade counter with synchronous reset (@Vadimatorik).
   * Added TTL 74168: synchronous presettable BCD decade up/down counter (@Vadimatorik).
@@ -188,6 +194,7 @@
   * Fixed undo and redo after moving polygon and polyline vertices [#1042] (@hewzhew).
   * Unified the spelling of "Logisim-evolution" in the Snap and Flatpak metadata and the German and French guide
     [#3008] (@xjx06127).
+  * Fixed French translation mistake for `selCutItem` (@LPe7).
 
 * v5.0.0 (2026-09-12)
   * Improved visual representation of Pull Resistor component (@V-Zemlyakov).
