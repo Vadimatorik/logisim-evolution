@@ -124,27 +124,94 @@ public class Ttl74198 extends AbstractTtlGate {
 
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    final var gfx = painter.getGraphics();
+    final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
-    Drawgates.paintPortNamesByPin(painter, x, y, height, PIN_NAMES);
-    drawWord(gfx, x, y, height, (TtlRegisterData) painter.getData());
-  }
-
-  private static void drawWord(Graphics gfx, int x, int y, int height, TtlRegisterData data) {
-    if (data == null) {
-      return;
-    }
-    final var value = data.getValue();
-    final var origin = x + ((24 * 10) - (WIDTH * 16)) / 2;
-    for (var bit = WIDTH - 1; bit >= 0; bit--) {
-      final var shown = value.get(bit);
-      final var originX = origin + (WIDTH - 1 - bit) * 16;
-      gfx.setColor(shown.getColor());
-      gfx.fillOval(originX, y + height / 2 - 7, 14, 14);
-      gfx.setColor(Color.WHITE);
-      GraphicsUtil.drawCenteredText(gfx, shown.toDisplayString(), originX + 7, y + height / 2);
-    }
-    gfx.setColor(Color.BLACK);
+    g.setColor(Color.BLACK);
+    final var rawState = painter.getData();
+    final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
+    g.drawRect((x + 14), (y + height - 28), 12, 12);
+    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + height - 13));
+    g.drawLine((x + 70), (y + height - 13), (x + 20), (y + height - 13));
+    g.drawLine((x + 20), (y + height - 13), (x + 20), ((y + height - 28)) + 12);
+    g.drawLine((x + 14), (((y + height - 28)) + 6) - 3, ((x + 14)) + 4, ((y + height - 28)) + 6);
+    g.drawLine((x + 14), (((y + height - 28)) + 6) + 3, ((x + 14)) + 4, ((y + height - 28)) + 6);
+    structureDot(g, (x + 20), ((y + height - 28)) + 6, stored, 0, 0);
+    g.drawRect((x + 40), (y + height - 28), 12, 12);
+    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + height - 13));
+    g.drawLine((x + 110), (y + height - 13), (x + 46), (y + height - 13));
+    g.drawLine((x + 46), (y + height - 13), (x + 46), ((y + height - 28)) + 12);
+    g.drawLine((x + 40), (((y + height - 28)) + 6) - 3, ((x + 40)) + 4, ((y + height - 28)) + 6);
+    g.drawLine((x + 40), (((y + height - 28)) + 6) + 3, ((x + 40)) + 4, ((y + height - 28)) + 6);
+    g.drawRect((x + 66), (y + height - 28), 12, 12);
+    g.drawLine((x + 150), (y + height - 7), (x + 150), (y + height - 13));
+    g.drawLine((x + 150), (y + height - 13), (x + 72), (y + height - 13));
+    g.drawLine((x + 72), (y + height - 13), (x + 72), ((y + height - 28)) + 12);
+    g.drawLine((x + 66), (((y + height - 28)) + 6) - 3, ((x + 66)) + 4, ((y + height - 28)) + 6);
+    g.drawLine((x + 66), (((y + height - 28)) + 6) + 3, ((x + 66)) + 4, ((y + height - 28)) + 6);
+    g.drawRect((x + 92), (y + height - 28), 12, 12);
+    g.drawLine((x + 190), (y + height - 7), (x + 190), (y + height - 13));
+    g.drawLine((x + 190), (y + height - 13), (x + 98), (y + height - 13));
+    g.drawLine((x + 98), (y + height - 13), (x + 98), ((y + height - 28)) + 12);
+    g.drawLine((x + 92), (((y + height - 28)) + 6) - 3, ((x + 92)) + 4, ((y + height - 28)) + 6);
+    g.drawLine((x + 92), (((y + height - 28)) + 6) + 3, ((x + 92)) + 4, ((y + height - 28)) + 6);
+    g.drawRect((x + 118), (y + height - 28), 12, 12);
+    g.drawLine((x + 170), (y + 7), (x + 170), (y + 13));
+    g.drawLine((x + 170), (y + 13), (x + 124), (y + 13));
+    g.drawLine((x + 124), (y + 13), (x + 124), (y + height - 28));
+    g.drawLine((x + 118), (((y + height - 28)) + 6) - 3, ((x + 118)) + 4, ((y + height - 28)) + 6);
+    g.drawLine((x + 118), (((y + height - 28)) + 6) + 3, ((x + 118)) + 4, ((y + height - 28)) + 6);
+    g.drawRect((x + 144), (y + height - 28), 12, 12);
+    g.drawLine((x + 130), (y + 7), (x + 130), (y + 13));
+    g.drawLine((x + 130), (y + 13), (x + 150), (y + 13));
+    g.drawLine((x + 150), (y + 13), (x + 150), (y + height - 28));
+    g.drawLine((x + 144), (((y + height - 28)) + 6) - 3, ((x + 144)) + 4, ((y + height - 28)) + 6);
+    g.drawLine((x + 144), (((y + height - 28)) + 6) + 3, ((x + 144)) + 4, ((y + height - 28)) + 6);
+    g.drawRect((x + 170), (y + height - 28), 12, 12);
+    g.drawLine((x + 90), (y + 7), (x + 90), (y + 13));
+    g.drawLine((x + 90), (y + 13), (x + 176), (y + 13));
+    g.drawLine((x + 176), (y + 13), (x + 176), (y + height - 28));
+    g.drawLine((x + 170), (((y + height - 28)) + 6) - 3, ((x + 170)) + 4, ((y + height - 28)) + 6);
+    g.drawLine((x + 170), (((y + height - 28)) + 6) + 3, ((x + 170)) + 4, ((y + height - 28)) + 6);
+    g.drawRect((x + 196), (y + height - 28), 12, 12);
+    g.drawLine((x + 50), (y + 7), (x + 50), (y + 13));
+    g.drawLine((x + 50), (y + 13), (x + 202), (y + 13));
+    g.drawLine((x + 202), (y + 13), (x + 202), (y + height - 28));
+    g.drawLine((x + 196), (((y + height - 28)) + 6) - 3, ((x + 196)) + 4, ((y + height - 28)) + 6);
+    g.drawLine((x + 196), (((y + height - 28)) + 6) + 3, ((x + 196)) + 4, ((y + height - 28)) + 6);
+    g.drawLine((x + 26), ((y + height - 28)) + 6, (x + 36), ((y + height - 28)) + 6);
+    g.drawLine((x + 52), ((y + height - 28)) + 6, (x + 62), ((y + height - 28)) + 6);
+    g.drawLine((x + 78), ((y + height - 28)) + 6, (x + 88), ((y + height - 28)) + 6);
+    g.drawLine((x + 104), ((y + height - 28)) + 6, (x + 114), ((y + height - 28)) + 6);
+    g.drawLine((x + 130), ((y + height - 28)) + 6, (x + 140), ((y + height - 28)) + 6);
+    g.drawLine((x + 156), ((y + height - 28)) + 6, (x + 166), ((y + height - 28)) + 6);
+    g.drawLine((x + 182), ((y + height - 28)) + 6, (x + 192), ((y + height - 28)) + 6);
+    g.drawLine((x + 210), (y + height - 7), (x + 210), (y + height - 13));
+    g.drawLine((x + 210), (y + height - 13), (x + 9), (y + height - 13));
+    g.drawLine((x + 9), (y + height - 13), (x + 9), ((y + height - 28)) + 6);
+    g.drawLine((x + 20), (y + height - 32), (x + 202), (y + height - 32));
+    g.drawLine((x + 20), (y + height - 32), (x + 20), ((y + height - 28)) + 0);
+    g.drawLine((x + 20), (y + height - 32), (x + 20), (y + height - 28));
+    g.drawLine((x + 46), (y + height - 32), (x + 46), ((y + height - 28)) + 0);
+    g.drawLine((x + 46), (y + height - 32), (x + 46), (y + height - 28));
+    g.drawLine((x + 72), (y + height - 32), (x + 72), ((y + height - 28)) + 0);
+    g.drawLine((x + 72), (y + height - 32), (x + 72), (y + height - 28));
+    g.drawLine((x + 98), (y + height - 32), (x + 98), ((y + height - 28)) + 0);
+    g.drawLine((x + 98), (y + height - 32), (x + 98), (y + height - 28));
+    g.drawLine((x + 124), (y + height - 32), (x + 124), ((y + height - 28)) + 0);
+    g.drawLine((x + 124), (y + height - 32), (x + 124), (y + height - 28));
+    g.drawLine((x + 150), (y + height - 32), (x + 150), ((y + height - 28)) + 0);
+    g.drawLine((x + 150), (y + height - 32), (x + 150), (y + height - 28));
+    g.drawLine((x + 176), (y + height - 32), (x + 176), ((y + height - 28)) + 0);
+    g.drawLine((x + 176), (y + height - 32), (x + 176), (y + height - 28));
+    g.drawLine((x + 202), (y + height - 32), (x + 202), ((y + height - 28)) + 0);
+    g.drawLine((x + 202), (y + height - 32), (x + 202), (y + height - 28));
+    g.drawLine((x + 230), (y + 7), (x + 230), (y + 13));
+    g.drawLine((x + 230), (y + 13), (x + 20), (y + 13));
+    g.drawLine((x + 20), (y + 13), (x + 20), (y + height - 32));
+    structureBubble(g, (x + 230), (y + 7));
+    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + height - 13));
+    g.drawLine((x + 30), (y + height - 13), (x + 62), (y + height - 13));
+    g.drawLine((x + 62), (y + height - 13), (x + 62), (y + 20));
   }
 
   @Override
@@ -336,4 +403,40 @@ public class Ttl74198 extends AbstractTtlGate {
   public int[] clockPinIndex(netlistComponent comp) {
     return new int[] {pinNrToPortNr(CP)};
   }
+
+  private static int structureX(int originX, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originX + (pin - 1) * 20 + 10;
+    }
+    return originX + (pins - pin) * 20 + 10;
+  }
+
+  private static int structureY(int originY, int bodyHeight, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
+    }
+    return originY + AbstractTtlGate.PIN_HEIGHT;
+  }
+
+  private static void structureBubble(Graphics g, int centerX, int centerY) {
+    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  }
+
+  private static void structureDot(
+      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
+    if (data == null) {
+      return;
+    }
+    final var value = data.getValue(word);
+    if (bit < 0 || bit >= value.getWidth()) {
+      return;
+    }
+    final var bitValue = value.get(bit);
+    g.setColor(bitValue.getColor());
+    g.fillOval(centerX - 3, centerY - 3, 6, 6);
+    g.setColor(Color.WHITE);
+    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
+    g.setColor(Color.BLACK);
+  }
+
 }
