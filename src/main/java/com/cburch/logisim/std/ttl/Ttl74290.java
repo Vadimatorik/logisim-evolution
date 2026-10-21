@@ -17,7 +17,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 
 /**
  * TTL 74x290: decade ripple counter.
@@ -94,30 +94,68 @@ public class Ttl74290 extends AbstractTtlGate {
 
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    final var gfx = (Graphics2D) painter.getGraphics();
+    final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "CP1", "MR1", "MR2", null, null, "MS1", "MS2",
-          "Q2", "Q1", null, "Q3", "Q0", null, "CP0"
-        });
-    drawState(gfx, x, y, height, (TtlRegisterData) painter.getData());
-  }
-
-  private void drawState(Graphics2D gfx, int x, int y, int height, TtlRegisterData state) {
-    if (state == null) return;
-    for (var i = 0; i < BITS; i++) {
-      final var bit = state.getValue().get(BIT_Q3 - i);
-      gfx.setColor(bit.getColor());
-      gfx.fillOval(x + 52 + i * 10, y + height / 2 - 4, 8, 8);
-      gfx.setColor(Color.WHITE);
-      GraphicsUtil.drawCenteredText(gfx, bit.toDisplayString(), x + 56 + i * 10, y + height / 2);
-    }
-    gfx.setColor(Color.BLACK);
+    g.setColor(Color.BLACK);
+    final var rawState = painter.getData();
+    final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
+    g.drawRect((x + 44), (y + 11), 12, 14);
+    g.drawLine((x + 50), (y + 11), (x + 50), (y + 7));
+    g.drawLine((x + 44), (((y + 11)) + 7) - 3, ((x + 44)) + 4, ((y + 11)) + 7);
+    g.drawLine((x + 44), (((y + 11)) + 7) + 3, ((x + 44)) + 4, ((y + 11)) + 7);
+    structureDot(g, (x + 50), ((y + 11)) + 7, stored, 0, 0);
+    g.drawLine((x + 10), (y + 7), (x + 10), (y + 13));
+    g.drawLine((x + 10), (y + 13), (x + 39), (y + 13));
+    g.drawLine((x + 39), (y + 13), (x + 39), ((y + 11)) + 7);
+    structureBubble(g, (x + 39), ((y + 11)) + 7);
+    g.drawLine((x + 50), (y + 27), (x + 50), (y + 27));
+    g.drawLine((x + 50), (y + 27), (x + 50), (y + 11));
+    g.drawLine((x + 50), (y + 27), (x + 50), ((y + 11)) + 14);
+    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + height - 13));
+    g.drawLine((x + 30), (y + height - 13), (x + 50), (y + height - 13));
+    g.drawLine((x + 50), (y + height - 13), (x + 50), (y + 27));
+    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 27));
+    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 30));
+    GraphicsUtil.drawCenteredText(g, "9", (x + 110), (y + 30));
+    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + 30));
+    GraphicsUtil.drawCenteredText(g, "9", (x + 130), (y + 30));
+    g.drawRect((x + 14), (y + 11), 12, 12);
+    g.drawLine((x + 110), (y + 7), (x + 110), (y + 13));
+    g.drawLine((x + 110), (y + 13), (x + 20), (y + 13));
+    g.drawLine((x + 20), (y + 13), (x + 20), (y + 11));
+    g.drawLine((x + 14), (((y + 11)) + 6) - 3, ((x + 14)) + 4, ((y + 11)) + 6);
+    g.drawLine((x + 14), (((y + 11)) + 6) + 3, ((x + 14)) + 4, ((y + 11)) + 6);
+    g.drawRect((x + 51), (y + 11), 12, 12);
+    g.drawLine((x + 130), (y + 7), (x + 130), (y + 13));
+    g.drawLine((x + 130), (y + 13), (x + 57), (y + 13));
+    g.drawLine((x + 57), (y + 13), (x + 57), (y + 11));
+    g.drawLine((x + 51), (((y + 11)) + 6) - 3, ((x + 51)) + 4, ((y + 11)) + 6);
+    g.drawLine((x + 51), (((y + 11)) + 6) + 3, ((x + 51)) + 4, ((y + 11)) + 6);
+    g.drawRect((x + 88), (y + 11), 12, 12);
+    g.drawLine((x + 70), (y + 7), (x + 70), (y + 13));
+    g.drawLine((x + 70), (y + 13), (x + 94), (y + 13));
+    g.drawLine((x + 94), (y + 13), (x + 94), (y + 11));
+    g.drawLine((x + 88), (((y + 11)) + 6) - 3, ((x + 88)) + 4, ((y + 11)) + 6);
+    g.drawLine((x + 88), (((y + 11)) + 6) + 3, ((x + 88)) + 4, ((y + 11)) + 6);
+    g.drawLine((x + 26), ((y + 11)) + 6, (x + 47), ((y + 11)) + 6);
+    g.drawLine((x + 63), ((y + 11)) + 6, (x + 84), ((y + 11)) + 6);
+    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
+    g.drawLine((x + 10), (y + height - 13), (x + 9), (y + height - 13));
+    g.drawLine((x + 9), (y + height - 13), (x + 9), ((y + 11)) + 6);
+    structureBubble(g, (x + 9), ((y + 11)) + 6);
+    g.drawLine((x + 20), (y + 27), (x + 94), (y + 27));
+    g.drawLine((x + 20), (y + 27), (x + 20), (y + 11));
+    g.drawLine((x + 20), (y + 27), (x + 20), ((y + 11)) + 14);
+    g.drawLine((x + 57), (y + 27), (x + 57), (y + 11));
+    g.drawLine((x + 57), (y + 27), (x + 57), ((y + 11)) + 14);
+    g.drawLine((x + 94), (y + 27), (x + 94), (y + 11));
+    g.drawLine((x + 94), (y + 27), (x + 94), ((y + 11)) + 14);
+    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + height - 13));
+    g.drawLine((x + 30), (y + height - 13), (x + 20), (y + height - 13));
+    g.drawLine((x + 20), (y + height - 13), (x + 20), (y + 27));
+    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + height - 13));
+    g.drawLine((x + 50), (y + height - 13), (x + 20), (y + height - 13));
+    g.drawLine((x + 20), (y + height - 13), (x + 20), (y + 27));
   }
 
   private static TtlRegisterData getStateData(InstanceState state) {
@@ -219,4 +257,40 @@ public class Ttl74290 extends AbstractTtlGate {
   public int[] clockPinIndex(netlistComponent comp) {
     return new int[] {PORT_INDEX_CP1, PORT_INDEX_CP0};
   }
+
+  private static int structureX(int originX, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originX + (pin - 1) * 20 + 10;
+    }
+    return originX + (pins - pin) * 20 + 10;
+  }
+
+  private static int structureY(int originY, int bodyHeight, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
+    }
+    return originY + AbstractTtlGate.PIN_HEIGHT;
+  }
+
+  private static void structureBubble(Graphics g, int centerX, int centerY) {
+    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  }
+
+  private static void structureDot(
+      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
+    if (data == null) {
+      return;
+    }
+    final var value = data.getValue(word);
+    if (bit < 0 || bit >= value.getWidth()) {
+      return;
+    }
+    final var bitValue = value.get(bit);
+    g.setColor(bitValue.getColor());
+    g.fillOval(centerX - 3, centerY - 3, 6, 6);
+    g.setColor(Color.WHITE);
+    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
+    g.setColor(Color.BLACK);
+  }
+
 }
