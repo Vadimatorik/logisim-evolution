@@ -9,6 +9,9 @@
 
 package com.cburch.logisim.std.ttl;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -109,16 +112,48 @@ public class Ttl74156 extends AbstractTtlGate {
 
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, true, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "1C", "1nG", "B", "1nY3", "1nY2", "1nY1", "1nY0", null,
-          "2nY0", "2nY1", "2nY2", "2nY3", "A", "2nG", "2nC", null
-        });
+    final var g = painter.getGraphics();
+    super.paintBase(painter, false, false);
+    g.setColor(Color.BLACK);
+    g.drawRect((x + 12), (y + 18), 136, 24);
+    GraphicsUtil.drawCenteredText(g, "2-4", (x + 80), (y + 30));
+    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
+    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
+    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
+    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
+    structureBubble(g, (x + 30), (y + 46));
+    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
+    g.drawLine((x + 70), (y + 7), (x + 70), (y + 18));
+    g.drawLine((x + 50), (y + 7), (x + 50), (y + 18));
+    structureBubble(g, (x + 50), (y + 14));
+    g.drawLine((x + 30), (y + 7), (x + 30), (y + 18));
+    structureBubble(g, (x + 30), (y + 14));
+    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + 42));
+    structureBubble(g, (x + 130), (y + 46));
+    g.drawLine((x + 128), (y + 44), (x + 132), (y + 44));
+    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 42));
+    structureBubble(g, (x + 110), (y + 46));
+    g.drawLine((x + 108), (y + 44), (x + 112), (y + 44));
+    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
+    structureBubble(g, (x + 90), (y + 46));
+    g.drawLine((x + 88), (y + 44), (x + 92), (y + 44));
+    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
+    structureBubble(g, (x + 70), (y + 46));
+    g.drawLine((x + 68), (y + 44), (x + 72), (y + 44));
+    g.drawLine((x + 150), (y + 7), (x + 150), (y + 13));
+    g.drawLine((x + 150), (y + 13), (x + 144), (y + 13));
+    g.drawLine((x + 144), (y + 13), (x + 144), (y + 18));
+    structureBubble(g, (x + 144), (y + 14));
+    g.drawLine((x + 142), (y + 16), (x + 146), (y + 16));
+    g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
+    structureBubble(g, (x + 130), (y + 14));
+    g.drawLine((x + 128), (y + 16), (x + 132), (y + 16));
+    g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
+    structureBubble(g, (x + 110), (y + 14));
+    g.drawLine((x + 108), (y + 16), (x + 112), (y + 16));
+    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
+    structureBubble(g, (x + 90), (y + 14));
+    g.drawLine((x + 88), (y + 16), (x + 92), (y + 16));
   }
 
   private static boolean isLow(InstanceState state, byte dsPinNr) {
@@ -158,4 +193,40 @@ public class Ttl74156 extends AbstractTtlGate {
     propagateSection(state, isLow(state, G1) && isHigh(state, C1), SECTION1);
     propagateSection(state, isLow(state, G2) && isLow(state, C2), SECTION2);
   }
+
+  private static int structureX(int originX, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originX + (pin - 1) * 20 + 10;
+    }
+    return originX + (pins - pin) * 20 + 10;
+  }
+
+  private static int structureY(int originY, int bodyHeight, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
+    }
+    return originY + AbstractTtlGate.PIN_HEIGHT;
+  }
+
+  private static void structureBubble(Graphics g, int centerX, int centerY) {
+    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  }
+
+  private static void structureDot(
+      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
+    if (data == null) {
+      return;
+    }
+    final var value = data.getValue(word);
+    if (bit < 0 || bit >= value.getWidth()) {
+      return;
+    }
+    final var bitValue = value.get(bit);
+    g.setColor(bitValue.getColor());
+    g.fillOval(centerX - 3, centerY - 3, 6, 6);
+    g.setColor(Color.WHITE);
+    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
+    g.setColor(Color.BLACK);
+  }
+
 }
