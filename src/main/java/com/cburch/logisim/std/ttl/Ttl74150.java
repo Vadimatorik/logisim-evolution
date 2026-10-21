@@ -9,6 +9,9 @@
 
 package com.cburch.logisim.std.ttl;
 
+import com.cburch.logisim.util.GraphicsUtil;
+import java.awt.Color;
+import java.awt.Graphics;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -126,16 +129,39 @@ public class Ttl74150 extends AbstractTtlGate {
 
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, true, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "E7", "E6", "E5", "E4", "E3", "E2", "E1", "E0", "nG", "W", "D", null,
-          "C", "B", "A", "E15", "E14", "E13", "E12", "E11", "E10", "E9", "E8", null
-        });
+    final var g = painter.getGraphics();
+    super.paintBase(painter, false, false);
+    g.setColor(Color.BLACK);
+    g.drawLine((x + 10), (y + 34), (x + 100), (y + 18));
+    g.drawLine((x + 190), (y + 34), (x + 100), (y + 18));
+    g.drawLine((x + 10), (y + 34), (x + 190), (y + 34));
+    g.drawLine((x + 100), (y + 18), (x + 190), (y + height - 7));
+    g.drawLine((x + 150), (y + height - 7), (x + 150), (y + 34));
+    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + 34));
+    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 34));
+    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 34));
+    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 34));
+    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 34));
+    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 34));
+    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 34));
+    g.drawLine((x + 30), (y + 7), (x + 30), (y + 34));
+    g.drawLine((x + 50), (y + 7), (x + 50), (y + 34));
+    g.drawLine((x + 70), (y + 7), (x + 70), (y + 34));
+    g.drawLine((x + 90), (y + 7), (x + 90), (y + 34));
+    g.drawLine((x + 110), (y + 7), (x + 110), (y + 34));
+    g.drawLine((x + 130), (y + 7), (x + 130), (y + 34));
+    g.drawLine((x + 150), (y + 7), (x + 150), (y + 34));
+    g.drawLine((x + 170), (y + 7), (x + 170), (y + 34));
+    g.drawLine((x + 190), (y + 7), (x + 190), (y + 16));
+    GraphicsUtil.drawCenteredText(g, "S", (x + 190), (y + 16));
+    g.drawLine((x + 210), (y + 7), (x + 210), (y + 16));
+    GraphicsUtil.drawCenteredText(g, "S", (x + 210), (y + 16));
+    g.drawLine((x + 230), (y + 7), (x + 230), (y + 16));
+    GraphicsUtil.drawCenteredText(g, "S", (x + 230), (y + 16));
+    g.drawLine((x + 210), (y + height - 7), (x + 210), (y + 16));
+    GraphicsUtil.drawCenteredText(g, "S", (x + 210), (y + 16));
+    g.drawLine((x + 170), (y + height - 7), (x + 170), (y + 40));
+    structureBubble(g, (x + 170), (y + height - 7));
   }
 
   @Override
@@ -209,4 +235,40 @@ public class Ttl74150 extends AbstractTtlGate {
   private static Value input(InstanceState state, byte dsPinNr) {
     return state.getPortValue(pinNrToPortNr(dsPinNr));
   }
+
+  private static int structureX(int originX, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originX + (pin - 1) * 20 + 10;
+    }
+    return originX + (pins - pin) * 20 + 10;
+  }
+
+  private static int structureY(int originY, int bodyHeight, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
+    }
+    return originY + AbstractTtlGate.PIN_HEIGHT;
+  }
+
+  private static void structureBubble(Graphics g, int centerX, int centerY) {
+    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  }
+
+  private static void structureDot(
+      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
+    if (data == null) {
+      return;
+    }
+    final var value = data.getValue(word);
+    if (bit < 0 || bit >= value.getWidth()) {
+      return;
+    }
+    final var bitValue = value.get(bit);
+    g.setColor(bitValue.getColor());
+    g.fillOval(centerX - 3, centerY - 3, 6, 6);
+    g.setColor(Color.WHITE);
+    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
+    g.setColor(Color.BLACK);
+  }
+
 }
