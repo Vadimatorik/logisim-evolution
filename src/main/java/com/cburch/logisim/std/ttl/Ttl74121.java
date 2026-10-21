@@ -27,6 +27,7 @@ import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Graphics;
 
 /**
  * TTL 74x121: non-retriggerable monostable multivibrator.
@@ -147,17 +148,24 @@ public class Ttl74121 extends AbstractTtlGate implements TickAware {
 
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    final var gfx = (Graphics2D) painter.getGraphics();
+    final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
-    Drawgates.paintPortNamesByPin(
-        painter,
-        x,
-        y,
-        height,
-        new String[] {
-          "nQ", null, "A1", "A2", "B", "Q", null, null, "Rint", "C", "RC", null, null, null
-        });
-    drawTiming(gfx, painter, x, y, height);
+    g.setColor(Color.BLACK);
+    g.drawRect((x + 12), (y + 18), 102, 24);
+    GraphicsUtil.drawCenteredText(g, "1SHOT", (x + 63), (y + 30));
+    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
+    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
+    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
+    structureBubble(g, (x + 16), (y + 46));
+    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 42));
+    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
+    structureBubble(g, (x + 50), (y + 46));
+    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
+    structureBubble(g, (x + 70), (y + 46));
+    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
+    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
+    g.drawLine((x + 70), (y + 7), (x + 70), (y + 18));
+    drawTiming((Graphics2D) g, painter, x, y, height);
   }
 
   @Override
@@ -290,4 +298,40 @@ public class Ttl74121 extends AbstractTtlGate implements TickAware {
       return true;
     }
   }
+
+  private static int structureX(int originX, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originX + (pin - 1) * 20 + 10;
+    }
+    return originX + (pins - pin) * 20 + 10;
+  }
+
+  private static int structureY(int originY, int bodyHeight, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
+    }
+    return originY + AbstractTtlGate.PIN_HEIGHT;
+  }
+
+  private static void structureBubble(Graphics g, int centerX, int centerY) {
+    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  }
+
+  private static void structureDot(
+      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
+    if (data == null) {
+      return;
+    }
+    final var value = data.getValue(word);
+    if (bit < 0 || bit >= value.getWidth()) {
+      return;
+    }
+    final var bitValue = value.get(bit);
+    g.setColor(bitValue.getColor());
+    g.fillOval(centerX - 3, centerY - 3, 6, 6);
+    g.setColor(Color.WHITE);
+    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
+    g.setColor(Color.BLACK);
+  }
+
 }
