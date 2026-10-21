@@ -17,7 +17,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 
 /**
  * TTL 74x593: 8-bit binary counter with an input register and 3-state I/O.
@@ -162,26 +162,20 @@ public class Ttl74593 extends AbstractTtlGate {
 
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    final var gfx = (Graphics2D) painter.getGraphics();
+    final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
-    Drawgates.paintPortNamesByPin(painter, x, y, height, PIN_NAMES);
-    drawCounter(gfx, x, y, height, (TtlRegisterData) painter.getData());
-  }
-
-  private static void drawCounter(Graphics2D gfx, int x, int y, int height, TtlRegisterData data) {
-    if (data == null) {
-      return;
-    }
-    final var counter = data.getValue(COUNTER);
-    for (var bit = WIDTH - 1; bit >= 0; bit--) {
-      final var shown = counter.get(bit);
-      final var originX = x + 28 + (WIDTH - 1 - bit) * 18;
-      gfx.setColor(shown.getColor());
-      gfx.fillOval(originX, y + height / 2 - 6, 12, 12);
-      gfx.setColor(Color.WHITE);
-      GraphicsUtil.drawCenteredText(gfx, shown.toDisplayString(), originX + 6, y + height / 2);
-    }
-    gfx.setColor(Color.BLACK);
+    g.setColor(Color.BLACK);
+    g.drawRect((x + 146), (y + 18), 42, 24);
+    GraphicsUtil.drawCenteredText(g, "CNT", (x + 167), (y + 30));
+    g.drawLine((x + 150), (y + 7), (x + 150), (y + 18));
+    g.drawLine((x + 170), (y + 7), (x + 170), (y + 18));
+    structureBubble(g, (x + 170), (y + 14));
+    g.drawLine((x + 190), (y + 7), (x + 190), (y + 13));
+    g.drawLine((x + 190), (y + 13), (x + 184), (y + 13));
+    g.drawLine((x + 184), (y + 13), (x + 184), (y + 18));
+    structureBubble(g, (x + 184), (y + 14));
+    g.drawLine((x + 170), (y + height - 7), (x + 170), (y + 42));
+    structureBubble(g, (x + 170), (y + 46));
   }
 
   @Override
@@ -458,4 +452,40 @@ public class Ttl74593 extends AbstractTtlGate {
       return Value.create(bits);
     }
   }
+
+  private static int structureX(int originX, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originX + (pin - 1) * 20 + 10;
+    }
+    return originX + (pins - pin) * 20 + 10;
+  }
+
+  private static int structureY(int originY, int bodyHeight, int pins, int pin) {
+    if (pin <= pins / 2) {
+      return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
+    }
+    return originY + AbstractTtlGate.PIN_HEIGHT;
+  }
+
+  private static void structureBubble(Graphics g, int centerX, int centerY) {
+    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  }
+
+  private static void structureDot(
+      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
+    if (data == null) {
+      return;
+    }
+    final var value = data.getValue(word);
+    if (bit < 0 || bit >= value.getWidth()) {
+      return;
+    }
+    final var bitValue = value.get(bit);
+    g.setColor(bitValue.getColor());
+    g.fillOval(centerX - 3, centerY - 3, 6, 6);
+    g.setColor(Color.WHITE);
+    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
+    g.setColor(Color.BLACK);
+  }
+
 }
