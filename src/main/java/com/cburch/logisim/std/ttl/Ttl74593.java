@@ -17,6 +17,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -160,23 +161,38 @@ public class Ttl74593 extends AbstractTtlGate {
     return (byte) ((dsPinNr <= GND) ? dsPinNr - 1 : dsPinNr - 2);
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 146), (y + 18), 42, 24);
-    GraphicsUtil.drawCenteredText(g, "CNT", (x + 167), (y + 30));
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 18));
-    g.drawLine((x + 170), (y + 7), (x + 170), (y + 18));
-    structureBubble(g, (x + 170), (y + 14));
-    g.drawLine((x + 190), (y + 7), (x + 190), (y + 13));
-    g.drawLine((x + 190), (y + 13), (x + 184), (y + 13));
-    g.drawLine((x + 184), (y + 13), (x + 184), (y + 18));
-    structureBubble(g, (x + 184), (y + 14));
-    g.drawLine((x + 170), (y + height - 7), (x + 170), (y + 42));
-    structureBubble(g, (x + 170), (y + 46));
+    final var boxTop = y + 18;
+    final var boxBottom = boxTop + 24;
+    g.drawRect(x + 6, boxTop, 392, 24);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "CNT", x + 202, y + 30);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 20; pin++) {
+      if (pin == GND || pin == VCC) {
+        continue;
+      }
+      final var pinX = pin <= 10 ? x + (pin - 1) * 20 + 10 : x + (20 - pin) * 20 + 10;
+      final var pinY =
+          pin <= 10
+              ? y + height - AbstractTtlGate.PIN_HEIGHT
+              : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = pin <= 10 ? boxBottom : boxTop;
+      if (pin == NCLOAD || pin == NRCO || pin == NCCLR || pin == NCCKEN || pin == NRCKEN || pin == NG) {
+        final var bubbleY = pin <= 10 ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, pin <= 10 ? bubbleY + 2 : bubbleY - 2);
+        structureBubble(g, pinX, bubbleY);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
+
 
   @Override
   public void propagate(InstanceState state) {
