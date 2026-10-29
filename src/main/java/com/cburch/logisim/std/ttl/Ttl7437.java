@@ -8,6 +8,9 @@
  */
 
 package com.cburch.logisim.std.ttl;
+import java.awt.Color;
+import com.cburch.logisim.util.GraphicsUtil;
+import com.cburch.logisim.instance.InstancePainter;
 
 /**
  * TTL 74x37: quad 2-input NAND buffer.
@@ -42,5 +45,30 @@ public class Ttl7437 extends Ttl7400 {
 
   public Ttl7437() {
     super(_ID);
+  }
+  @Override
+  public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
+    final var g = painter.getGraphics();
+    super.paintBase(painter, false, false);
+    g.setColor(Color.BLACK);
+    final var bodyFont = g.getFont();
+    g.setFont(bodyFont.deriveFont(9f));
+    g.drawRect((x + 12), (y + 18), 122, 24);
+    GraphicsUtil.drawCenteredText(g, "BUF", (x + 73), (y + 30));
+    g.setFont(bodyFont);
+    final var top = y + PIN_HEIGHT;
+    final var bottom = y + height - PIN_HEIGHT;
+    g.drawLine((x + 10), bottom, (x + 10), (y + 42));
+    g.drawLine((x + 30), bottom, (x + 30), (y + 42));
+    g.drawLine((x + 50), bottom, (x + 50), (y + 42));
+    g.drawLine((x + 70), bottom, (x + 70), (y + 42));
+    g.drawLine((x + 90), bottom, (x + 90), (y + 42));
+    g.drawLine((x + 110), bottom, (x + 110), (y + 42));
+    g.drawLine((x + 130), top, (x + 130), (y + 18));
+    g.drawLine((x + 110), top, (x + 110), (y + 18));
+    g.drawLine((x + 90), top, (x + 90), (y + 18));
+    g.drawLine((x + 70), top, (x + 70), (y + 18));
+    g.drawLine((x + 50), top, (x + 50), (y + 18));
+    g.drawLine((x + 30), top, (x + 30), (y + 18));
   }
 }
