@@ -12,6 +12,8 @@ package com.cburch.logisim.std.ttl;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * TTL 74x15: triple 3-input AND gate with open-collector outputs.
@@ -69,39 +71,36 @@ public class Ttl7415 extends AbstractTtlGate {
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    Drawgates.paintAnd(g, x + 45, y + 20, 10, 10, false);
-    Drawgates.paintAnd(g, x + 125, y + 20, 10, 10, false);
-    Drawgates.paintAnd(g, x + 105, y + 40, 10, 10, false);
-    Drawgates.paintOpenCollector(g, x + 45, y + 20);
-    Drawgates.paintOpenCollector(g, x + 125, y + 20);
-    Drawgates.paintOpenCollector(g, x + 105, y + 40);
+    g.setColor(Color.BLACK);
+    final var top = y + AbstractTtlGate.PIN_HEIGHT;
+    final var bottom = y + height - AbstractTtlGate.PIN_HEIGHT;
+    drawAnd(g, x + 50, y + 18, top, true, new int[] {x + 10, x + 30, x + 30}, new boolean[] {false, false, true}, bottom, top);
+    drawAnd(g, x + 110, y + 44, bottom, false, new int[] {x + 50, x + 70, x + 90}, new boolean[] {false, false, false}, bottom, top);
+    drawAnd(g, x + 130, y + 18, top, true, new int[] {x + 70, x + 90, x + 110}, new boolean[] {true, true, true}, bottom, top);
+  }
 
-    var xpos = new int[] {x + 45, x + 50, x + 50};
-    var ypos = new int[] {y + 20, y + 20, y + AbstractTtlGate.PIN_HEIGHT};
-    g.drawPolyline(xpos, ypos, 3);
-    xpos = new int[] {x + 125, x + 130, x + 130};
-    g.drawPolyline(xpos, ypos, 3);
-    xpos = new int[] {x + 105, x + 110, x + 110};
-    ypos = new int[] {y + 40, y + 40, y + height - AbstractTtlGate.PIN_HEIGHT};
-    g.drawPolyline(xpos, ypos, 3);
-
-    xpos = new int[] {x + 30, x + 30, x + 35};
-    ypos = new int[] {y + AbstractTtlGate.PIN_HEIGHT, y + 17, y + 17};
-    g.drawPolyline(xpos, ypos, 3);
-    xpos = new int[] {x + 10, x + 10, x + 35};
-    ypos = new int[] {y + height - AbstractTtlGate.PIN_HEIGHT, y + 20, y + 20};
-    g.drawPolyline(xpos, ypos, 3);
-    xpos = new int[] {x + 30, x + 30, x + 35};
-    ypos = new int[] {y + height - AbstractTtlGate.PIN_HEIGHT, y + 23, y + 23};
-    g.drawPolyline(xpos, ypos, 3);
-
-    for (var i = 0; i < 3; i++) {
-      xpos = new int[] {x + 70 + i * 20, x + 70 + i * 20, x + 115};
-      ypos = new int[] {y + AbstractTtlGate.PIN_HEIGHT, y + 23 - i * 3, y + 23 - i * 3};
-      g.drawPolyline(xpos, ypos, 3);
-      xpos = new int[] {x + 50 + i * 20, x + 50 + i * 20, x + 95};
-      ypos = new int[] {y + height - AbstractTtlGate.PIN_HEIGHT, y + 37 + i * 3, y + 37 + i * 3};
-      g.drawPolyline(xpos, ypos, 3);
+  /** One open-collector AND. Each input stops on the left edge of its own gate. */
+  private static void drawAnd(
+      Graphics g,
+      int outputX,
+      int outputY,
+      int outputPinY,
+      boolean outputOnTop,
+      int[] inputX,
+      boolean[] inputOnTop,
+      int bottom,
+      int top) {
+    Drawgates.paintAnd(g, outputX, outputY, 10, 10, false);
+    final var diamondY = outputOnTop ? outputY - 8 : outputY + 8;
+    Drawgates.paintOpenCollector(g, outputX, diamondY);
+    g.drawLine(outputX, outputY, outputX, diamondY);
+    g.drawLine(outputX, outputOnTop ? diamondY - 3 : diamondY + 3, outputX, outputPinY);
+    final var inputEdge = outputX - 10;
+    for (var i = 0; i < inputX.length; i++) {
+      final var row = outputY - 4 + i * 4;
+      final var pinY = inputOnTop[i] ? top : bottom;
+      g.drawLine(inputX[i], pinY, inputX[i], row);
+      g.drawLine(inputX[i], row, inputEdge, row);
     }
   }
 
