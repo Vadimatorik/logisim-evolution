@@ -79,9 +79,9 @@ public class Ttl74126 extends AbstractTtlGate {
     Drawgates.paintBuffer(g, x + 50, youtput, portwidth, portheight);
     Drawgates.paintOutputgate(g, x + 50, y, x + 45, youtput, up, height);
     Drawgates.paintSingleInputgate(g, x + 30, y, x + 35, youtput, up, height);
-    // Active-high enable: the control wire meets the buffer with no inversion bubble.
+    // Active-high enable. The wire stops on the outside of the slant.
     final var enableY = up ? youtput + 2 : youtput - 2;
-    Drawgates.paintSingleInputgate(g, x + 10, y, x + 41, enableY, up, height);
+    Drawgates.paintSingleInputgate(g, x + 10, y, x + 40, enableY, up, height);
   }
 
   @Override
