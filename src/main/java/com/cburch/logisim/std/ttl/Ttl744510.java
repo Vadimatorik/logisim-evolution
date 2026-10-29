@@ -157,7 +157,7 @@ public class Ttl744510 extends AbstractTtlGate {
     g.drawRect(x + 6, top, 148, bottom - top);
     final var previousFont = g.getFont();
     g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "CMP", x + 80, (top + bottom) / 2);
+    GraphicsUtil.drawCenteredText(g, "CTR", x + 80, (top + bottom) / 2);
     g.setFont(previousFont);
     for (var pin = 1; pin <= 16; pin++) {
       if (pin == 8 || pin == 16) {
