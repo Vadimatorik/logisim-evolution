@@ -10,6 +10,7 @@
 package com.cburch.logisim.std.ttl;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.data.Value;
@@ -144,59 +145,32 @@ public class Ttl74368 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 30));
-    g.drawLine((x + 30), (y + 30), (x + 34), (y + 30));
-    g.drawLine((x + 34), (y + 24), (x + 46), (y + 30));
-    g.drawLine((x + 34), (y + 36), (x + 46), (y + 30));
-    g.drawLine((x + 34), (y + 24), (x + 34), (y + 36));
-    structureBubble(g, (x + 48), (y + 30));
-    g.drawLine((x + 52), (y + 30), (x + 50), (y + 30));
-    g.drawLine((x + 50), (y + 30), (x + 50), (y + height - 7));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 30));
-    g.drawLine((x + 70), (y + 30), (x + 74), (y + 30));
-    g.drawLine((x + 74), (y + 24), (x + 86), (y + 30));
-    g.drawLine((x + 74), (y + 36), (x + 86), (y + 30));
-    g.drawLine((x + 74), (y + 24), (x + 74), (y + 36));
-    structureBubble(g, (x + 88), (y + 30));
-    g.drawLine((x + 92), (y + 30), (x + 90), (y + 30));
-    g.drawLine((x + 90), (y + 30), (x + 90), (y + height - 7));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 30));
-    g.drawLine((x + 110), (y + 30), (x + 114), (y + 30));
-    g.drawLine((x + 114), (y + 24), (x + 126), (y + 30));
-    g.drawLine((x + 114), (y + 36), (x + 126), (y + 30));
-    g.drawLine((x + 114), (y + 24), (x + 114), (y + 36));
-    structureBubble(g, (x + 128), (y + 30));
-    g.drawLine((x + 132), (y + 30), (x + 130), (y + 30));
-    g.drawLine((x + 130), (y + 30), (x + 130), (y + height - 7));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 30));
-    g.drawLine((x + 130), (y + 30), (x + 134), (y + 30));
-    g.drawLine((x + 134), (y + 24), (x + 146), (y + 30));
-    g.drawLine((x + 134), (y + 36), (x + 146), (y + 30));
-    g.drawLine((x + 134), (y + 24), (x + 134), (y + 36));
-    structureBubble(g, (x + 148), (y + 30));
-    g.drawLine((x + 152), (y + 30), (x + 150), (y + 30));
-    g.drawLine((x + 150), (y + 30), (x + 150), (y + 7));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 30));
-    g.drawLine((x + 90), (y + 30), (x + 94), (y + 30));
-    g.drawLine((x + 94), (y + 24), (x + 106), (y + 30));
-    g.drawLine((x + 94), (y + 36), (x + 106), (y + 30));
-    g.drawLine((x + 94), (y + 24), (x + 94), (y + 36));
-    structureBubble(g, (x + 108), (y + 30));
-    g.drawLine((x + 112), (y + 30), (x + 110), (y + 30));
-    g.drawLine((x + 110), (y + 30), (x + 110), (y + 7));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 30));
-    g.drawLine((x + 50), (y + 30), (x + 54), (y + 30));
-    g.drawLine((x + 54), (y + 24), (x + 66), (y + 30));
-    g.drawLine((x + 54), (y + 36), (x + 66), (y + 30));
-    g.drawLine((x + 54), (y + 24), (x + 54), (y + 36));
-    structureBubble(g, (x + 68), (y + 30));
-    g.drawLine((x + 72), (y + 30), (x + 70), (y + 30));
-    g.drawLine((x + 70), (y + 30), (x + 70), (y + 7));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 22));
-    structureBubble(g, (x + 10), (y + height - 7));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 22));
-    structureBubble(g, (x + 30), (y + 7));
+    final var top = y + 18;
+    final var bottom = y + height - 18;
+    g.drawRect(x + 6, top, 148, bottom - top);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "BUF", x + 80, (top + bottom) / 2);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 16; pin++) {
+      if (pin == 8 || pin == 16) {
+        continue;
+      }
+      final var lower = pin <= 8;
+      final var pinX = lower ? x + (pin - 1) * 20 + 10 : x + (16 - pin) * 20 + 10;
+      final var pinY = lower ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = lower ? bottom : top;
+      if (false) {
+        final var bubbleY = lower ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, lower ? bubbleY + 2 : bubbleY - 2);
+        g.drawOval(pinX - 2, bubbleY - 2, 4, 4);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
