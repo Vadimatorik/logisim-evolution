@@ -18,6 +18,7 @@ import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.prefs.AppPreferences;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Arrays;
 
@@ -191,77 +192,35 @@ public class Ttl74598 extends AbstractTtlGate {
     driveOutputs(state, data.shift, state.getPortValue(pinNrToPortNr(OE)));
   }
 
-  @Override
-  public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
+    public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 4), (y + height - 28), 12, 14);
-    g.drawLine((x + 10), ((y + height - 28)) + 14, (x + 10), (y + height - 7));
-    g.drawLine((x + 4), (((y + height - 28)) + 7) - 3, ((x + 4)) + 4, ((y + height - 28)) + 7);
-    g.drawLine((x + 4), (((y + height - 28)) + 7) + 3, ((x + 4)) + 4, ((y + height - 28)) + 7);
-    g.drawRect((x + 24), (y + height - 28), 12, 14);
-    g.drawLine((x + 30), ((y + height - 28)) + 14, (x + 30), (y + height - 7));
-    g.drawLine((x + 24), (((y + height - 28)) + 7) - 3, ((x + 24)) + 4, ((y + height - 28)) + 7);
-    g.drawLine((x + 24), (((y + height - 28)) + 7) + 3, ((x + 24)) + 4, ((y + height - 28)) + 7);
-    g.drawRect((x + 44), (y + height - 28), 12, 14);
-    g.drawLine((x + 50), ((y + height - 28)) + 14, (x + 50), (y + height - 7));
-    g.drawLine((x + 44), (((y + height - 28)) + 7) - 3, ((x + 44)) + 4, ((y + height - 28)) + 7);
-    g.drawLine((x + 44), (((y + height - 28)) + 7) + 3, ((x + 44)) + 4, ((y + height - 28)) + 7);
-    g.drawRect((x + 64), (y + height - 28), 12, 14);
-    g.drawLine((x + 70), ((y + height - 28)) + 14, (x + 70), (y + height - 7));
-    g.drawLine((x + 64), (((y + height - 28)) + 7) - 3, ((x + 64)) + 4, ((y + height - 28)) + 7);
-    g.drawLine((x + 64), (((y + height - 28)) + 7) + 3, ((x + 64)) + 4, ((y + height - 28)) + 7);
-    g.drawRect((x + 84), (y + height - 28), 12, 14);
-    g.drawLine((x + 90), ((y + height - 28)) + 14, (x + 90), (y + height - 7));
-    g.drawLine((x + 84), (((y + height - 28)) + 7) - 3, ((x + 84)) + 4, ((y + height - 28)) + 7);
-    g.drawLine((x + 84), (((y + height - 28)) + 7) + 3, ((x + 84)) + 4, ((y + height - 28)) + 7);
-    g.drawRect((x + 104), (y + height - 28), 12, 14);
-    g.drawLine((x + 110), ((y + height - 28)) + 14, (x + 110), (y + height - 7));
-    g.drawLine((x + 104), (((y + height - 28)) + 7) - 3, ((x + 104)) + 4, ((y + height - 28)) + 7);
-    g.drawLine((x + 104), (((y + height - 28)) + 7) + 3, ((x + 104)) + 4, ((y + height - 28)) + 7);
-    g.drawRect((x + 124), (y + height - 28), 12, 14);
-    g.drawLine((x + 130), ((y + height - 28)) + 14, (x + 130), (y + height - 7));
-    g.drawLine((x + 124), (((y + height - 28)) + 7) - 3, ((x + 124)) + 4, ((y + height - 28)) + 7);
-    g.drawLine((x + 124), (((y + height - 28)) + 7) + 3, ((x + 124)) + 4, ((y + height - 28)) + 7);
-    g.drawRect((x + 144), (y + height - 28), 12, 14);
-    g.drawLine((x + 150), ((y + height - 28)) + 14, (x + 150), (y + height - 7));
-    g.drawLine((x + 144), (((y + height - 28)) + 7) - 3, ((x + 144)) + 4, ((y + height - 28)) + 7);
-    g.drawLine((x + 144), (((y + height - 28)) + 7) + 3, ((x + 144)) + 4, ((y + height - 28)) + 7);
-    g.drawLine((x + 16), ((y + height - 28)) + 7, (x + 20), ((y + height - 28)) + 7);
-    g.drawLine((x + 36), ((y + height - 28)) + 7, (x + 40), ((y + height - 28)) + 7);
-    g.drawLine((x + 56), ((y + height - 28)) + 7, (x + 60), ((y + height - 28)) + 7);
-    g.drawLine((x + 76), ((y + height - 28)) + 7, (x + 80), ((y + height - 28)) + 7);
-    g.drawLine((x + 96), ((y + height - 28)) + 7, (x + 100), ((y + height - 28)) + 7);
-    g.drawLine((x + 116), ((y + height - 28)) + 7, (x + 120), ((y + height - 28)) + 7);
-    g.drawLine((x + 136), ((y + height - 28)) + 7, (x + 140), ((y + height - 28)) + 7);
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 13));
-    g.drawLine((x + 150), (y + 13), (x + -1), (y + 13));
-    g.drawLine((x + -1), (y + 13), (x + -1), ((y + height - 28)) + 7);
-    g.drawLine((x + 10), (y + height - 32), (x + 150), (y + height - 32));
-    g.drawLine((x + 10), (y + height - 32), (x + 10), ((y + height - 28)) + 0);
-    g.drawLine((x + 10), (y + height - 32), (x + 10), (y + height - 28));
-    g.drawLine((x + 30), (y + height - 32), (x + 30), ((y + height - 28)) + 0);
-    g.drawLine((x + 30), (y + height - 32), (x + 30), (y + height - 28));
-    g.drawLine((x + 50), (y + height - 32), (x + 50), ((y + height - 28)) + 0);
-    g.drawLine((x + 50), (y + height - 32), (x + 50), (y + height - 28));
-    g.drawLine((x + 70), (y + height - 32), (x + 70), ((y + height - 28)) + 0);
-    g.drawLine((x + 70), (y + height - 32), (x + 70), (y + height - 28));
-    g.drawLine((x + 90), (y + height - 32), (x + 90), ((y + height - 28)) + 0);
-    g.drawLine((x + 90), (y + height - 32), (x + 90), (y + height - 28));
-    g.drawLine((x + 110), (y + height - 32), (x + 110), ((y + height - 28)) + 0);
-    g.drawLine((x + 110), (y + height - 32), (x + 110), (y + height - 28));
-    g.drawLine((x + 130), (y + height - 32), (x + 130), ((y + height - 28)) + 0);
-    g.drawLine((x + 130), (y + height - 32), (x + 130), (y + height - 28));
-    g.drawLine((x + 150), (y + height - 32), (x + 150), ((y + height - 28)) + 0);
-    g.drawLine((x + 150), (y + height - 32), (x + 150), (y + height - 28));
-    g.drawLine((x + 170), (y + 7), (x + 170), (y + 13));
-    g.drawLine((x + 170), (y + 13), (x + 10), (y + 13));
-    g.drawLine((x + 10), (y + 13), (x + 10), (y + height - 32));
-    structureBubble(g, (x + 170), (y + 7));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 13));
-    g.drawLine((x + 30), (y + 13), (x + 2), (y + 13));
-    g.drawLine((x + 2), (y + 13), (x + 2), (y + 20));
+    final var boxTop = y + 18;
+    final var boxBottom = boxTop + 24;
+    g.drawRect(x + 6, boxTop, 392, 24);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "REG", x + 202, y + 30);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 20; pin++) {
+      if (pin == 10 || pin == 20) {
+        continue;
+      }
+      final var pinX = pin <= 10 ? x + (pin - 1) * 20 + 10 : x + (20 - pin) * 20 + 10;
+      final var pinY =
+          pin <= 10
+              ? y + height - AbstractTtlGate.PIN_HEIGHT
+              : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = pin <= 10 ? boxBottom : boxTop;
+      if (pin == 9 || pin == 12 || pin == 14 || pin == 16) {
+        final var bubbleY = pin <= 10 ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, pin <= 10 ? bubbleY + 2 : bubbleY - 2);
+        structureBubble(g, pinX, bubbleY);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
 
   @Override
