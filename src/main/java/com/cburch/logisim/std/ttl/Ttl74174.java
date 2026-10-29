@@ -104,15 +104,16 @@ public class Ttl74174 extends AbstractTtlGate {
     final var top = y + AbstractTtlGate.PIN_HEIGHT;
     final var clearBottom = y + height - 8;
     final var clearTop = y + 8;
+    final var clockY = y + 30;
 
     g.drawLine(x + 10, y + height - AbstractTtlGate.PIN_HEIGHT, x + 10, clearBottom);
+    g.drawLine(x + 10, clearBottom, x + 10, clearTop);
     g.drawLine(x + 10, clearBottom, x + 146, clearBottom);
-    g.drawLine(x + 146, clearBottom, x + 146, clearTop);
-    g.drawLine(x + 36, clearTop, x + 146, clearTop);
+    g.drawLine(x + 10, clearTop, x + 146, clearTop);
 
-    g.drawLine(x + 150, top, x + 150, y + 30);
-    g.drawLine(x + 36, y + 30, x + 150, y + 30);
-    g.fillOval(x + 148, y + 28, 4, 4);
+    g.drawLine(x + 150, top, x + 150, clockY);
+    g.drawLine(x + 36, clockY, x + 150, clockY);
+    g.fillOval(x + 148, clockY - 2, 4, 4);
 
     drawFlop(g, x, y, height, false, 30, 50, true);
     drawFlop(g, x, y, height, false, 90, 70, false);
@@ -136,27 +137,52 @@ public class Ttl74174 extends AbstractTtlGate {
     final var dY = bodyY + 10;
 
     g.drawRect(bodyX, bodyY, 6, 14);
-    g.drawLine(x + qPin, pinY, x + qPin, qY);
-    g.drawLine(x + qPin, qY, qEdge, qY);
-    g.drawLine(x + dPin, pinY, x + dPin, dY);
-    g.drawLine(x + dPin, dY, dEdge, dY);
+    final var corridorY = bodyY - 3;
+    drawPinLead(g, x + qPin, pinY, qEdge, qY, corridorY, onTop);
+    drawPinLead(g, x + dPin, pinY, dEdge, dY, corridorY, onTop);
 
     final var clockX = bodyX + 3;
+    final var clockY = y + 30;
     if (onTop) {
-      g.drawLine(clockX, y + 30, clockX, bodyY + 14);
+      g.drawLine(clockX, clockY, clockX, bodyY + 14);
       g.drawLine(bodyX, bodyY + 14, clockX, bodyY + 11);
       g.drawLine(bodyX + 6, bodyY + 14, clockX, bodyY + 11);
       g.drawOval(bodyX + 2, bodyY - 3, 2, 2);
-      g.drawLine(clockX, bodyY - 1, clockX, y + 8);
+      g.drawLine(bodyX + 2, bodyY - 1, x + 10, bodyY - 1);
+      g.drawLine(x + 10, bodyY - 1, x + 10, y + 8);
     } else {
-      g.drawLine(clockX, bodyY, clockX, y + 30);
+      g.drawLine(clockX, bodyY, clockX, clockY);
       g.drawLine(bodyX, bodyY, clockX, bodyY + 3);
       g.drawLine(bodyX + 6, bodyY, clockX, bodyY + 3);
       g.drawOval(bodyX + 2, bodyY + 14, 2, 2);
-      g.drawLine(clockX, bodyY + 16, clockX, y + height - 8);
+      g.drawLine(bodyX + 2, bodyY + 15, x + 10, bodyY + 15);
+      g.drawLine(x + 10, bodyY + 15, x + 10, y + height - 8);
     }
     g.drawString("Q", qOnLeft ? bodyX - 8 : bodyX + 8, bodyY + 8);
     g.drawString("D", qOnLeft ? bodyX + 8 : bodyX - 8, bodyY + 12);
+  }
+
+  /** Routes a package pin to a symbol edge without crossing the shared clock line. */
+  private static void drawPinLead(
+      Graphics g,
+      int pinX,
+      int pinY,
+      int edgeX,
+      int edgeY,
+      int corridorY,
+      boolean fromTop) {
+    if (fromTop) {
+      g.drawLine(pinX, pinY, pinX, edgeY);
+      if (pinX != edgeX) {
+        g.drawLine(pinX, edgeY, edgeX, edgeY);
+      }
+      return;
+    }
+    g.drawLine(pinX, pinY, pinX, corridorY);
+    if (pinX != edgeX) {
+      g.drawLine(pinX, corridorY, edgeX, corridorY);
+    }
+    g.drawLine(edgeX, corridorY, edgeX, edgeY);
   }
 
   @Override
