@@ -8,6 +8,8 @@
  */
 
 package com.cburch.logisim.std.ttl;
+import java.awt.Color;
+import com.cburch.logisim.util.GraphicsUtil;
 
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
@@ -58,14 +60,28 @@ public class Ttl744072 extends AbstractTtlGate {
     super(_ID, PIN_COUNT, OUTPUT_PINS, UNUSED_PINS, PORT_NAMES, new Ttl744072HdlGenerator());
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    final var inset = AppPreferences.GATE_SHAPE.get().equals(AppPreferences.SHAPE_SHAPED) ? 4 : 0;
-    // Outputs sit to the left of their inputs, so each OR symbol faces left.
-    paintHalf(g, x, y, height, false, inset);
-    paintHalf(g, x, y, height, true, inset);
+    super.paintBase(painter, false, false);
+    g.setColor(Color.BLACK);
+    final var bodyFont = g.getFont();
+    g.setFont(bodyFont.deriveFont(9f));
+    g.drawRect((x + 12), (y + 18), 122, 24);
+    GraphicsUtil.drawCenteredText(g, "BUF", (x + 73), (y + 30));
+    g.setFont(bodyFont);
+    final var top = y + PIN_HEIGHT;
+    final var bottom = y + height - PIN_HEIGHT;
+    g.drawLine((x + 10), bottom, (x + 10), (y + 42));
+    g.drawLine((x + 30), bottom, (x + 30), (y + 42));
+    g.drawLine((x + 50), bottom, (x + 50), (y + 42));
+    g.drawLine((x + 70), bottom, (x + 70), (y + 42));
+    g.drawLine((x + 90), bottom, (x + 90), (y + 42));
+    g.drawLine((x + 110), top, (x + 110), (y + 18));
+    g.drawLine((x + 90), top, (x + 90), (y + 18));
+    g.drawLine((x + 70), top, (x + 70), (y + 18));
+    g.drawLine((x + 50), top, (x + 50), (y + 18));
+    g.drawLine((x + 30), top, (x + 30), (y + 18));
   }
 
   @Override
