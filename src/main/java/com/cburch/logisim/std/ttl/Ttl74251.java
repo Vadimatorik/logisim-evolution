@@ -11,6 +11,7 @@ package com.cburch.logisim.std.ttl;
 
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
@@ -116,26 +117,28 @@ public class Ttl74251 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawLine((x + 10), (y + 34), (x + 50), (y + 18));
-    g.drawLine((x + 90), (y + 34), (x + 50), (y + 18));
-    g.drawLine((x + 10), (y + 34), (x + 90), (y + 34));
-    g.drawLine((x + 50), (y + 18), (x + 90), (y + height - 7));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 34));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 34));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 34));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 34));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 34));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 34));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 34));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 34));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 16));
-    GraphicsUtil.drawCenteredText(g, "S", (x + 110), (y + 16));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 16));
-    GraphicsUtil.drawCenteredText(g, "S", (x + 130), (y + 16));
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 16));
-    GraphicsUtil.drawCenteredText(g, "S", (x + 150), (y + 16));
-    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + 40));
-    structureBubble(g, (x + 130), (y + height - 7));
+    final var top = y + 18;
+    final var bottom = y + 42;
+    g.drawRect(x + 6, top, 148, bottom - top);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "MUX", x + 80, y + 30);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 16; pin++) {
+      if (pin == GND || pin == VCC) {
+        continue;
+      }
+      final var pinX = pin <= 8 ? x + (pin - 1) * 20 + 10 : x + (16 - pin) * 20 + 10;
+      final var pinY = pin <= 8 ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = pin <= 8 ? bottom : top;
+      if (pin == NY || pin == NOE) {
+        final var bubbleY = pin <= 8 ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, pin <= 8 ? bubbleY + 2 : bubbleY - 2);
+        structureBubble(g, pinX, bubbleY);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
 
   private static Value portValue(InstanceState state, byte dsPinNr) {
