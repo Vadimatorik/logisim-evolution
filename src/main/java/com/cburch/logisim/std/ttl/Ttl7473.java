@@ -17,6 +17,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -82,57 +83,35 @@ public class Ttl7473 extends AbstractTtlGate {
         new Ttl7473HdlGenerator());
   }
 
-  @Override
-  public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
+    public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var rawState = painter.getData();
-    final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
-    g.drawRect((x + 14), (y + 18), 42, 24);
-    GraphicsUtil.drawCenteredText(g, "J", (x + 22), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "K", (x + 22), (y + 36));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 48), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 48), (y + 36));
-    structureBubble(g, (x + 48), (y + 32));
-    structureDot(g, (x + 35), (y + 30), stored, 0, 0);
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 23), (y + height - 13));
-    g.drawLine((x + 23), (y + height - 13), (x + 23), (y + 42));
-    g.drawLine((x + 23) - 3, (y + 42), (x + 23), ((y + 42)) - 4);
-    g.drawLine((x + 23) + 3, (y + 42), (x + 23), ((y + 42)) - 4);
-    structureBubble(g, (x + 23), ((y + 42)) + 6);
-    g.drawLine((x + 10), (y + 7), (x + 10), (y + 13));
-    g.drawLine((x + 10), (y + 13), (x + 23), (y + 13));
-    g.drawLine((x + 23), (y + 13), (x + 23), (y + 18));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    structureBubble(g, (x + 30), ((y + 42)) + 5);
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 18));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 18));
-    structureBubble(g, (x + 30), ((y + 18)) - 5);
-    g.drawRect((x + 84), (y + 18), 34, 24);
-    GraphicsUtil.drawCenteredText(g, "J", (x + 92), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "K", (x + 92), (y + 36));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 110), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 110), (y + 36));
-    structureBubble(g, (x + 110), (y + 32));
-    structureDot(g, (x + 101), (y + 30), stored, 0, 1);
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
-    g.drawLine((x + 90) - 3, (y + 42), (x + 90), ((y + 42)) - 4);
-    g.drawLine((x + 90) + 3, (y + 42), (x + 90), ((y + 42)) - 4);
-    structureBubble(g, (x + 90), ((y + 42)) + 6);
-    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + height - 13));
-    g.drawLine((x + 130), (y + height - 13), (x + 96), (y + height - 13));
-    g.drawLine((x + 96), (y + height - 13), (x + 96), (y + 42));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 42));
-    structureBubble(g, (x + 110), ((y + 42)) + 5);
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 13));
-    g.drawLine((x + 130), (y + 13), (x + 101), (y + 13));
-    g.drawLine((x + 101), (y + 13), (x + 101), (y + 18));
-    structureBubble(g, (x + 101), ((y + 18)) - 5);
+    final var boxTop = y + 18;
+    final var boxBottom = boxTop + 24;
+    g.drawRect(x + 6, boxTop, 272, 24);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "REG", x + 142, y + 30);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 14; pin++) {
+      if (pin == 7 || pin == 14) {
+        continue;
+      }
+      final var pinX = pin <= 7 ? x + (pin - 1) * 20 + 10 : x + (14 - pin) * 20 + 10;
+      final var pinY =
+          pin <= 7
+              ? y + height - AbstractTtlGate.PIN_HEIGHT
+              : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = pin <= 7 ? boxBottom : boxTop;
+      if (pin == 2 || pin == 5) {
+        final var bubbleY = pin <= 7 ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, pin <= 7 ? bubbleY + 2 : bubbleY - 2);
+        structureBubble(g, pinX, bubbleY);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
 
   private static TtlRegisterData getStateData(InstanceState state) {
