@@ -141,22 +141,17 @@ public class Ttl74256 extends AbstractTtlGate {
     g.drawLine((x + 110), (y + 28), (x + 110), (y + 26));
     g.drawLine((x + 130), (y + 28), (x + 130), (y + 26));
     g.drawLine((x + 150), (y + 28), (x + 150), (y + 26));
-    g.drawLine((x + 130), (y + 28), (x + 130), (y + 26));
-    g.drawLine((x + 110), (y + 28), (x + 110), (y + 26));
-    g.drawLine((x + 90), (y + 28), (x + 90), (y + 26));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 13));
-    g.drawLine((x + 50), (y + 13), (x + 64), (y + 13));
-    g.drawLine((x + 64), (y + 13), (x + 64), (y + 28));
+    g.drawLine((x + 50), (y + 7), (x + 50), (y + 28));
     structureBubble(g, (x + 50), (y + 7));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 30));
-    GraphicsUtil.drawCenteredText(g, "A", (x + 10), (y + 30));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 30));
-    GraphicsUtil.drawCenteredText(g, "A", (x + 30), (y + 30));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 30));
-    GraphicsUtil.drawCenteredText(g, "D", (x + 50), (y + 30));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 30));
-    GraphicsUtil.drawCenteredText(g, "D", (x + 70), (y + 30));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 30));
+    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 28));
+    GraphicsUtil.drawCenteredText(g, "A", (x + 10), (y + 34));
+    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 28));
+    GraphicsUtil.drawCenteredText(g, "A", (x + 30), (y + 34));
+    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 28));
+    GraphicsUtil.drawCenteredText(g, "D", (x + 50), (y + 34));
+    g.drawLine((x + 70), (y + 7), (x + 70), (y + 28));
+    GraphicsUtil.drawCenteredText(g, "D", (x + 70), (y + 18));
+    g.drawLine((x + 30), (y + 7), (x + 30), (y + 28));
     structureBubble(g, (x + 30), (y + 7));
   }
 
