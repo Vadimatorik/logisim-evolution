@@ -117,9 +117,8 @@ public class Ttl74156 extends AbstractTtlGate {
     g.setColor(Color.BLACK);
     g.drawRect((x + 12), (y + 18), 136, 24);
     GraphicsUtil.drawCenteredText(g, "2-4", (x + 80), (y + 30));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
-    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
+    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 42));
+    g.drawLine((x + 10), (y + 42), (x + 12), (y + 42));
     g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
     structureBubble(g, (x + 30), (y + 46));
     g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
@@ -130,30 +129,20 @@ public class Ttl74156 extends AbstractTtlGate {
     structureBubble(g, (x + 30), (y + 14));
     g.drawLine((x + 130), (y + height - 7), (x + 130), (y + 42));
     structureBubble(g, (x + 130), (y + 46));
-    g.drawLine((x + 128), (y + 44), (x + 132), (y + 44));
     g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 42));
     structureBubble(g, (x + 110), (y + 46));
-    g.drawLine((x + 108), (y + 44), (x + 112), (y + 44));
     g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
     structureBubble(g, (x + 90), (y + 46));
-    g.drawLine((x + 88), (y + 44), (x + 92), (y + 44));
     g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
     structureBubble(g, (x + 70), (y + 46));
-    g.drawLine((x + 68), (y + 44), (x + 72), (y + 44));
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 13));
-    g.drawLine((x + 150), (y + 13), (x + 144), (y + 13));
-    g.drawLine((x + 144), (y + 13), (x + 144), (y + 18));
-    structureBubble(g, (x + 144), (y + 14));
-    g.drawLine((x + 142), (y + 16), (x + 146), (y + 16));
+    g.drawLine((x + 150), (y + 7), (x + 150), (y + 18));
+    structureBubble(g, (x + 150), (y + 14));
     g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
     structureBubble(g, (x + 130), (y + 14));
-    g.drawLine((x + 128), (y + 16), (x + 132), (y + 16));
     g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
     structureBubble(g, (x + 110), (y + 14));
-    g.drawLine((x + 108), (y + 16), (x + 112), (y + 16));
     g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
     structureBubble(g, (x + 90), (y + 14));
-    g.drawLine((x + 88), (y + 16), (x + 92), (y + 16));
   }
 
   private static boolean isLow(InstanceState state, byte dsPinNr) {
