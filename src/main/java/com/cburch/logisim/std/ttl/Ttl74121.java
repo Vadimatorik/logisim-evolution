@@ -146,26 +146,35 @@ public class Ttl74121 extends AbstractTtlGate implements TickAware {
     return data != null && data.expire(ticks);
   }
 
-  @Override
-  public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
+    public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 12), (y + 18), 102, 24);
-    GraphicsUtil.drawCenteredText(g, "1SHOT", (x + 63), (y + 30));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
-    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
-    structureBubble(g, (x + 16), (y + 46));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 42));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
-    structureBubble(g, (x + 50), (y + 46));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
-    structureBubble(g, (x + 70), (y + 46));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 18));
-    drawTiming((Graphics2D) g, painter, x, y, height);
+    final var boxTop = y + 18;
+    final var boxBottom = boxTop + 24;
+    g.drawRect(x + 6, boxTop, 272, 24);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "CNT", x + 142, y + 30);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 14; pin++) {
+      if (pin == 7 || pin == 14) {
+        continue;
+      }
+      final var pinX = pin <= 7 ? x + (pin - 1) * 20 + 10 : x + (14 - pin) * 20 + 10;
+      final var pinY =
+          pin <= 7
+              ? y + height - AbstractTtlGate.PIN_HEIGHT
+              : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = pin <= 7 ? boxBottom : boxTop;
+      if (pin == 1) {
+        final var bubbleY = pin <= 7 ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, pin <= 7 ? bubbleY + 2 : bubbleY - 2);
+        structureBubble(g, pinX, bubbleY);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
 
   @Override
