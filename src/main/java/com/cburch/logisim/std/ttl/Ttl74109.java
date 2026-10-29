@@ -17,6 +17,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -137,65 +138,76 @@ public class Ttl74109 extends AbstractTtlGate {
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
     final var rawState = painter.getData();
-    final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
-    g.drawRect((x + 14), (y + 18), 58, 24);
-    GraphicsUtil.drawCenteredText(g, "J", (x + 22), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "K", (x + 22), (y + 36));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 64), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 64), (y + 36));
-    structureBubble(g, (x + 64), (y + 32));
-    structureDot(g, (x + 43), (y + 30), stored, 0, 0);
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + height - 13));
-    g.drawLine((x + 70), (y + height - 13), (x + 26), (y + height - 13));
-    g.drawLine((x + 26), (y + height - 13), (x + 26), (y + 42));
-    g.drawLine((x + 26) - 3, (y + 42), (x + 26), ((y + 42)) - 4);
-    g.drawLine((x + 26) + 3, (y + 42), (x + 26), ((y + 42)) - 4);
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
-    structureBubble(g, (x + 50), ((y + 42)) + 5);
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 51), (y + height - 13));
-    g.drawLine((x + 51), (y + height - 13), (x + 51), (y + 42));
-    structureBubble(g, (x + 51), ((y + 42)) + 5);
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + height - 13));
-    g.drawLine((x + 90), (y + height - 13), (x + 59), (y + height - 13));
-    g.drawLine((x + 59), (y + height - 13), (x + 59), (y + 42));
-    structureBubble(g, (x + 59), ((y + 42)) + 5);
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + height - 13));
-    g.drawLine((x + 110), (y + height - 13), (x + 68), (y + height - 13));
-    g.drawLine((x + 68), (y + height - 13), (x + 68), (y + 42));
-    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + height - 13));
-    g.drawLine((x + 130), (y + height - 13), (x + 68), (y + height - 13));
-    g.drawLine((x + 68), (y + height - 13), (x + 68), (y + 42));
-    structureBubble(g, (x + 68), ((y + 42)) + 5);
-    g.drawRect((x + 80), (y + 18), 58, 24);
-    GraphicsUtil.drawCenteredText(g, "J", (x + 88), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "K", (x + 88), (y + 36));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 130), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 130), (y + 36));
-    structureBubble(g, (x + 130), (y + 32));
-    structureDot(g, (x + 109), (y + 30), stored, 0, 1);
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
-    g.drawLine((x + 90) - 3, (y + 18), (x + 90), ((y + 18)) + 4);
-    g.drawLine((x + 90) + 3, (y + 18), (x + 90), ((y + 18)) + 4);
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 13));
-    g.drawLine((x + 50), (y + 13), (x + 100), (y + 13));
-    g.drawLine((x + 100), (y + 13), (x + 100), (y + 18));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 13));
-    g.drawLine((x + 70), (y + 13), (x + 109), (y + 13));
-    g.drawLine((x + 109), (y + 13), (x + 109), (y + 18));
-    structureBubble(g, (x + 109), ((y + 18)) - 5);
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 13));
-    g.drawLine((x + 30), (y + 13), (x + 117), (y + 13));
-    g.drawLine((x + 117), (y + 13), (x + 117), (y + 18));
-    structureBubble(g, (x + 117), ((y + 18)) - 5);
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
-    structureBubble(g, (x + 110), ((y + 18)) - 5);
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 13));
-    g.drawLine((x + 150), (y + 13), (x + 134), (y + 13));
-    g.drawLine((x + 134), (y + 13), (x + 134), (y + 18));
-    structureBubble(g, (x + 134), ((y + 18)) - 5);
+    final TtlRegisterData stored =
+        rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
+    // Lower half uses pins 1..7. Upper half uses pins 15..9. Each lead stays on its own pin.
+    drawHalf(g, x, y, height, false, new int[] {1, 2, 3, 4, 5, 6, 7}, stored, 0);
+    drawHalf(g, x, y, height, true, new int[] {15, 14, 13, 12, 11, 10, 9}, stored, 1);
+  }
+
+  /**
+   * One J-K symbol. {@code pins} is reset, J, K, clock, set, Q, nQ. Active-low pins get a bubble
+   * on the symbol edge, and the clock wedge stops on that edge.
+   */
+  private static void drawHalf(
+      Graphics g,
+      int x,
+      int y,
+      int height,
+      boolean alongTop,
+      int[] pins,
+      TtlRegisterData stored,
+      int word) {
+    final var resetX = structureX(x, 16, pins[0]);
+    final var jX = structureX(x, 16, pins[1]);
+    final var kX = structureX(x, 16, pins[2]);
+    final var clockX = structureX(x, 16, pins[3]);
+    final var setX = structureX(x, 16, pins[4]);
+    final var qX = structureX(x, 16, pins[5]);
+    final var nqX = structureX(x, 16, pins[6]);
+    final var left = Math.min(resetX, nqX) - 6;
+    final var right = Math.max(resetX, nqX) + 6;
+    final var top = alongTop ? y + 12 : y + 32;
+    final var boxHeight = 16;
+    g.drawRect(left, top, right - left, boxHeight);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    final var labelY = top + boxHeight / 2;
+    GraphicsUtil.drawCenteredText(g, "J", jX, labelY);
+    GraphicsUtil.drawCenteredText(g, "K", kX, labelY);
+    GraphicsUtil.drawCenteredText(g, "Q", qX, labelY);
+    GraphicsUtil.drawCenteredText(g, "Q", nqX, labelY);
+    g.setFont(previousFont);
+    structureDot(g, (jX + qX) / 2, labelY, stored, word, 0);
+
+    final var edge = alongTop ? top : top + boxHeight;
+    final var pinY = structureY(y, height, 16, pins[0]);
+    drawLead(g, resetX, pinY, edge, true);
+    drawLead(g, jX, pinY, edge, false);
+    drawLead(g, kX, pinY, edge, false);
+    drawClock(g, clockX, pinY, edge, alongTop);
+    drawLead(g, setX, pinY, edge, true);
+    drawLead(g, qX, pinY, edge, false);
+    drawLead(g, nqX, pinY, edge, true);
+  }
+
+  /** Straight lead from the package pin to the symbol. A bubble sits on the symbol edge. */
+  private static void drawLead(Graphics g, int pinX, int pinY, int edgeY, boolean bubble) {
+    if (!bubble) {
+      g.drawLine(pinX, pinY, pinX, edgeY);
+      return;
+    }
+    final var stop = edgeY < pinY ? edgeY + 2 : edgeY - 2;
+    g.drawLine(pinX, pinY, pinX, stop);
+    structureBubble(g, pinX, edgeY);
+  }
+
+  /** Three segments meeting at the symbol edge, outside the rectangle. */
+  private static void drawClock(Graphics g, int pinX, int pinY, int edgeY, boolean alongTop) {
+    final var base = alongTop ? edgeY - 3 : edgeY + 3;
+    g.drawLine(pinX, pinY, pinX, base);
+    g.drawLine(pinX - 3, base, pinX, edgeY);
+    g.drawLine(pinX + 3, base, pinX, edgeY);
   }
 
   private static TtlRegisterData getStateData(InstanceState state) {
