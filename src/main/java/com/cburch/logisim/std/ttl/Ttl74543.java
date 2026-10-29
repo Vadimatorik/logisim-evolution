@@ -142,20 +142,25 @@ public class Ttl74543 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 12), (y + 18), 216, 24);
+    final var pins = 24;
+    final var boxTop = y + 18;
+    final var boxBottom = boxTop + 24;
+    g.drawRect((x + 12), boxTop, 216, 24);
     GraphicsUtil.drawCenteredText(g, "LATCH", (x + 120), (y + 30));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
-    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
-    structureBubble(g, (x + 16), (y + 46));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    structureBubble(g, (x + 30), (y + 46));
-    g.drawLine((x + 210), (y + 7), (x + 210), (y + 18));
-    structureBubble(g, (x + 210), (y + 14));
-    g.drawLine((x + 230), (y + 7), (x + 230), (y + 13));
-    g.drawLine((x + 230), (y + 13), (x + 224), (y + 13));
-    g.drawLine((x + 224), (y + 13), (x + 224), (y + 18));
-    structureBubble(g, (x + 224), (y + 14));
+    structurePinToBox(g, x, y, height, pins, 1, boxBottom);
+    structurePinToBox(g, x, y, height, pins, 2, boxBottom);
+    structurePinToBox(g, x, y, height, pins, 11, boxBottom);
+    structurePinToBox(g, x, y, height, pins, 13, boxTop);
+    structurePinToBox(g, x, y, height, pins, 14, boxTop);
+    structurePinToBox(g, x, y, height, pins, 23, boxTop);
+  }
+
+  private static void structurePinToBox(
+      Graphics g, int x, int y, int height, int pins, int pin, int boxEdgeY) {
+    final var pinX = structureX(x, pins, pin);
+    final var pinY = structureY(y, height, pins, pin);
+    g.drawLine(pinX, pinY, pinX, boxEdgeY);
+    structureBubble(g, pinX, boxEdgeY);
   }
 
   private static void drawLatches(Graphics2D gfx, int x, int y, int height, TtlRegisterData data) {
