@@ -12,6 +12,8 @@ package com.cburch.logisim.std.ttl;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * TTL 74x12: triple 3-input NAND gate with open-drain outputs.
@@ -67,42 +69,39 @@ public class Ttl7412 extends AbstractTtlGate {
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    Drawgates.paintAnd(g, x + 45, y + 20, 10, 10, true);
-    Drawgates.paintAnd(g, x + 125, y + 20, 10, 10, true);
-    Drawgates.paintAnd(g, x + 105, y + 40, 10, 10, true);
-    Drawgates.paintOpenCollector(g, x + 47, y + 14);
-    Drawgates.paintOpenCollector(g, x + 127, y + 14);
-    Drawgates.paintOpenCollector(g, x + 107, y + 46);
+    g.setColor(Color.BLACK);
+    final var top = y + AbstractTtlGate.PIN_HEIGHT;
+    final var bottom = y + height - AbstractTtlGate.PIN_HEIGHT;
+    drawNand(g, x + 50, y + 18, top, true, new int[] {x + 10, x + 30, x + 30}, new boolean[] {false, false, true}, bottom, top);
+    drawNand(g, x + 110, y + 44, bottom, false, new int[] {x + 50, x + 70, x + 90}, new boolean[] {false, false, false}, bottom, top);
+    drawNand(g, x + 130, y + 18, top, true, new int[] {x + 70, x + 90, x + 110}, new boolean[] {true, true, true}, bottom, top);
+  }
 
-    var xpos = new int[] {x + 49, x + 50, x + 50};
-    var ypos = new int[] {y + 20, y + 20, y + AbstractTtlGate.PIN_HEIGHT};
-    g.drawPolyline(xpos, ypos, 3);
-    xpos[0] = x + 129;
-    xpos[1] = xpos[2] = x + 130;
-    g.drawPolyline(xpos, ypos, 3);
-    xpos[0] = x + 109;
-    xpos[1] = xpos[2] = x + 110;
-    ypos[0] = ypos[1] = y + 40;
-    ypos[2] = y + height - AbstractTtlGate.PIN_HEIGHT;
-    g.drawPolyline(xpos, ypos, 3);
-
-    xpos = new int[] {x + 30, x + 30, x + 35};
-    ypos = new int[] {y + AbstractTtlGate.PIN_HEIGHT, y + 17, y + 17};
-    g.drawPolyline(xpos, ypos, 3);
-    xpos = new int[] {x + 10, x + 10, x + 35};
-    ypos = new int[] {y + height - AbstractTtlGate.PIN_HEIGHT, y + 20, y + 20};
-    g.drawPolyline(xpos, ypos, 3);
-    xpos = new int[] {x + 30, x + 30, x + 35};
-    ypos = new int[] {y + height - AbstractTtlGate.PIN_HEIGHT, y + 23, y + 23};
-    g.drawPolyline(xpos, ypos, 3);
-
-    for (var i = 0; i < 3; i++) {
-      xpos = new int[] {x + 70 + i * 20, x + 70 + i * 20, x + 115};
-      ypos = new int[] {y + AbstractTtlGate.PIN_HEIGHT, y + 23 - i * 3, y + 23 - i * 3};
-      g.drawPolyline(xpos, ypos, 3);
-      xpos = new int[] {x + 50 + i * 20, x + 50 + i * 20, x + 95};
-      ypos = new int[] {y + height - AbstractTtlGate.PIN_HEIGHT, y + 37 + i * 3, y + 37 + i * 3};
-      g.drawPolyline(xpos, ypos, 3);
+  /**
+   * One open-collector NAND. Inputs arrive at the left edge on their own rows and do not enter the
+   * gate body.
+   */
+  private static void drawNand(
+      Graphics g,
+      int outputX,
+      int outputY,
+      int outputPinY,
+      boolean outputOnTop,
+      int[] inputX,
+      boolean[] inputOnTop,
+      int bottom,
+      int top) {
+    Drawgates.paintAnd(g, outputX, outputY, 10, 10, true);
+    final var diamondY = outputOnTop ? outputY - 8 : outputY + 8;
+    Drawgates.paintOpenCollector(g, outputX, diamondY);
+    g.drawLine(outputX, outputY, outputX, diamondY);
+    g.drawLine(outputX, outputOnTop ? diamondY - 3 : diamondY + 3, outputX, outputPinY);
+    final var inputEdge = outputX - 10;
+    for (var i = 0; i < inputX.length; i++) {
+      final var row = outputY - 4 + i * 4;
+      final var pinY = inputOnTop[i] ? top : bottom;
+      g.drawLine(inputX[i], pinY, inputX[i], row);
+      g.drawLine(inputX[i], row, inputEdge, row);
     }
   }
 
