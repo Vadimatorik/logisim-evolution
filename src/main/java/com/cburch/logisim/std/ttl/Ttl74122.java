@@ -145,22 +145,17 @@ public class Ttl74122 extends AbstractTtlGate implements TickAware {
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
     g.drawRect((x + 12), (y + 18), 116, 24);
-    GraphicsUtil.drawCenteredText(g, "1SHOT", (x + 70), (y + 30));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 42));
-    structureBubble(g, (x + 110), (y + 46));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 13));
-    g.drawLine((x + 130), (y + 13), (x + 124), (y + 13));
-    g.drawLine((x + 124), (y + 13), (x + 124), (y + 18));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
-    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
-    structureBubble(g, (x + 16), (y + 46));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    structureBubble(g, (x + 30), (y + 46));
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "1SHOT", (x + 60), (y + 26));
+    g.setFont(previousFont);
+    drawEdge(g, x + 110, y + height - 7, y + 42, true);
+    g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
+    drawEdge(g, x + 16, y + height - 7, y + 42, true);
+    drawEdge(g, x + 30, y + height - 7, y + 42, true);
     g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
     g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
-    structureBubble(g, (x + 90), (y + 46));
+    drawEdge(g, x + 90, y + height - 7, y + 42, true);
     g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
     g.drawLine((x + 70), (y + 7), (x + 70), (y + 18));
     drawTiming((Graphics2D) g, painter, x, y, height);
@@ -204,7 +199,7 @@ public class Ttl74122 extends AbstractTtlGate implements TickAware {
     final var active = data != null && data.active;
     gfx.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 9));
     gfx.setColor(active ? Value.TRUE.getColor() : Color.BLACK);
-    GraphicsUtil.drawCenteredText(gfx, ticks + "t", x + 70, y + height / 2 + 8);
+    GraphicsUtil.drawCenteredText(gfx, ticks + "t", x + 84, y + 34);
     gfx.setColor(Color.BLACK);
   }
 
@@ -315,6 +310,15 @@ public class Ttl74122 extends AbstractTtlGate implements TickAware {
       return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
     }
     return originY + AbstractTtlGate.PIN_HEIGHT;
+  }
+
+  private static void drawEdge(Graphics g, int pinX, int pinY, int edgeY, boolean bubble) {
+    if (!bubble) {
+      g.drawLine(pinX, pinY, pinX, edgeY);
+      return;
+    }
+    structureBubble(g, pinX, edgeY + 4);
+    g.drawLine(pinX, pinY, pinX, edgeY + 6);
   }
 
   private static void structureBubble(Graphics g, int centerX, int centerY) {
