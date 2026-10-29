@@ -10,6 +10,7 @@
 package com.cburch.logisim.std.ttl;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.data.Value;
@@ -93,51 +94,32 @@ public class Ttl74243 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 36));
-    g.drawLine((x + 50), (y + 36), (x + 60), (y + 36));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 22));
-    g.drawLine((x + 70), (y + 22), (x + 60), (y + 22));
-    g.drawLine((x + 56), (y + 32), (x + 64), (y + 32));
-    g.drawLine((x + 56), (y + 32), (x + 60), (y + 26));
-    g.drawLine((x + 64), (y + 32), (x + 60), (y + 26));
-    g.drawLine((x + 56), (y + 28), (x + 64), (y + 28));
-    g.drawLine((x + 56), (y + 28), (x + 60), (y + 34));
-    g.drawLine((x + 64), (y + 28), (x + 60), (y + 34));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 36));
-    g.drawLine((x + 70), (y + 36), (x + 80), (y + 36));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 22));
-    g.drawLine((x + 90), (y + 22), (x + 80), (y + 22));
-    g.drawLine((x + 76), (y + 32), (x + 84), (y + 32));
-    g.drawLine((x + 76), (y + 32), (x + 80), (y + 26));
-    g.drawLine((x + 84), (y + 32), (x + 80), (y + 26));
-    g.drawLine((x + 76), (y + 28), (x + 84), (y + 28));
-    g.drawLine((x + 76), (y + 28), (x + 80), (y + 34));
-    g.drawLine((x + 84), (y + 28), (x + 80), (y + 34));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 36));
-    g.drawLine((x + 90), (y + 36), (x + 100), (y + 36));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 22));
-    g.drawLine((x + 110), (y + 22), (x + 100), (y + 22));
-    g.drawLine((x + 96), (y + 32), (x + 104), (y + 32));
-    g.drawLine((x + 96), (y + 32), (x + 100), (y + 26));
-    g.drawLine((x + 104), (y + 32), (x + 100), (y + 26));
-    g.drawLine((x + 96), (y + 28), (x + 104), (y + 28));
-    g.drawLine((x + 96), (y + 28), (x + 100), (y + 34));
-    g.drawLine((x + 104), (y + 28), (x + 100), (y + 34));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 36));
-    g.drawLine((x + 110), (y + 36), (x + 120), (y + 36));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 22));
-    g.drawLine((x + 130), (y + 22), (x + 120), (y + 22));
-    g.drawLine((x + 116), (y + 32), (x + 124), (y + 32));
-    g.drawLine((x + 116), (y + 32), (x + 120), (y + 26));
-    g.drawLine((x + 124), (y + 32), (x + 120), (y + 26));
-    g.drawLine((x + 116), (y + 28), (x + 124), (y + 28));
-    g.drawLine((x + 116), (y + 28), (x + 120), (y + 34));
-    g.drawLine((x + 124), (y + 28), (x + 120), (y + 34));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 18));
-    structureBubble(g, (x + 10), (y + height - 7));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 18));
-    structureBubble(g, (x + 30), (y + 7));
+    final var top = y + 18;
+    final var bottom = y + height - 18;
+    g.drawRect(x + 6, top, 128, bottom - top);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "BUF", x + 70, (top + bottom) / 2);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 14; pin++) {
+      if (pin == 7 || pin == 14) {
+        continue;
+      }
+      final var lower = pin <= 7;
+      final var pinX = lower ? x + (pin - 1) * 20 + 10 : x + (14 - pin) * 20 + 10;
+      final var pinY = lower ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = lower ? bottom : top;
+      if (false) {
+        final var bubbleY = lower ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, lower ? bubbleY + 2 : bubbleY - 2);
+        g.drawOval(pinX - 2, bubbleY - 2, 4, 4);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
+
+
 
   /**
    * Releases both buses when the exposed supply pins are not a valid ground and positive rail.
