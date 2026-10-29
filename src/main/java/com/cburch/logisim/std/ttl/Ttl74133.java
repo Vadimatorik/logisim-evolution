@@ -12,6 +12,10 @@ package com.cburch.logisim.std.ttl;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
+import java.awt.Graphics;
+import java.awt.Font;
+import java.awt.Color;
+import com.cburch.logisim.util.GraphicsUtil;
 
 /**
  * TTL 74x133: single 13-input NAND gate.
@@ -91,31 +95,42 @@ public class Ttl74133 extends AbstractTtlGate {
     return (byte) ((dsPinNr <= GND) ? dsPinNr - 1 : dsPinNr - 2);
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    final int gateX = x + 140;
-    final int gateY = y + 30;
-    Drawgates.paintAnd(g, gateX, gateY, 16, 22, true);
-    g.drawLine(gateX + 4, gateY, x + 150, gateY);
-    g.drawLine(x + 150, y + PIN_HEIGHT, x + 150, gateY);
-    final int back = gateX - 16;
-    // A to G are bottom pins 1 to 7. Pin 8 is GND.
-    for (var i = 0; i < 7; i++) {
-      final int pinX = x + 10 + i * 20;
-      final int rail = y + 20 + i * 2;
-      g.drawLine(pinX, y + height - PIN_HEIGHT, pinX, rail);
-      g.drawLine(pinX, rail, back, rail);
-    }
-    // H to M are top pins 10 to 15. Pin 9 is Y and pin 16 is VCC.
-    for (var i = 0; i < 6; i++) {
-      final int pinX = x + 130 - i * 20;
-      final int rail = y + 18 + i * 2;
-      g.drawLine(pinX, y + PIN_HEIGHT, pinX, rail);
-      g.drawLine(pinX, rail, back, rail);
+    super.paintBase(painter, false, false);
+    g.setColor(Color.BLACK);
+    final var boxTop = y + 18;
+    final var boxBottom = boxTop + 24;
+    g.drawRect(x + 6, boxTop, 312, 24);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "REG", x + 162, y + 30);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 16; pin++) {
+      if (pin == GND || pin == VCC) {
+        continue;
+      }
+      final var pinX = pin <= 8 ? x + (pin - 1) * 20 + 10 : x + (16 - pin) * 20 + 10;
+      final var pinY =
+          pin <= 8
+              ? y + height - AbstractTtlGate.PIN_HEIGHT
+              : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = pin <= 8 ? boxBottom : boxTop;
+      if (pin == Y) {
+        final var bubbleY = edge - 4;
+        g.drawLine(pinX, pinY, pinX, bubbleY - 2);
+        structureBubble(g, pinX, bubbleY);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
     }
   }
+
+  private static void structureBubble(Graphics g, int centerX, int centerY) {
+    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  }
+
 
   @Override
   public void propagateTtl(InstanceState state) {
