@@ -60,14 +60,15 @@ public class Ttl741G14 extends AbstractTtlGate {
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
-    final var portWidth = 12;
-    final var portHeight = 6;
     final var yOutput = y + height / 2;
-    final var xPin = x + 30;
-    final var xGate = xPin + 16;
-    Drawgates.paintNot(g, xGate, yOutput, portWidth, portHeight);
-    Drawgates.paintSingleInputgate(g, xPin, y, xGate - portWidth, yOutput, false, height);
-    Drawgates.paintOutputgate(g, xPin, y, xGate, yOutput, true, height);
+    final var xOut = x + 30;
+    final var left = xOut - 12;
+    Drawgates.paintNot(g, xOut, yOutput, 12, 6);
+    g.drawLine(xOut, y + AbstractTtlGate.PIN_HEIGHT, xOut, yOutput);
+    final var below = yOutput + 10;
+    g.drawLine(xOut, y + height - AbstractTtlGate.PIN_HEIGHT, xOut, below);
+    g.drawLine(xOut, below, left, below);
+    g.drawLine(left, below, left, yOutput + 4);
   }
 
   @Override
