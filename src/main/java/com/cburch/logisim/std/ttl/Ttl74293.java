@@ -70,71 +70,192 @@ public class Ttl74293 extends AbstractTtlGate {
     super(_ID, (byte) 14, OUTPUT_PORTS, UNUSED_PINS, PORT_NAMES, new Ttl74293HdlGenerator());
   }
 
+  private static final int PINS = 14;
+  private static final int BUBBLE_SIZE = 4;
+
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
     final var rawState = painter.getData();
-    final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
-    g.drawRect((x + 104), (y + 11), 12, 14);
-    g.drawLine((x + 110), (y + 11), (x + 110), (y + 7));
-    g.drawLine((x + 104), (((y + 11)) + 7) - 3, ((x + 104)) + 4, ((y + 11)) + 7);
-    g.drawLine((x + 104), (((y + 11)) + 7) + 3, ((x + 104)) + 4, ((y + 11)) + 7);
-    structureDot(g, (x + 110), ((y + 11)) + 7, stored, 0, 0);
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 13));
-    g.drawLine((x + 90), (y + 13), (x + 99), (y + 13));
-    g.drawLine((x + 99), (y + 13), (x + 99), ((y + 11)) + 7);
-    structureBubble(g, (x + 99), ((y + 11)) + 7);
-    g.drawLine((x + 110), (y + 27), (x + 110), (y + 27));
-    g.drawLine((x + 110), (y + 27), (x + 110), (y + 11));
-    g.drawLine((x + 110), (y + 27), (x + 110), ((y + 11)) + 14);
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 13));
-    g.drawLine((x + 50), (y + 13), (x + 110), (y + 13));
-    g.drawLine((x + 110), (y + 13), (x + 110), (y + 27));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 13));
-    g.drawLine((x + 30), (y + 13), (x + 110), (y + 13));
-    g.drawLine((x + 110), (y + 13), (x + 110), (y + 27));
-    g.drawRect((x + 14), (y + height - 28), 12, 12);
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + height - 13));
-    g.drawLine((x + 90), (y + height - 13), (x + 20), (y + height - 13));
-    g.drawLine((x + 20), (y + height - 13), (x + 20), ((y + height - 28)) + 12);
-    g.drawLine((x + 14), (((y + height - 28)) + 6) - 3, ((x + 14)) + 4, ((y + height - 28)) + 6);
-    g.drawLine((x + 14), (((y + height - 28)) + 6) + 3, ((x + 14)) + 4, ((y + height - 28)) + 6);
-    structureDot(g, (x + 20), ((y + height - 28)) + 6, stored, 0, 1);
-    g.drawRect((x + 51), (y + height - 28), 12, 12);
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + height - 13));
-    g.drawLine((x + 70), (y + height - 13), (x + 57), (y + height - 13));
-    g.drawLine((x + 57), (y + height - 13), (x + 57), ((y + height - 28)) + 12);
-    g.drawLine((x + 51), (((y + height - 28)) + 6) - 3, ((x + 51)) + 4, ((y + height - 28)) + 6);
-    g.drawLine((x + 51), (((y + height - 28)) + 6) + 3, ((x + 51)) + 4, ((y + height - 28)) + 6);
-    structureDot(g, (x + 57), ((y + height - 28)) + 6, stored, 0, 2);
-    g.drawRect((x + 88), (y + height - 28), 12, 12);
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 13));
-    g.drawLine((x + 130), (y + 13), (x + 94), (y + 13));
-    g.drawLine((x + 94), (y + 13), (x + 94), (y + height - 28));
-    g.drawLine((x + 88), (((y + height - 28)) + 6) - 3, ((x + 88)) + 4, ((y + height - 28)) + 6);
-    g.drawLine((x + 88), (((y + height - 28)) + 6) + 3, ((x + 88)) + 4, ((y + height - 28)) + 6);
-    structureDot(g, (x + 94), ((y + height - 28)) + 6, stored, 0, 3);
-    g.drawLine((x + 26), ((y + height - 28)) + 6, (x + 47), ((y + height - 28)) + 6);
-    g.drawLine((x + 63), ((y + height - 28)) + 6, (x + 84), ((y + height - 28)) + 6);
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 13));
-    g.drawLine((x + 70), (y + 13), (x + 9), (y + 13));
-    g.drawLine((x + 9), (y + 13), (x + 9), ((y + height - 28)) + 6);
-    structureBubble(g, (x + 9), ((y + height - 28)) + 6);
-    g.drawLine((x + 20), (y + height - 32), (x + 94), (y + height - 32));
-    g.drawLine((x + 20), (y + height - 32), (x + 20), ((y + height - 28)) + 0);
-    g.drawLine((x + 20), (y + height - 32), (x + 20), (y + height - 28));
-    g.drawLine((x + 57), (y + height - 32), (x + 57), ((y + height - 28)) + 0);
-    g.drawLine((x + 57), (y + height - 32), (x + 57), (y + height - 28));
-    g.drawLine((x + 94), (y + height - 32), (x + 94), ((y + height - 28)) + 0);
-    g.drawLine((x + 94), (y + height - 32), (x + 94), (y + height - 28));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 13));
-    g.drawLine((x + 50), (y + 13), (x + 20), (y + 13));
-    g.drawLine((x + 20), (y + 13), (x + 20), (y + height - 32));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 13));
-    g.drawLine((x + 30), (y + 13), (x + 20), (y + 13));
-    g.drawLine((x + 20), (y + 13), (x + 20), (y + height - 32));
+    final TtlRegisterData stored =
+        rawState instanceof TtlRegisterData register ? register : null;
+    // QA (9) follows clock A (10). QB (5), QC (4) and QD (8) follow clock B (11).
+    drawSingleStage(g, x, y, height, true, 9, 10, 0, y + 14, stored);
+    drawRippleChain(
+        g, x, y, height, false, new int[] {5, 4}, new int[] {1, 2}, 11, y + height - 22, stored);
+    drawQdStage(g, x, y, height, y + height - 22, y + 30, stored);
+    drawAsyncReset(g, x, y, height, 12, 13, y + 14, y + height - 22, y + 30);
+  }
+
+  private static void drawQdStage(
+      Graphics g,
+      int x,
+      int y,
+      int height,
+      int sourceRowTop,
+      int rowTop,
+      TtlRegisterData stored) {
+    final var boxWidth = 10;
+    final var boxHeight = 10;
+    final var mid = rowTop + boxHeight / 2;
+    final var center = structureX(x, PINS, 8);
+    final var left = center - boxWidth / 2;
+    final var right = left + boxWidth;
+    final var pinY = structureY(y, height, PINS, 8);
+    g.drawRect(left, rowTop, boxWidth, boxHeight);
+    drawClockMark(g, left, mid);
+    drawBit(g, center, mid, stored, 0, 3);
+    g.drawLine(right, mid, center, mid);
+    g.drawLine(center, mid, center, pinY);
+    final var qcCenter = structureX(x, PINS, 4);
+    final var qcMid = sourceRowTop + boxHeight / 2;
+    final var qcNode = qcCenter + boxWidth / 2 + 3;
+    g.drawLine(qcNode, qcMid, qcNode, mid);
+    g.drawLine(qcNode, mid, left - BUBBLE_SIZE, mid);
+    drawClockBubble(g, left, mid);
+    drawNode(g, qcNode, qcMid);
+  }
+
+  private static void drawSingleStage(
+      Graphics g,
+      int x,
+      int y,
+      int height,
+      boolean alongTop,
+      int outputPin,
+      int clockPin,
+      int bit,
+      int rowTop,
+      TtlRegisterData stored) {
+    final var boxWidth = 10;
+    final var boxHeight = 10;
+    final var center = structureX(x, PINS, outputPin);
+    final var left = center - boxWidth / 2;
+    final var right = left + boxWidth;
+    final var mid = rowTop + boxHeight / 2;
+    final var pinY = structureY(y, height, PINS, outputPin);
+    final var towardPins = alongTop ? pinY + 2 : pinY - 2;
+    g.drawRect(left, rowTop, boxWidth, boxHeight);
+    drawClockMark(g, left, mid);
+    drawBit(g, center, mid, stored, 0, bit);
+    final var nodeX = right + 3;
+    g.drawLine(right, mid, nodeX, mid);
+    g.drawLine(nodeX, mid, nodeX, towardPins);
+    g.drawLine(nodeX, towardPins, center, towardPins);
+    g.drawLine(center, towardPins, center, pinY);
+    final var clockX = structureX(x, PINS, clockPin);
+    final var clockPinY = structureY(y, height, PINS, clockPin);
+    g.drawLine(clockX, clockPinY, clockX, mid);
+    g.drawLine(clockX, mid, left - BUBBLE_SIZE, mid);
+    drawClockBubble(g, left, mid);
+  }
+
+  private static void drawRippleChain(
+      Graphics g,
+      int x,
+      int y,
+      int height,
+      boolean outputsAlongTop,
+      int[] outputPins,
+      int[] bits,
+      int clockPin,
+      int rowTop,
+      TtlRegisterData stored) {
+    final var boxWidth = 10;
+    final var boxHeight = 10;
+    final var mid = rowTop + boxHeight / 2;
+    final var towardPins = outputsAlongTop ? y + PIN_HEIGHT + 2 : y + height - PIN_HEIGHT - 2;
+    for (var stage = 0; stage < outputPins.length; stage++) {
+      final var center = structureX(x, PINS, outputPins[stage]);
+      final var left = center - boxWidth / 2;
+      final var right = left + boxWidth;
+      final var pinY = structureY(y, height, PINS, outputPins[stage]);
+      g.drawRect(left, rowTop, boxWidth, boxHeight);
+      drawClockMark(g, left, mid);
+      drawBit(g, center, mid, stored, 0, bits[stage]);
+      final var nodeX = right + 3;
+      g.drawLine(right, mid, nodeX, mid);
+      g.drawLine(nodeX, mid, nodeX, towardPins);
+      g.drawLine(nodeX, towardPins, center, towardPins);
+      g.drawLine(center, towardPins, center, pinY);
+      if (stage + 1 < outputPins.length) {
+        final var nextLeft = structureX(x, PINS, outputPins[stage + 1]) - boxWidth / 2;
+        g.drawLine(nodeX, mid, nextLeft - BUBBLE_SIZE, mid);
+        drawClockBubble(g, nextLeft, mid);
+        drawNode(g, nodeX, mid);
+      }
+    }
+    final var firstLeft = structureX(x, PINS, outputPins[0]) - boxWidth / 2;
+    final var clockX = structureX(x, PINS, clockPin);
+    final var clockPinY = structureY(y, height, PINS, clockPin);
+    g.drawLine(clockX, clockPinY, clockX, mid);
+    g.drawLine(clockX, mid, firstLeft - BUBBLE_SIZE, mid);
+    drawClockBubble(g, firstLeft, mid);
+  }
+
+  private static void drawAsyncReset(
+      Graphics g,
+      int x,
+      int y,
+      int height,
+      int resetPinA,
+      int resetPinB,
+      int rowTopA,
+      int rowTopB,
+      int rowTopC) {
+    final var r1 = structureX(x, PINS, resetPinA);
+    final var r2 = structureX(x, PINS, resetPinB);
+    final var topPinY = y + PIN_HEIGHT;
+    final var gateMid = y + 22;
+    g.drawLine(r1, topPinY, r1, gateMid);
+    g.drawLine(r2, topPinY, r2, gateMid);
+    g.drawRect(r1, gateMid - 4, r2 - r1, 8);
+    final var mergeX = (r1 + r2) / 2;
+    var railY = rowTopA - 3;
+    g.drawLine(mergeX, gateMid + 4, mergeX, railY);
+    for (final var segment :
+        new int[][] {{rowTopA, 9}, {rowTopC, 8}, {rowTopB, 5}, {rowTopB, 4}}) {
+      final var rail = segment[0] - 3;
+      final var px = structureX(x, PINS, segment[1]);
+      if (rail != railY) {
+        g.drawLine(mergeX, railY, mergeX, rail);
+        railY = rail;
+      }
+      g.drawLine(mergeX, rail, px, rail);
+      g.drawLine(px, rail, px, segment[0]);
+      drawNode(g, px, rail);
+    }
+    drawNode(g, mergeX, gateMid + 4);
+  }
+
+  private static void drawClockMark(Graphics g, int left, int mid) {
+    g.drawLine(left, mid - 2, left + 3, mid);
+    g.drawLine(left, mid + 2, left + 3, mid);
+  }
+
+  private static void drawClockBubble(Graphics g, int inputX, int mid) {
+    g.drawOval(inputX - BUBBLE_SIZE, mid - BUBBLE_SIZE / 2, BUBBLE_SIZE, BUBBLE_SIZE);
+  }
+
+  private static void drawNode(Graphics g, int nodeX, int nodeY) {
+    g.fillOval(nodeX - 2, nodeY - 2, 4, 4);
+  }
+
+  private static void drawBit(
+      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
+    if (data == null) {
+      return;
+    }
+    final var value = data.getValue(word);
+    if (bit < 0 || bit >= value.getWidth()) {
+      return;
+    }
+    final var bitValue = value.get(bit);
+    g.setColor(bitValue.getColor());
+    g.fillOval(centerX - 2, centerY - 2, 4, 4);
+    g.setColor(Color.BLACK);
   }
 
   private static TtlRegisterData getStateData(InstanceState state) {
@@ -199,27 +320,6 @@ public class Ttl74293 extends AbstractTtlGate {
       return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
     }
     return originY + AbstractTtlGate.PIN_HEIGHT;
-  }
-
-  private static void structureBubble(Graphics g, int centerX, int centerY) {
-    g.drawOval(centerX - 2, centerY - 2, 4, 4);
-  }
-
-  private static void structureDot(
-      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
-    if (data == null) {
-      return;
-    }
-    final var value = data.getValue(word);
-    if (bit < 0 || bit >= value.getWidth()) {
-      return;
-    }
-    final var bitValue = value.get(bit);
-    g.setColor(bitValue.getColor());
-    g.fillOval(centerX - 3, centerY - 3, 6, 6);
-    g.setColor(Color.WHITE);
-    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
-    g.setColor(Color.BLACK);
   }
 
 }
