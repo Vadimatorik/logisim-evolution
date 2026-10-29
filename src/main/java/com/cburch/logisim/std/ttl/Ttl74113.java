@@ -17,6 +17,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -120,59 +121,68 @@ public class Ttl74113 extends AbstractTtlGate {
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
     final var rawState = painter.getData();
-    final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
-    g.drawRect((x + 14), (y + 18), 48, 24);
-    GraphicsUtil.drawCenteredText(g, "J", (x + 22), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "K", (x + 22), (y + 36));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 54), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 54), (y + 36));
-    structureBubble(g, (x + 54), (y + 32));
-    structureDot(g, (x + 38), (y + 30), stored, 0, 0);
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 24), (y + height - 13));
-    g.drawLine((x + 24), (y + height - 13), (x + 24), (y + 42));
-    g.drawLine((x + 24) - 3, (y + 42), (x + 24), ((y + 42)) - 4);
-    g.drawLine((x + 24) + 3, (y + 42), (x + 24), ((y + 42)) - 4);
-    structureBubble(g, (x + 24), ((y + 42)) + 6);
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + height - 13));
-    g.drawLine((x + 70), (y + height - 13), (x + 44), (y + height - 13));
-    g.drawLine((x + 44), (y + height - 13), (x + 44), (y + 42));
-    structureBubble(g, (x + 44), ((y + 42)) + 5);
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + height - 13));
-    g.drawLine((x + 90), (y + height - 13), (x + 51), (y + height - 13));
-    g.drawLine((x + 51), (y + height - 13), (x + 51), (y + 42));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + height - 13));
-    g.drawLine((x + 110), (y + height - 13), (x + 58), (y + height - 13));
-    g.drawLine((x + 58), (y + height - 13), (x + 58), (y + 42));
-    structureBubble(g, (x + 58), ((y + 42)) + 5);
-    g.drawRect((x + 70), (y + 18), 48, 24);
-    GraphicsUtil.drawCenteredText(g, "J", (x + 78), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "K", (x + 78), (y + 36));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 110), (y + 26));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 110), (y + 36));
-    structureBubble(g, (x + 110), (y + 32));
-    structureDot(g, (x + 94), (y + 30), stored, 0, 1);
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 13));
-    g.drawLine((x + 30), (y + 13), (x + 80), (y + 13));
-    g.drawLine((x + 80), (y + 13), (x + 80), (y + 18));
-    g.drawLine((x + 80) - 3, (y + 18), (x + 80), ((y + 18)) + 4);
-    g.drawLine((x + 80) + 3, (y + 18), (x + 80), ((y + 18)) + 4);
-    structureBubble(g, (x + 80), ((y + 18)) - 6);
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 13));
-    g.drawLine((x + 70), (y + 13), (x + 87), (y + 13));
-    g.drawLine((x + 87), (y + 13), (x + 87), (y + 18));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 13));
-    g.drawLine((x + 50), (y + 13), (x + 94), (y + 13));
-    g.drawLine((x + 94), (y + 13), (x + 94), (y + 18));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
-    structureBubble(g, (x + 90), ((y + 18)) - 5);
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 13));
-    g.drawLine((x + 130), (y + 13), (x + 114), (y + 13));
-    g.drawLine((x + 114), (y + 13), (x + 114), (y + 18));
-    structureBubble(g, (x + 114), ((y + 18)) - 5);
+    final TtlRegisterData stored =
+        rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
+    drawHalf(g, x, y, height, false, new int[] {1, 3, 2, 4, 5, 6}, stored, 0);
+    drawHalf(g, x, y, height, true, new int[] {13, 11, 12, 10, 9, 8}, stored, 1);
+  }
+
+  /** {@code pins} is clock, J, K, preset, Q, nQ. Preset and nQ carry a bubble. */
+  private static void drawHalf(
+      Graphics g,
+      int x,
+      int y,
+      int height,
+      boolean alongTop,
+      int[] pins,
+      TtlRegisterData stored,
+      int word) {
+    final var clockX = structureX(x, 14, pins[0]);
+    final var jX = structureX(x, 14, pins[1]);
+    final var kX = structureX(x, 14, pins[2]);
+    final var presetX = structureX(x, 14, pins[3]);
+    final var qX = structureX(x, 14, pins[4]);
+    final var nqX = structureX(x, 14, pins[5]);
+    final var left = Math.min(clockX, nqX) - 6;
+    final var right = Math.max(clockX, nqX) + 6;
+    final var top = alongTop ? y + 12 : y + 32;
+    final var boxHeight = 16;
+    g.drawRect(left, top, right - left, boxHeight);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    final var labelY = top + boxHeight / 2;
+    GraphicsUtil.drawCenteredText(g, "J", jX, labelY);
+    GraphicsUtil.drawCenteredText(g, "K", kX, labelY);
+    GraphicsUtil.drawCenteredText(g, "Q", qX, labelY);
+    GraphicsUtil.drawCenteredText(g, "Q", nqX, labelY);
+    g.setFont(previousFont);
+    structureDot(g, (jX + qX) / 2, labelY, stored, word, 0);
+
+    final var edge = alongTop ? top : top + boxHeight;
+    final var pinY = structureY(y, height, 14, pins[0]);
+    drawClock(g, clockX, pinY, edge, alongTop);
+    drawLead(g, jX, pinY, edge, false);
+    drawLead(g, kX, pinY, edge, false);
+    drawLead(g, presetX, pinY, edge, true);
+    drawLead(g, qX, pinY, edge, false);
+    drawLead(g, nqX, pinY, edge, true);
+  }
+
+  private static void drawLead(Graphics g, int pinX, int pinY, int edgeY, boolean bubble) {
+    if (!bubble) {
+      g.drawLine(pinX, pinY, pinX, edgeY);
+      return;
+    }
+    final var stop = edgeY < pinY ? edgeY + 2 : edgeY - 2;
+    g.drawLine(pinX, pinY, pinX, stop);
+    structureBubble(g, pinX, edgeY);
+  }
+
+  private static void drawClock(Graphics g, int pinX, int pinY, int edgeY, boolean alongTop) {
+    final var base = alongTop ? edgeY - 3 : edgeY + 3;
+    g.drawLine(pinX, pinY, pinX, base);
+    g.drawLine(pinX - 3, base, pinX, edgeY);
+    g.drawLine(pinX + 3, base, pinX, edgeY);
   }
 
   private static TtlRegisterData getStateData(InstanceState state) {
