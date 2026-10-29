@@ -115,6 +115,10 @@ public class Ttl74574 extends AbstractTtlGate {
     super(_ID, (byte) 20, OUTPUT_PINS, PORT_NAMES, new Ttl74574HdlGenerator());
   }
 
+  private static final int STRUCTURE_PINS = 20;
+  private static final int[] STRUCTURE_D_PINS = {2, 3, 4, 5, 6, 7, 8, 9};
+  private static final int[] STRUCTURE_Q_PINS = {19, 18, 17, 16, 15, 14, 13, 12};
+
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
@@ -122,61 +126,41 @@ public class Ttl74574 extends AbstractTtlGate {
     g.setColor(Color.BLACK);
     final var rawState = painter.getData();
     final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
-    g.drawRect((x + 24), (y + 12), 12, 14);
-    g.drawLine((x + 30), (y + 12), (x + 30), (y + 7));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), ((y + 12)) + 14);
-    g.drawLine((x + 24), (((y + 12)) + 7) - 3, ((x + 24)) + 4, ((y + 12)) + 7);
-    g.drawLine((x + 24), (((y + 12)) + 7) + 3, ((x + 24)) + 4, ((y + 12)) + 7);
-    structureDot(g, (x + 30), ((y + 12)) + 7, stored, 0, 0);
-    g.drawRect((x + 44), (y + 12), 12, 14);
-    g.drawLine((x + 50), (y + 12), (x + 50), (y + 7));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), ((y + 12)) + 14);
-    g.drawLine((x + 44), (((y + 12)) + 7) - 3, ((x + 44)) + 4, ((y + 12)) + 7);
-    g.drawLine((x + 44), (((y + 12)) + 7) + 3, ((x + 44)) + 4, ((y + 12)) + 7);
-    g.drawRect((x + 64), (y + 12), 12, 14);
-    g.drawLine((x + 70), (y + 12), (x + 70), (y + 7));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), ((y + 12)) + 14);
-    g.drawLine((x + 64), (((y + 12)) + 7) - 3, ((x + 64)) + 4, ((y + 12)) + 7);
-    g.drawLine((x + 64), (((y + 12)) + 7) + 3, ((x + 64)) + 4, ((y + 12)) + 7);
-    g.drawRect((x + 84), (y + 12), 12, 14);
-    g.drawLine((x + 90), (y + 12), (x + 90), (y + 7));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), ((y + 12)) + 14);
-    g.drawLine((x + 84), (((y + 12)) + 7) - 3, ((x + 84)) + 4, ((y + 12)) + 7);
-    g.drawLine((x + 84), (((y + 12)) + 7) + 3, ((x + 84)) + 4, ((y + 12)) + 7);
-    g.drawRect((x + 104), (y + 12), 12, 14);
-    g.drawLine((x + 110), (y + 12), (x + 110), (y + 7));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), ((y + 12)) + 14);
-    g.drawLine((x + 104), (((y + 12)) + 7) - 3, ((x + 104)) + 4, ((y + 12)) + 7);
-    g.drawLine((x + 104), (((y + 12)) + 7) + 3, ((x + 104)) + 4, ((y + 12)) + 7);
-    g.drawRect((x + 124), (y + 12), 12, 14);
-    g.drawLine((x + 130), (y + 12), (x + 130), (y + 7));
-    g.drawLine((x + 130), (y + height - 7), (x + 130), ((y + 12)) + 14);
-    g.drawLine((x + 124), (((y + 12)) + 7) - 3, ((x + 124)) + 4, ((y + 12)) + 7);
-    g.drawLine((x + 124), (((y + 12)) + 7) + 3, ((x + 124)) + 4, ((y + 12)) + 7);
-    g.drawRect((x + 144), (y + 12), 12, 14);
-    g.drawLine((x + 150), (y + 12), (x + 150), (y + 7));
-    g.drawLine((x + 150), (y + height - 7), (x + 150), ((y + 12)) + 14);
-    g.drawLine((x + 144), (((y + 12)) + 7) - 3, ((x + 144)) + 4, ((y + 12)) + 7);
-    g.drawLine((x + 144), (((y + 12)) + 7) + 3, ((x + 144)) + 4, ((y + 12)) + 7);
-    g.drawRect((x + 164), (y + 12), 12, 14);
-    g.drawLine((x + 170), (y + 12), (x + 170), (y + 7));
-    g.drawLine((x + 170), (y + height - 7), (x + 170), ((y + 12)) + 14);
-    g.drawLine((x + 164), (((y + 12)) + 7) - 3, ((x + 164)) + 4, ((y + 12)) + 7);
-    g.drawLine((x + 164), (((y + 12)) + 7) + 3, ((x + 164)) + 4, ((y + 12)) + 7);
-    g.drawLine((x + 24), (y + 28), (x + 176), (y + 28));
-    g.drawLine((x + 30), (y + 28), (x + 30), (y + 26));
-    g.drawLine((x + 50), (y + 28), (x + 50), (y + 26));
-    g.drawLine((x + 70), (y + 28), (x + 70), (y + 26));
-    g.drawLine((x + 90), (y + 28), (x + 90), (y + 26));
-    g.drawLine((x + 110), (y + 28), (x + 110), (y + 26));
-    g.drawLine((x + 130), (y + 28), (x + 130), (y + 26));
-    g.drawLine((x + 150), (y + 28), (x + 150), (y + 26));
-    g.drawLine((x + 170), (y + 28), (x + 170), (y + 26));
-    g.drawLine((x + 190), (y + 7), (x + 190), (y + 13));
-    g.drawLine((x + 190), (y + 13), (x + 24), (y + 13));
-    g.drawLine((x + 24), (y + 13), (x + 24), (y + 28));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 30));
-    structureBubble(g, (x + 10), (y + height - 7));
+    final var boxTop = y + 12;
+    final var boxBottom = boxTop + 14;
+    final var clockY = boxTop + 7;
+    var busLeft = Integer.MAX_VALUE;
+    var busRight = Integer.MIN_VALUE;
+    for (var bit = 0; bit < BITS; bit++) {
+      final var dX = structureX(x, STRUCTURE_PINS, STRUCTURE_D_PINS[bit]);
+      final var qX = structureX(x, STRUCTURE_PINS, STRUCTURE_Q_PINS[bit]);
+      final var centerX = (dX + qX) / 2;
+      final var left = centerX - 6;
+      busLeft = Math.min(busLeft, left);
+      busRight = Math.max(busRight, left + 12);
+      g.drawRect(left, boxTop, 12, 14);
+      g.drawLine(left, clockY - 3, left + 4, clockY);
+      g.drawLine(left, clockY + 3, left + 4, clockY);
+      structureDot(g, centerX, clockY, stored, 0, bit);
+      final var dPinY = structureY(y, height, STRUCTURE_PINS, STRUCTURE_D_PINS[bit]);
+      g.drawLine(dX, dPinY, dX, boxBottom);
+      if (dX != centerX) {
+        g.drawLine(dX, boxBottom, centerX, boxBottom);
+      }
+      final var qPinY = structureY(y, height, STRUCTURE_PINS, STRUCTURE_Q_PINS[bit]);
+      g.drawLine(qX, qPinY, qX, boxTop);
+      if (qX != centerX) {
+        g.drawLine(centerX, boxTop, qX, boxTop);
+      }
+    }
+    g.drawLine(busLeft + 4, clockY, busRight - 8, clockY);
+    final var clkX = structureX(x, STRUCTURE_PINS, 10);
+    final var clkPinY = structureY(y, height, STRUCTURE_PINS, 10);
+    structureClockLead(g, clkX, clkPinY, clockY);
+    final var oeX = structureX(x, STRUCTURE_PINS, 1);
+    final var oePinY = structureY(y, height, STRUCTURE_PINS, 1);
+    g.drawLine(oeX, oePinY, oeX, boxBottom);
+    structureBubble(g, oeX, boxBottom);
   }
 
   @Override
@@ -223,6 +207,14 @@ public class Ttl74574 extends AbstractTtlGate {
 
   private static void structureBubble(Graphics g, int centerX, int centerY) {
     g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  }
+
+  /** Three segments meeting at the clock bus, outside the flip-flop rectangle. */
+  private static void structureClockLead(Graphics g, int pinX, int pinY, int busY) {
+    final var base = busY + 3;
+    g.drawLine(pinX, pinY, pinX, base);
+    g.drawLine(pinX - 3, base, pinX, busY);
+    g.drawLine(pinX + 3, base, pinX, busY);
   }
 
   private static void structureDot(
