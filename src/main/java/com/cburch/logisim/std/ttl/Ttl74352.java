@@ -115,33 +115,36 @@ public class Ttl74352 extends AbstractTtlGate {
     return (byte) ((dsPinNr <= GND) ? dsPinNr - 1 : dsPinNr - 2);
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawLine((x + 50), (y + 34), (x + 90), (y + 18));
-    g.drawLine((x + 130), (y + 34), (x + 90), (y + 18));
-    g.drawLine((x + 50), (y + 34), (x + 130), (y + 34));
-    g.drawLine((x + 90), (y + 18), (x + 130), (y + height - 7));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 34));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 34));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 34));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 34));
-    g.drawLine((x + 70), (y + 34), (x + 110), (y + 18));
-    g.drawLine((x + 150), (y + 34), (x + 110), (y + 18));
-    g.drawLine((x + 70), (y + 34), (x + 150), (y + 34));
-    g.drawLine((x + 110), (y + 18), (x + 150), (y + 7));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 34));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 34));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 34));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 34));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 16));
-    GraphicsUtil.drawCenteredText(g, "S", (x + 50), (y + 16));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 16));
-    GraphicsUtil.drawCenteredText(g, "S", (x + 30), (y + 16));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 40));
-    structureBubble(g, (x + 10), (y + height - 7));
+    final var bodyFont = g.getFont();
+    g.setFont(bodyFont.deriveFont(9f));
+    g.drawRect((x + 12), (y + 18), 142, 24);
+    GraphicsUtil.drawCenteredText(g, "MUX", (x + 83), (y + 30));
+    g.setFont(bodyFont);
+    final var top = y + PIN_HEIGHT;
+    final var bottom = y + height - PIN_HEIGHT;
+    structureBubble(g, (x + 10), (y + 42));
+    g.drawLine((x + 10), bottom, (x + 10), (y + 44));
+    g.drawLine((x + 30), bottom, (x + 30), (y + 42));
+    g.drawLine((x + 50), bottom, (x + 50), (y + 42));
+    g.drawLine((x + 70), bottom, (x + 70), (y + 42));
+    g.drawLine((x + 90), bottom, (x + 90), (y + 42));
+    g.drawLine((x + 110), bottom, (x + 110), (y + 42));
+    structureBubble(g, (x + 130), (y + 42));
+    g.drawLine((x + 130), bottom, (x + 130), (y + 44));
+    structureBubble(g, (x + 150), (y + 18));
+    g.drawLine((x + 150), top, (x + 150), (y + 16));
+    g.drawLine((x + 130), top, (x + 130), (y + 18));
+    g.drawLine((x + 110), top, (x + 110), (y + 18));
+    g.drawLine((x + 90), top, (x + 90), (y + 18));
+    g.drawLine((x + 70), top, (x + 70), (y + 18));
+    g.drawLine((x + 50), top, (x + 50), (y + 18));
+    structureBubble(g, (x + 30), (y + 18));
+    g.drawLine((x + 30), top, (x + 30), (y + 16));
   }
 
   private static Value input(InstanceState state, byte dsPinNr) {
