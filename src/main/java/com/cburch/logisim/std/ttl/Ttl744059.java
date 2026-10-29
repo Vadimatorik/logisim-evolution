@@ -17,6 +17,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -121,12 +122,32 @@ public class Ttl744059 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 5), (y + 18), 36, 24);
-    GraphicsUtil.drawCenteredText(g, "N", (x + 23), (y + 30));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 42));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 18));
+    final var top = y + 18;
+    final var bottom = y + height - 18;
+    g.drawRect(x + 6, top, 228, bottom - top);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "CTR", x + 120, (top + bottom) / 2);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 24; pin++) {
+      if (pin == 12 || pin == 24) {
+        continue;
+      }
+      final var lower = pin <= 12;
+      final var pinX = lower ? x + (pin - 1) * 20 + 10 : x + (24 - pin) * 20 + 10;
+      final var pinY = lower ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = lower ? bottom : top;
+      if (false) {
+        final var bubbleY = lower ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, lower ? bubbleY + 2 : bubbleY - 2);
+        g.drawOval(pinX - 2, bubbleY - 2, 4, 4);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
+
+
 
   private static CounterData getStateData(InstanceState state) {
     var data = (CounterData) state.getData();
