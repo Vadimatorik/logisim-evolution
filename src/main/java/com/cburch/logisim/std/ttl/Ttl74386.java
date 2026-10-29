@@ -8,6 +8,8 @@
  */
 
 package com.cburch.logisim.std.ttl;
+import java.awt.Color;
+import com.cburch.logisim.util.GraphicsUtil;
 
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -61,20 +63,30 @@ public class Ttl74386 extends AbstractTtlGate {
     super(_ID, (byte) 14, OUTPUT_PINS, PORT_NAMES, new Ttl74386HdlGenerator());
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    final int bottom = y + height - PIN_HEIGHT;
-    final int top = y + PIN_HEIGHT;
-    // Pins 1 to 3 are 1A, 1B and 1Y.
-    paintXorToPin(g, x + 44, y + 44, bottom, new int[] {x + 10, x + 30}, x + 50);
-    // Pin 4 is 2Y, to the left of 2A and 2B on pins 5 and 6.
-    paintXorToPin(g, x + 96, y + 30, bottom, new int[] {x + 90, x + 110}, x + 70);
-    // Pins 8 to 10 are 3A, 3B and 3Y. 3Y is the leftmost of the three.
-    paintXorToPin(g, x + 108, y + 16, top, new int[] {x + 130, x + 110}, x + 90);
-    // Pins 12 and 13 are 4A and 4B, to the left of 4Y on pin 11.
-    paintXorToPin(g, x + 60, y + 16, top, new int[] {x + 50, x + 30}, x + 70);
+    super.paintBase(painter, false, false);
+    g.setColor(Color.BLACK);
+    final var bodyFont = g.getFont();
+    g.setFont(bodyFont.deriveFont(9f));
+    g.drawRect((x + 12), (y + 18), 122, 24);
+    GraphicsUtil.drawCenteredText(g, "BUF", (x + 73), (y + 30));
+    g.setFont(bodyFont);
+    final var top = y + PIN_HEIGHT;
+    final var bottom = y + height - PIN_HEIGHT;
+    g.drawLine((x + 10), bottom, (x + 10), (y + 42));
+    g.drawLine((x + 30), bottom, (x + 30), (y + 42));
+    g.drawLine((x + 50), bottom, (x + 50), (y + 42));
+    g.drawLine((x + 70), bottom, (x + 70), (y + 42));
+    g.drawLine((x + 90), bottom, (x + 90), (y + 42));
+    g.drawLine((x + 110), bottom, (x + 110), (y + 42));
+    g.drawLine((x + 130), top, (x + 130), (y + 18));
+    g.drawLine((x + 110), top, (x + 110), (y + 18));
+    g.drawLine((x + 90), top, (x + 90), (y + 18));
+    g.drawLine((x + 70), top, (x + 70), (y + 18));
+    g.drawLine((x + 50), top, (x + 50), (y + 18));
+    g.drawLine((x + 30), top, (x + 30), (y + 18));
   }
 
   @Override
