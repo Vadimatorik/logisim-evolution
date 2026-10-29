@@ -11,6 +11,7 @@ package com.cburch.logisim.std.ttl;
 
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
@@ -108,65 +109,44 @@ public class Ttl74279 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var rawState = painter.getData();
-    final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
-    g.drawRect((x + 14), (y + 18), 25, 24);
-    GraphicsUtil.drawCenteredText(g, "SR", (x + 24), (y + 28));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 31), (y + 26));
-    structureDot(g, (x + 26), (y + 30), stored, 0, 0);
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + height - 13));
-    g.drawLine((x + 50), (y + height - 13), (x + 23), (y + height - 13));
-    g.drawLine((x + 23), (y + height - 13), (x + 23), (y + 42));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 26), (y + height - 13));
-    g.drawLine((x + 26), (y + height - 13), (x + 26), (y + 42));
-    structureBubble(g, (x + 26), ((y + 42)) + 5);
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + height - 13));
-    g.drawLine((x + 70), (y + height - 13), (x + 29), (y + height - 13));
-    g.drawLine((x + 29), (y + height - 13), (x + 29), (y + 42));
-    g.drawRect((x + 47), (y + 18), 25, 24);
-    GraphicsUtil.drawCenteredText(g, "SR", (x + 57), (y + 28));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 64), (y + 26));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 13));
-    g.drawLine((x + 50), (y + 13), (x + 53), (y + 13));
-    g.drawLine((x + 53), (y + 13), (x + 53), (y + 18));
-    structureBubble(g, (x + 53), ((y + 18)) - 5);
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 13));
-    g.drawLine((x + 30), (y + 13), (x + 56), (y + 13));
-    g.drawLine((x + 56), (y + 13), (x + 56), (y + 18));
-    structureBubble(g, (x + 56), ((y + 18)) - 5);
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 13));
-    g.drawLine((x + 70), (y + 13), (x + 59), (y + 13));
-    g.drawLine((x + 59), (y + 13), (x + 59), (y + 18));
-    g.drawRect((x + 80), (y + 18), 25, 24);
-    GraphicsUtil.drawCenteredText(g, "SR", (x + 90), (y + 28));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 97), (y + 26));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + height - 13));
-    g.drawLine((x + 110), (y + height - 13), (x + 86), (y + height - 13));
-    g.drawLine((x + 86), (y + height - 13), (x + 86), (y + 42));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
-    structureBubble(g, (x + 90), ((y + 42)) + 5);
-    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + height - 13));
-    g.drawLine((x + 130), (y + height - 13), (x + 92), (y + height - 13));
-    g.drawLine((x + 92), (y + height - 13), (x + 92), (y + 42));
-    g.drawRect((x + 113), (y + 18), 25, 24);
-    GraphicsUtil.drawCenteredText(g, "SR", (x + 123), (y + 28));
-    GraphicsUtil.drawCenteredText(g, "Q", (x + 130), (y + 26));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 13));
-    g.drawLine((x + 110), (y + 13), (x + 119), (y + 13));
-    g.drawLine((x + 119), (y + 13), (x + 119), (y + 18));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 13));
-    g.drawLine((x + 90), (y + 13), (x + 122), (y + 13));
-    g.drawLine((x + 122), (y + 13), (x + 122), (y + 18));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
-    structureBubble(g, (x + 130), ((y + 18)) - 5);
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 13));
-    g.drawLine((x + 150), (y + 13), (x + 128), (y + 13));
-    g.drawLine((x + 128), (y + 13), (x + 128), (y + 18));
+    drawLatch(g, x, y, height, false, new int[] {1, 2, 3, 4});
+    drawLatch(g, x, y, height, false, new int[] {5, 6, 7});
+    drawLatch(g, x, y, height, true, new int[] {15, 14, 13});
+    drawLatch(g, x, y, height, true, new int[] {12, 11, 10, 9});
   }
 
-  @Override
+  /** One SR latch. Every lead stays on its pin. Set and reset are active low. */
+  private static void drawLatch(Graphics g, int x, int y, int height, boolean alongTop, int[] pins) {
+    var left = Integer.MAX_VALUE;
+    var right = Integer.MIN_VALUE;
+    for (var pin : pins) {
+      final var pinX = structureX(x, 16, pin);
+      left = Math.min(left, pinX);
+      right = Math.max(right, pinX);
+    }
+    final var top = alongTop ? y + 12 : y + 32;
+    final var boxHeight = 16;
+    g.drawRect(left - 6, top, right - left + 12, boxHeight);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "SR", (left + right) / 2, top + boxHeight / 2);
+    g.setFont(previousFont);
+    final var edge = alongTop ? top : top + boxHeight;
+    final var pinY = structureY(y, height, 16, pins[0]);
+    for (var index = 0; index < pins.length; index++) {
+      final var pin = pins[index];
+      final var pinX = structureX(x, 16, pin);
+      final var output = pin == Q1 || pin == Q2 || pin == Q3 || pin == Q4;
+      if (output) {
+        g.drawLine(pinX, pinY, pinX, edge);
+      } else {
+        final var bubbleY = alongTop ? edge - 4 : edge + 4;
+        g.drawLine(pinX, pinY, pinX, alongTop ? bubbleY - 2 : bubbleY + 2);
+        structureBubble(g, pinX, bubbleY);
+      }
+    }
+  }
+
   public void propagateTtl(InstanceState state) {
     final var data = latchState(state);
     for (var index = 0; index < LATCHES.length; index++) {
