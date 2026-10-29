@@ -17,6 +17,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.prefs.AppPreferences;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Arrays;
@@ -119,13 +120,35 @@ public class Ttl74596 extends AbstractTtlGate {
     return Value.UNKNOWN;
   }
 
-  @Override
-  public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    final var g = (Graphics2D) painter.getGraphics();
+    public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
+    final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
-    Drawgates.paintPortNamesByPin(painter, x, y, height, PIN_NAMES);
-    drawOpenDrainMarks(g, x, y, height);
-    drawState(g, x, y, getData(painter));
+    g.setColor(Color.BLACK);
+    final var boxTop = y + 18;
+    final var boxBottom = boxTop + 24;
+    g.drawRect(x + 6, boxTop, 312, 24);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "REG", x + 162, y + 30);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 16; pin++) {
+      if (pin == 8 || pin == 16) {
+        continue;
+      }
+      final var pinX = pin <= 8 ? x + (pin - 1) * 20 + 10 : x + (16 - pin) * 20 + 10;
+      final var pinY =
+          pin <= 8
+              ? y + height - AbstractTtlGate.PIN_HEIGHT
+              : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = pin <= 8 ? boxBottom : boxTop;
+      if (pin == 13) {
+        final var bubbleY = pin <= 8 ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, pin <= 8 ? bubbleY + 2 : bubbleY - 2);
+        structureBubble(g, pinX, bubbleY);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
 
   private void drawOpenDrainMarks(Graphics g, int x, int y, int height) {
@@ -230,4 +253,8 @@ public class Ttl74596 extends AbstractTtlGate {
       return copy;
     }
   }
+  private static void structureBubble(Graphics g, int centerX, int centerY) {
+    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  }
+
 }
