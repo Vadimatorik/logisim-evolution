@@ -14,6 +14,9 @@ import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.prefs.AppPreferences;
 
+import com.cburch.logisim.util.GraphicsUtil;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -84,13 +87,35 @@ public class Ttl744002 extends AbstractTtlGate {
 
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    final var inset = AppPreferences.GATE_SHAPE.get().equals(AppPreferences.SHAPE_SHAPED) ? 4 : 0;
-    // 1Y and 2Y sit to the left of their inputs, as on the 4072. Pins 6 and 8 stay open.
-    paintHalf(g, x, y, height, false, inset);
-    paintHalf(g, x, y, height, true, inset);
+    super.paintBase(painter, false, false);
+    g.setColor(Color.BLACK);
+    final var top = y + 18;
+    final var bottom = y + height - 18;
+    g.drawRect(x + 6, top, 128, bottom - top);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "NOR", x + 70, (top + bottom) / 2);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 14; pin++) {
+      if (pin == 7 || pin == 14) {
+        continue;
+      }
+      final var lower = pin <= 7;
+      final var pinX = lower ? x + (pin - 1) * 20 + 10 : x + (14 - pin) * 20 + 10;
+      final var pinY = lower ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = lower ? bottom : top;
+      if (false) {
+        final var bubbleY = lower ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, lower ? bubbleY + 2 : bubbleY - 2);
+        g.drawOval(pinX - 2, bubbleY - 2, 4, 4);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
