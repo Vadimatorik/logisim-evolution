@@ -104,9 +104,8 @@ public class Ttl74238 extends AbstractTtlGate {
     g.setColor(Color.BLACK);
     g.drawRect((x + 12), (y + 18), 136, 24);
     GraphicsUtil.drawCenteredText(g, "3-8", (x + 80), (y + 30));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
-    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
+    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 42));
+    g.drawLine((x + 10), (y + 42), (x + 12), (y + 42));
     g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
     g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
     g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
@@ -120,9 +119,7 @@ public class Ttl74238 extends AbstractTtlGate {
     g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
     g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
     g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 13));
-    g.drawLine((x + 150), (y + 13), (x + 144), (y + 13));
-    g.drawLine((x + 144), (y + 13), (x + 144), (y + 18));
+    g.drawLine((x + 150), (y + 7), (x + 150), (y + 18));
     g.drawLine((x + 130), (y + height - 7), (x + 130), (y + 42));
   }
 
