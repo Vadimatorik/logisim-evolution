@@ -13,6 +13,9 @@ import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 
+import com.cburch.logisim.util.GraphicsUtil;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -85,20 +88,35 @@ public class Ttl74260 extends AbstractTtlGate {
 
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    final int bottom = y + height - PIN_HEIGHT;
-    final int top = y + PIN_HEIGHT;
-    // Gate 1 output is pin 5. Inputs 1A to 1C are bottom pins 1 to 3; 1D and 1E are top pins 12
-    // and 13.
-    paintNorToPin(g, x + 78, y + 42, x + 90, bottom);
-    wireInputs(g, new int[] {x + 10, x + 30, x + 50}, bottom, x + 62, y + 36);
-    wireInputs(g, new int[] {x + 50, x + 30}, top, x + 62, y + 44);
-    // Gate 2 output is pin 6. 2E is bottom pin 4 and 2A to 2D are top pins 8 to 11.
-    paintNorToPin(g, x + 104, y + 22, x + 110, bottom);
-    wireInputs(g, new int[] {x + 70}, bottom, x + 88, y + 28);
-    wireInputs(g, new int[] {x + 130, x + 110, x + 90, x + 70}, top, x + 88, y + 14);
+    super.paintBase(painter, false, false);
+    g.setColor(Color.BLACK);
+    final var top = y + 18;
+    final var bottom = y + height - 18;
+    g.drawRect(x + 6, top, 128, bottom - top);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "NOR", x + 70, (top + bottom) / 2);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 14; pin++) {
+      if (pin == 7 || pin == 14) {
+        continue;
+      }
+      final var lower = pin <= 7;
+      final var pinX = lower ? x + (pin - 1) * 20 + 10 : x + (14 - pin) * 20 + 10;
+      final var pinY = lower ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = lower ? bottom : top;
+      if (false) {
+        final var bubbleY = lower ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, lower ? bubbleY + 2 : bubbleY - 2);
+        g.drawOval(pinX - 2, bubbleY - 2, 4, 4);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
