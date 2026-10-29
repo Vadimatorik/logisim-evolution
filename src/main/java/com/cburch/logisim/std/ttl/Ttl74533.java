@@ -15,6 +15,7 @@ import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -123,80 +124,32 @@ public class Ttl74533 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var rawState = painter.getData();
-    final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
-    g.drawRect((x + 24), (y + height - 28), 12, 14);
-    g.drawLine((x + 30), ((y + height - 28)) + 14, (x + 30), (y + height - 7));
-    structureBubble(g, (x + 30), ((y + height - 28)) + 16);
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + height - 13));
-    g.drawLine((x + 50), (y + height - 13), (x + 30), (y + height - 13));
-    g.drawLine((x + 30), (y + height - 13), (x + 30), (y + height - 28));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 30), ((y + height - 28)) + 8);
-    structureDot(g, (x + 30), ((y + height - 28)) + 7, stored, 0, 0);
-    g.drawRect((x + 84), (y + height - 28), 12, 14);
-    g.drawLine((x + 90), ((y + height - 28)) + 14, (x + 90), (y + height - 7));
-    structureBubble(g, (x + 90), ((y + height - 28)) + 16);
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + height - 13));
-    g.drawLine((x + 70), (y + height - 13), (x + 90), (y + height - 13));
-    g.drawLine((x + 90), (y + height - 13), (x + 90), (y + height - 28));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 90), ((y + height - 28)) + 8);
-    g.drawRect((x + 104), (y + height - 28), 12, 14);
-    g.drawLine((x + 110), ((y + height - 28)) + 14, (x + 110), (y + height - 7));
-    structureBubble(g, (x + 110), ((y + height - 28)) + 16);
-    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + height - 13));
-    g.drawLine((x + 130), (y + height - 13), (x + 110), (y + height - 13));
-    g.drawLine((x + 110), (y + height - 13), (x + 110), (y + height - 28));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 110), ((y + height - 28)) + 8);
-    g.drawRect((x + 164), (y + height - 28), 12, 14);
-    g.drawLine((x + 170), ((y + height - 28)) + 14, (x + 170), (y + height - 7));
-    structureBubble(g, (x + 170), ((y + height - 28)) + 16);
-    g.drawLine((x + 150), (y + height - 7), (x + 150), (y + height - 13));
-    g.drawLine((x + 150), (y + height - 13), (x + 170), (y + height - 13));
-    g.drawLine((x + 170), (y + height - 13), (x + 170), (y + height - 28));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 170), ((y + height - 28)) + 8);
-    g.drawRect((x + 164), (y + 12), 12, 14);
-    g.drawLine((x + 170), (y + 12), (x + 170), (y + 7));
-    structureBubble(g, (x + 170), ((y + 12)) - 2);
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 13));
-    g.drawLine((x + 150), (y + 13), (x + 170), (y + 13));
-    g.drawLine((x + 170), (y + 13), (x + 170), ((y + 12)) + 14);
-    GraphicsUtil.drawCenteredText(g, "L", (x + 170), ((y + 12)) + 8);
-    g.drawRect((x + 104), (y + 12), 12, 14);
-    g.drawLine((x + 110), (y + 12), (x + 110), (y + 7));
-    structureBubble(g, (x + 110), ((y + 12)) - 2);
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 13));
-    g.drawLine((x + 130), (y + 13), (x + 110), (y + 13));
-    g.drawLine((x + 110), (y + 13), (x + 110), ((y + 12)) + 14);
-    GraphicsUtil.drawCenteredText(g, "L", (x + 110), ((y + 12)) + 8);
-    g.drawRect((x + 84), (y + 12), 12, 14);
-    g.drawLine((x + 90), (y + 12), (x + 90), (y + 7));
-    structureBubble(g, (x + 90), ((y + 12)) - 2);
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 13));
-    g.drawLine((x + 70), (y + 13), (x + 90), (y + 13));
-    g.drawLine((x + 90), (y + 13), (x + 90), ((y + 12)) + 14);
-    GraphicsUtil.drawCenteredText(g, "L", (x + 90), ((y + 12)) + 8);
-    g.drawRect((x + 24), (y + 12), 12, 14);
-    g.drawLine((x + 30), (y + 12), (x + 30), (y + 7));
-    structureBubble(g, (x + 30), ((y + 12)) - 2);
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 13));
-    g.drawLine((x + 50), (y + 13), (x + 30), (y + 13));
-    g.drawLine((x + 30), (y + 13), (x + 30), ((y + 12)) + 14);
-    GraphicsUtil.drawCenteredText(g, "L", (x + 30), ((y + 12)) + 8);
-    g.drawLine((x + 24), (y + 28), (x + 176), (y + 28));
-    g.drawLine((x + 30), (y + 28), (x + 30), (y + 26));
-    g.drawLine((x + 90), (y + 28), (x + 90), (y + 26));
-    g.drawLine((x + 110), (y + 28), (x + 110), (y + 26));
-    g.drawLine((x + 170), (y + 28), (x + 170), (y + 26));
-    g.drawLine((x + 170), (y + 28), (x + 170), (y + 26));
-    g.drawLine((x + 110), (y + 28), (x + 110), (y + 26));
-    g.drawLine((x + 90), (y + 28), (x + 90), (y + 26));
-    g.drawLine((x + 30), (y + 28), (x + 30), (y + 26));
-    g.drawLine((x + 190), (y + 7), (x + 190), (y + 13));
-    g.drawLine((x + 190), (y + 13), (x + 24), (y + 13));
-    g.drawLine((x + 24), (y + 13), (x + 24), (y + 28));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 30));
-    structureBubble(g, (x + 10), (y + height - 7));
+    final var top = y + 18;
+    final var bottom = y + height - 18;
+    g.drawRect(x + 6, top, 188, bottom - top);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "LATCH", x + 100, (top + bottom) / 2);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 20; pin++) {
+      if (pin == 10 || pin == 20) {
+        continue;
+      }
+      final var lower = pin <= 10;
+      final var pinX = lower ? x + (pin - 1) * 20 + 10 : x + (20 - pin) * 20 + 10;
+      final var pinY = lower ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = lower ? bottom : top;
+      if (pin == 1 || pin == 2 || pin == 3) {
+        final var bubbleY = lower ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, lower ? bubbleY + 2 : bubbleY - 2);
+        g.drawOval(pinX - 2, bubbleY - 2, 4, 4);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
