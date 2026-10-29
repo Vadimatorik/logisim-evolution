@@ -131,6 +131,8 @@ public class Ttl744040 extends AbstractTtlGate {
 
 
 
+
+
   private static TtlRegisterData getStateData(InstanceState state) {
     var data = (TtlRegisterData) state.getData();
     if (data == null) {
