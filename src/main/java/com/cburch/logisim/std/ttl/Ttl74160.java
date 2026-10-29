@@ -170,28 +170,18 @@ public class Ttl74160 extends AbstractTtlGate {
     g.drawLine((x + 30), (y + height - 7), (x + 30), (y + height - 13));
     g.drawLine((x + 30), (y + height - 13), (x + 44), (y + height - 13));
     g.drawLine((x + 44), (y + height - 13), (x + 44), ((y + 12)) - 4);
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 110), (y + height - 13));
-    g.drawLine((x + 110), (y + height - 13), (x + 110), (y + 16));
-    structureBubble(g, (x + 10), (y + height - 7));
-    GraphicsUtil.drawCenteredText(g, "R", (x + 10), (y + height - 24));
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 13));
-    g.drawLine((x + 150), (y + 13), (x + 110), (y + 13));
-    g.drawLine((x + 110), (y + 13), (x + 110), (y + 16));
-    structureBubble(g, (x + 150), (y + 7));
-    GraphicsUtil.drawCenteredText(g, "LD", (x + 150), (y + 24));
-    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + height - 13));
-    g.drawLine((x + 130), (y + height - 13), (x + 110), (y + height - 13));
-    g.drawLine((x + 110), (y + height - 13), (x + 110), (y + 16));
-    GraphicsUtil.drawCenteredText(g, "P", (x + 130), (y + height - 24));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 13));
-    g.drawLine((x + 130), (y + 13), (x + 110), (y + 13));
-    g.drawLine((x + 110), (y + 13), (x + 110), (y + 16));
-    GraphicsUtil.drawCenteredText(g, "T", (x + 130), (y + 24));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 13));
-    g.drawLine((x + 30), (y + 13), (x + 110), (y + 13));
-    g.drawLine((x + 110), (y + 13), (x + 110), (y + 16));
-    GraphicsUtil.drawCenteredText(g, "TC", (x + 30), (y + 24));
+    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 12));
+    structureBubble(g, (x + 10), (y + height - 14));
+    GraphicsUtil.drawCenteredText(g, "R", (x + 18), (y + height - 24));
+    g.drawLine((x + 150), (y + 7), (x + 150), (y + 12));
+    structureBubble(g, (x + 150), (y + 14));
+    GraphicsUtil.drawCenteredText(g, "LD", (x + 140), (y + 24));
+    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + height - 18));
+    GraphicsUtil.drawCenteredText(g, "P", (x + 122), (y + height - 24));
+    g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
+    GraphicsUtil.drawCenteredText(g, "T", (x + 122), (y + 24));
+    g.drawLine((x + 30), (y + 7), (x + 30), (y + 18));
+    GraphicsUtil.drawCenteredText(g, "TC", (x + 40), (y + 24));
   }
 
   private static void updateState(InstanceState state, Value value) {
