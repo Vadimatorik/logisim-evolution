@@ -12,6 +12,8 @@ package com.cburch.logisim.std.ttl;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
+import com.cburch.logisim.util.GraphicsUtil;
+import java.awt.Font;
 
 /**
  * TTL 74x1G125: single bus buffer with a 3-state output.
@@ -84,19 +86,23 @@ public class Ttl741G125 extends AbstractTtlGate {
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    final int outX = x + 28;
-    final int outY = y + height / 2;
-    Drawgates.paintBuffer(g, outX, outY, 12, 10);
-    // Y is the top pin opposite A.
-    g.drawLine(outX - 4, outY, x + 20, outY);
-    g.drawLine(x + 20, outY, x + 20, y + PIN_HEIGHT);
-    // A is the second pin on the pin-1 side.
-    g.drawLine(x + 30, y + height - PIN_HEIGHT, x + 30, outY);
-    g.drawLine(x + 30, outY, outX - 12, outY);
-    // nOE is active low, so the enable wire meets the buffer at a bubble.
-    g.drawLine(x + 10, y + height - PIN_HEIGHT, x + 10, outY + 7);
-    g.drawLine(x + 10, outY + 7, outX - 8, outY + 7);
-    g.drawOval(outX - 11, outY + 4, 3, 3);
+    final var top = y + 22;
+    final var bottom = y + height - 22;
+    final var left = x + 8;
+    final var right = x + 42;
+    g.drawRect(left, top, right - left, bottom - top);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "BUF", x + 18, (top + bottom) / 2);
+    g.setFont(previousFont);
+    // nOE is pin 1. The bubble sits outside the rectangle.
+    final var oeX = x + 10;
+    g.drawLine(oeX, y + height - PIN_HEIGHT, oeX, bottom + 6);
+    g.drawOval(oeX - 2, bottom + 2, 4, 4);
+    // A (pin 2) and Y (pin 4) share an x on this five-pin body, so each lead stops on the near edge.
+    final var dataX = x + 30;
+    g.drawLine(dataX, y + height - PIN_HEIGHT, dataX, bottom);
+    g.drawLine(dataX, y + PIN_HEIGHT, dataX, top);
   }
 
   @Override
