@@ -130,59 +130,32 @@ public class Ttl744049 extends AbstractTtlGate {
     return (byte) (dsPinNr - 1 - skipped);
   }
 
-  @Override
+    @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 30));
-    g.drawLine((x + 50), (y + 30), (x + 34), (y + 30));
-    g.drawLine((x + 34), (y + 24), (x + 46), (y + 30));
-    g.drawLine((x + 34), (y + 36), (x + 46), (y + 30));
-    g.drawLine((x + 34), (y + 24), (x + 34), (y + 36));
-    structureBubble(g, (x + 48), (y + 30));
-    g.drawLine((x + 52), (y + 30), (x + 30), (y + 30));
-    g.drawLine((x + 30), (y + 30), (x + 30), (y + height - 7));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 30));
-    g.drawLine((x + 90), (y + 30), (x + 74), (y + 30));
-    g.drawLine((x + 74), (y + 24), (x + 86), (y + 30));
-    g.drawLine((x + 74), (y + 36), (x + 86), (y + 30));
-    g.drawLine((x + 74), (y + 24), (x + 74), (y + 36));
-    structureBubble(g, (x + 88), (y + 30));
-    g.drawLine((x + 92), (y + 30), (x + 70), (y + 30));
-    g.drawLine((x + 70), (y + 30), (x + 70), (y + height - 7));
-    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + 30));
-    g.drawLine((x + 130), (y + 30), (x + 114), (y + 30));
-    g.drawLine((x + 114), (y + 24), (x + 126), (y + 30));
-    g.drawLine((x + 114), (y + 36), (x + 126), (y + 30));
-    g.drawLine((x + 114), (y + 24), (x + 114), (y + 36));
-    structureBubble(g, (x + 128), (y + 30));
-    g.drawLine((x + 132), (y + 30), (x + 110), (y + 30));
-    g.drawLine((x + 110), (y + 30), (x + 110), (y + height - 7));
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 30));
-    g.drawLine((x + 150), (y + 30), (x + 134), (y + 30));
-    g.drawLine((x + 134), (y + 24), (x + 146), (y + 30));
-    g.drawLine((x + 134), (y + 36), (x + 146), (y + 30));
-    g.drawLine((x + 134), (y + 24), (x + 134), (y + 36));
-    structureBubble(g, (x + 148), (y + 30));
-    g.drawLine((x + 152), (y + 30), (x + 130), (y + 30));
-    g.drawLine((x + 130), (y + 30), (x + 130), (y + 7));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 30));
-    g.drawLine((x + 110), (y + 30), (x + 94), (y + 30));
-    g.drawLine((x + 94), (y + 24), (x + 106), (y + 30));
-    g.drawLine((x + 94), (y + 36), (x + 106), (y + 30));
-    g.drawLine((x + 94), (y + 24), (x + 94), (y + 36));
-    structureBubble(g, (x + 108), (y + 30));
-    g.drawLine((x + 112), (y + 30), (x + 90), (y + 30));
-    g.drawLine((x + 90), (y + 30), (x + 90), (y + 7));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 30));
-    g.drawLine((x + 50), (y + 30), (x + 34), (y + 30));
-    g.drawLine((x + 34), (y + 24), (x + 46), (y + 30));
-    g.drawLine((x + 34), (y + 36), (x + 46), (y + 30));
-    g.drawLine((x + 34), (y + 24), (x + 34), (y + 36));
-    structureBubble(g, (x + 48), (y + 30));
-    g.drawLine((x + 52), (y + 30), (x + 30), (y + 30));
-    g.drawLine((x + 30), (y + 30), (x + 30), (y + 7));
+    final var bodyFont = g.getFont();
+    g.setFont(bodyFont.deriveFont(9f));
+    g.drawRect((x + 12), (y + 18), 142, 24);
+    GraphicsUtil.drawCenteredText(g, "REG", (x + 83), (y + 30));
+    g.setFont(bodyFont);
+    final var top = y + PIN_HEIGHT;
+    final var bottom = y + height - PIN_HEIGHT;
+    g.drawLine((x + 30), bottom, (x + 30), (y + 42));
+    g.drawLine((x + 50), bottom, (x + 50), (y + 42));
+    g.drawLine((x + 70), bottom, (x + 70), (y + 42));
+    g.drawLine((x + 90), bottom, (x + 90), (y + 42));
+    g.drawLine((x + 110), bottom, (x + 110), (y + 42));
+    g.drawLine((x + 130), bottom, (x + 130), (y + 42));
+    g.drawLine((x + 150), top, (x + 150), (y + 18));
+    g.drawLine((x + 130), top, (x + 130), (y + 18));
+    g.drawLine((x + 110), top, (x + 110), (y + 18));
+    g.drawLine((x + 90), top, (x + 90), (y + 18));
+    g.drawLine((x + 70), top, (x + 70), (y + 18));
+    g.drawLine((x + 50), top, (x + 50), (y + 18));
+    g.drawLine((x + 30), top, (x + 30), (y + 18));
+    g.drawLine((x + 10), top, (x + 10), (y + 18));
   }
 
   @Override
