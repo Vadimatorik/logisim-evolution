@@ -167,7 +167,7 @@ public class Ttl744510 extends AbstractTtlGate {
       final var pinX = lower ? x + (pin - 1) * 20 + 10 : x + (16 - pin) * 20 + 10;
       final var pinY = lower ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
       final var edge = lower ? bottom : top;
-      if (pin == 1 || pin == 5 || pin == 6 || pin == 7 || pin == 8 || pin == 9) {
+      if (pin == 5 || pin == 7) {
         final var bubbleY = lower ? edge + 4 : edge - 4;
         g.drawLine(pinX, pinY, pinX, lower ? bubbleY + 2 : bubbleY - 2);
         g.drawOval(pinX - 2, bubbleY - 2, 4, 4);
@@ -176,6 +176,8 @@ public class Ttl744510 extends AbstractTtlGate {
       }
     }
   }
+
+
 
 
 
