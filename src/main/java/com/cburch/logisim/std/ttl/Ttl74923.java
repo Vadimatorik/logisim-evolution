@@ -10,6 +10,7 @@
 package com.cburch.logisim.std.ttl;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import com.cburch.logisim.util.GraphicsUtil;
 import static com.cburch.logisim.std.Strings.S;
@@ -227,23 +228,35 @@ public class Ttl74923 extends AbstractTtlGate implements TickAware {
     return timersChanged || data.columnStepDue(ticks, period);
   }
 
-  @Override
-  public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
+    public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 12), (y + 18), 102, 24);
-    GraphicsUtil.drawCenteredText(g, "KEY", (x + 63), (y + 30));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
-    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
-    structureBubble(g, (x + 90), (y + 14));
+    final var boxTop = y + 18;
+    final var boxBottom = boxTop + 24;
+    g.drawRect(x + 6, boxTop, 392, 24);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
+    GraphicsUtil.drawCenteredText(g, "CNT", x + 202, y + 30);
+    g.setFont(previousFont);
+    for (var pin = 1; pin <= 20; pin++) {
+      if (pin == 10 || pin == 20) {
+        continue;
+      }
+      final var pinX = pin <= 10 ? x + (pin - 1) * 20 + 10 : x + (20 - pin) * 20 + 10;
+      final var pinY =
+          pin <= 10
+              ? y + height - AbstractTtlGate.PIN_HEIGHT
+              : y + AbstractTtlGate.PIN_HEIGHT;
+      final var edge = pin <= 10 ? boxBottom : boxTop;
+      if (pin == 13 || pin == 14) {
+        final var bubbleY = pin <= 10 ? edge + 4 : edge - 4;
+        g.drawLine(pinX, pinY, pinX, pin <= 10 ? bubbleY + 2 : bubbleY - 2);
+        structureBubble(g, pinX, bubbleY);
+      } else {
+        g.drawLine(pinX, pinY, pinX, edge);
+      }
+    }
   }
 
   @Override
