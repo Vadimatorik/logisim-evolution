@@ -217,9 +217,8 @@ public class Ttl74922 extends AbstractTtlGate implements TickAware {
     g.setColor(Color.BLACK);
     g.drawRect((x + 12), (y + 18), 122, 24);
     GraphicsUtil.drawCenteredText(g, "KEY", (x + 73), (y + 30));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
-    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
+    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 42));
+    g.drawLine((x + 10), (y + 42), (x + 12), (y + 42));
     g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
     g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
     g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
