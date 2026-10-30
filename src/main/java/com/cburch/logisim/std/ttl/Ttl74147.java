@@ -11,6 +11,7 @@ package com.cburch.logisim.std.ttl;
 
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
@@ -103,39 +104,36 @@ public class Ttl74147 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 12), (y + 18), 136, 24);
-    GraphicsUtil.drawCenteredText(g, "PRI", (x + 80), (y + 30));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
-    structureBubble(g, (x + 110), (y + 14));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
-    structureBubble(g, (x + 90), (y + 14));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 18));
-    structureBubble(g, (x + 70), (y + 14));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
-    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
-    structureBubble(g, (x + 16), (y + 46));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    structureBubble(g, (x + 30), (y + 46));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
-    structureBubble(g, (x + 50), (y + 46));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
-    structureBubble(g, (x + 70), (y + 46));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
-    structureBubble(g, (x + 90), (y + 46));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
-    structureBubble(g, (x + 130), (y + 14));
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 13));
-    g.drawLine((x + 150), (y + 13), (x + 144), (y + 13));
-    g.drawLine((x + 144), (y + 13), (x + 144), (y + 18));
-    structureBubble(g, (x + 144), (y + 14));
-    g.drawLine((x + 130), (y + height - 7), (x + 130), (y + 42));
-    structureBubble(g, (x + 130), (y + 46));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 42));
-    structureBubble(g, (x + 110), (y + 46));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 18));
-    structureBubble(g, (x + 50), (y + 14));
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 105, y + 28, 10, 10);
+    g.drawRect(x + 125, y + 28, 10, 10);
+    g.drawRect(x + 145, y + 12, 10, 10);
+    g.drawRect(x + 45, y + 12, 10, 10);
+    g.drawLine(x + 110, y + height - 22, x + 110, y + height - 7);
+    g.drawLine(x + 130, y + height - 22, x + 130, y + height - 7);
+    g.drawLine(x + 150, y + 12, x + 150, y + 7);
+    g.drawLine(x + 50, y + 12, x + 50, y + 7);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 19);
+    g.drawLine(x + 10, y + height - 19, x + 107, y + height - 19);
+    g.drawLine(x + 107, y + height - 19, x + 107, y + height - 22);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 19);
+    g.drawLine(x + 30, y + height - 19, x + 127, y + height - 19);
+    g.drawLine(x + 127, y + height - 19, x + 127, y + height - 22);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + 25);
+    g.drawLine(x + 50, y + 25, x + 147, y + 25);
+    g.drawLine(x + 147, y + 25, x + 147, y + 22);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + 25);
+    g.drawLine(x + 70, y + 25, x + 47, y + 25);
+    g.drawLine(x + 47, y + 25, x + 47, y + 22);
+    GraphicsUtil.drawCenteredText(g, "t", x + 110, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "t", x + 130, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "t", x + 150, y + 17);
+    GraphicsUtil.drawCenteredText(g, "t", x + 50, y + 17);
+    g.setFont(previousFont);
   }
+
+
 
   private static boolean isAsserted(InstanceState state, byte dsPinNr) {
     return state.getPortValue(pinNrToPortNr(dsPinNr)) == Value.FALSE;
