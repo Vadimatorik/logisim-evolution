@@ -91,29 +91,43 @@ public class Ttl74197 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var top = y + 18;
-    final var bottom = y + 42;
-    g.drawRect(x + 6, top, 128, bottom - top);
     final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "CTR", x + 70, y + 30);
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 20, y + 14, 100, 12);
+    g.drawRect(x + 20, y + height - 28, 100, 12);
+    g.drawLine(x + 70, y + 26, x + 70, y + height - 28);
+    g.drawLine(x + 30, y + height - 16, x + 30, y + height - 7);
+    g.drawLine(x + 90, y + height - 16, x + 90, y + height - 7);
+    g.drawLine(x + 110, y + height - 28, x + 110, y + 26);
+    g.drawLine(x + 110, y + 26, x + 120, y + 26);
+    g.drawLine(x + 120, y + 26, x + 124, y + 26);
+    g.drawLine(x + 124, y + 26, x + 124, y + 10);
+    g.drawLine(x + 124, y + 10, x + 110, y + 10);
+    g.drawLine(x + 110, y + 10, x + 110, y + 7);
+    g.drawLine(x + 50, y + height - 28, x + 50, y + 26);
+    g.drawLine(x + 50, y + 26, x + 20, y + 26);
+    g.drawLine(x + 20, y + 26, x + 16, y + 26);
+    g.drawLine(x + 16, y + 26, x + 16, y + 10);
+    g.drawLine(x + 16, y + 10, x + 50, y + 10);
+    g.drawLine(x + 50, y + 10, x + 50, y + 7);
+    g.drawLine(x + 110, y + height - 7, x + 110, y + height - 9);
+    g.drawLine(x + 110, y + height - 9, x + 14, y + height - 9);
+    g.drawLine(x + 14, y + height - 9, x + 14, y + 14);
+    g.drawLine(x + 14, y + 14, x + 20, y + 14);
+    g.drawLine(x + 130, y + 7, x + 130, y + 9);
+    g.drawLine(x + 130, y + 9, x + 14, y + 9);
+    g.drawLine(x + 14, y + 9, x + 14, y + height - 28);
+    g.drawLine(x + 14, y + height - 28, x + 20, y + height - 28);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + height - 16);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + height - 16);
+    g.drawLine(x + 90, y + 7, x + 90, y + 14);
+    g.drawLine(x + 70, y + 7, x + 70, y + 14);
+    GraphicsUtil.drawCenteredText(g, "SHIFT", x + 70, y + 20);
+    GraphicsUtil.drawCenteredText(g, "STORE", x + 70, y + height - 22);
     g.setFont(previousFont);
-    for (var pin = 1; pin <= 14; pin++) {
-      if (pin == 7 || pin == 14) {
-        continue;
-      }
-      final var pinX = pin <= 7 ? x + (pin - 1) * 20 + 10 : x + (14 - pin) * 20 + 10;
-      final var pinY = pin <= 7 ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
-      final var edge = pin <= 7 ? bottom : top;
-      if (pin == 1 || pin == 13) {
-        final var bubbleY = pin <= 7 ? edge + 4 : edge - 4;
-        g.drawLine(pinX, pinY, pinX, pin <= 7 ? bubbleY + 2 : bubbleY - 2);
-        structureBubble(g, pinX, bubbleY);
-      } else {
-        g.drawLine(pinX, pinY, pinX, edge);
-      }
-    }
   }
+
+
 
   private static TtlRegisterData getStateData(InstanceState state) {
     var data = (TtlRegisterData) state.getData();
