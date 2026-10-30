@@ -11,6 +11,7 @@ package com.cburch.logisim.std.ttl;
 
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
@@ -109,24 +110,24 @@ public class Ttl74280 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 12), (y + 18), 116, 24);
-    GraphicsUtil.drawCenteredText(g, "PAR", (x + 70), (y + 30));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 13));
-    g.drawLine((x + 130), (y + 13), (x + 124), (y + 13));
-    g.drawLine((x + 124), (y + 13), (x + 124), (y + 18));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 18));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 18));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 18));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + height - 13));
-    g.drawLine((x + 10), (y + height - 13), (x + 16), (y + height - 13));
-    g.drawLine((x + 16), (y + height - 13), (x + 16), (y + 42));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
-    g.drawLine((x + 110), (y + height - 7), (x + 110), (y + 42));
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 65, y + 28, 10, 10);
+    g.drawRect(x + 85, y + 28, 10, 10);
+    g.drawLine(x + 70, y + height - 22, x + 70, y + height - 7);
+    g.drawLine(x + 90, y + height - 22, x + 90, y + height - 7);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 19);
+    g.drawLine(x + 10, y + height - 19, x + 67, y + height - 19);
+    g.drawLine(x + 67, y + height - 19, x + 67, y + height - 22);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 19);
+    g.drawLine(x + 30, y + height - 19, x + 87, y + height - 19);
+    g.drawLine(x + 87, y + height - 19, x + 87, y + height - 22);
+    GraphicsUtil.drawCenteredText(g, "t", x + 70, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "t", x + 90, y + height - 27);
+    g.setFont(previousFont);
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
