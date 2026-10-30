@@ -122,39 +122,60 @@ public class Ttl74540 extends AbstractTtlGate {
     g.dispose();
   }
 
-    @Override
+  @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var bodyFont = g.getFont();
-    g.setFont(bodyFont.deriveFont(9f));
-    g.drawRect((x + 12), (y + 18), 182, 24);
-    GraphicsUtil.drawCenteredText(g, "BUF", (x + 103), (y + 30));
-    g.setFont(bodyFont);
-    final var top = y + PIN_HEIGHT;
-    final var bottom = y + height - PIN_HEIGHT;
-    structureBubble(g, (x + 10), (y + 42));
-    g.drawLine((x + 10), bottom, (x + 10), (y + 44));
-    g.drawLine((x + 30), bottom, (x + 30), (y + 42));
-    g.drawLine((x + 50), bottom, (x + 50), (y + 42));
-    g.drawLine((x + 70), bottom, (x + 70), (y + 42));
-    g.drawLine((x + 90), bottom, (x + 90), (y + 42));
-    g.drawLine((x + 110), bottom, (x + 110), (y + 42));
-    g.drawLine((x + 130), bottom, (x + 130), (y + 42));
-    g.drawLine((x + 150), bottom, (x + 150), (y + 42));
-    g.drawLine((x + 170), bottom, (x + 170), (y + 42));
-    g.drawLine((x + 190), top, (x + 190), (y + 18));
-    g.drawLine((x + 170), top, (x + 170), (y + 18));
-    g.drawLine((x + 150), top, (x + 150), (y + 18));
-    g.drawLine((x + 130), top, (x + 130), (y + 18));
-    g.drawLine((x + 110), top, (x + 110), (y + 18));
-    g.drawLine((x + 90), top, (x + 90), (y + 18));
-    g.drawLine((x + 70), top, (x + 70), (y + 18));
-    g.drawLine((x + 50), top, (x + 50), (y + 18));
-    structureBubble(g, (x + 30), (y + 18));
-    g.drawLine((x + 30), top, (x + 30), (y + 16));
+    g.drawPolygon(new int[] {x + 50, x + 44, x + 56}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 70, x + 64, x + 76}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 90, x + 84, x + 96}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 110, x + 104, x + 116}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 130, x + 124, x + 136}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 150, x + 144, x + 156}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 170, x + 164, x + 176}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 190, x + 184, x + 196}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawLine(x + 50, y + 12, x + 50, y + 7);
+    g.drawLine(x + 70, y + 12, x + 70, y + 7);
+    g.drawLine(x + 90, y + 12, x + 90, y + 7);
+    g.drawLine(x + 110, y + 12, x + 110, y + 7);
+    g.drawLine(x + 130, y + 12, x + 130, y + 7);
+    g.drawLine(x + 150, y + 12, x + 150, y + 7);
+    g.drawLine(x + 170, y + 12, x + 170, y + 7);
+    g.drawLine(x + 190, y + 12, x + 190, y + 7);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + 25);
+    g.drawLine(x + 10, y + 25, x + 47, y + 25);
+    g.drawLine(x + 47, y + 25, x + 47, y + 22);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + 28);
+    g.drawLine(x + 30, y + 28, x + 49, y + 28);
+    g.drawLine(x + 49, y + 28, x + 49, y + 22);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + 25);
+    g.drawLine(x + 50, y + 25, x + 67, y + 25);
+    g.drawLine(x + 67, y + 25, x + 67, y + 22);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + 25);
+    g.drawLine(x + 70, y + 25, x + 87, y + 25);
+    g.drawLine(x + 87, y + 25, x + 87, y + 22);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + 25);
+    g.drawLine(x + 90, y + 25, x + 107, y + 25);
+    g.drawLine(x + 107, y + 25, x + 107, y + 22);
+    g.drawLine(x + 110, y + height - 7, x + 110, y + 25);
+    g.drawLine(x + 110, y + 25, x + 127, y + 25);
+    g.drawLine(x + 127, y + 25, x + 127, y + 22);
+    g.drawLine(x + 130, y + height - 7, x + 130, y + 25);
+    g.drawLine(x + 130, y + 25, x + 147, y + 25);
+    g.drawLine(x + 147, y + 25, x + 147, y + 22);
+    g.drawLine(x + 150, y + height - 7, x + 150, y + 25);
+    g.drawLine(x + 150, y + 25, x + 167, y + 25);
+    g.drawLine(x + 167, y + 25, x + 167, y + 22);
+    g.drawLine(x + 170, y + height - 7, x + 170, y + 25);
+    g.drawLine(x + 170, y + 25, x + 187, y + 25);
+    g.drawLine(x + 187, y + 25, x + 187, y + 22);
+    g.drawLine(x + 30, y + 7, x + 30, y + 6);
+    g.drawLine(x + 30, y + 6, x + 69, y + 6);
+    g.drawLine(x + 69, y + 6, x + 69, y + 12);
   }
+
+
 
   /**
    * Inverts a driven level. {@link Value#not()} turns an unknown bit into an error, which would
