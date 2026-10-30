@@ -171,27 +171,56 @@ public class Ttl74221 extends AbstractTtlGate implements TickAware {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 12), (y + 18), 136, 24);
-    GraphicsUtil.drawCenteredText(g, "1SHOT", (x + 80), (y + 30));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 42));
-    g.drawLine((x + 10), (y + 42), (x + 12), (y + 42));
-    structureBubble(g, (x + 16), (y + 46));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
-    structureBubble(g, (x + 50), (y + 46));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
-    structureBubble(g, (x + 70), (y + 46));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 18));
-    g.drawLine((x + 150), (y + 7), (x + 150), (y + 18));
-    structureBubble(g, (x + 150), (y + 14));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
-    structureBubble(g, (x + 110), (y + 14));
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
-    structureBubble(g, (x + 90), (y + 14));
-    g.drawLine((x + 90), (y + height - 7), (x + 90), (y + 42));
-    drawTiming((Graphics2D) g, painter, x, y, height);
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 65, y + 28, 10, 10);
+    g.drawRect(x + 85, y + 28, 10, 10);
+    g.drawRect(x + 85, y + 12, 10, 10);
+    g.drawRect(x + 65, y + 12, 10, 10);
+    g.drawLine(x + 70, y + height - 22, x + 70, y + height - 7);
+    g.drawLine(x + 90, y + height - 22, x + 90, y + height - 7);
+    g.drawLine(x + 90, y + 12, x + 90, y + 7);
+    g.drawLine(x + 70, y + 12, x + 70, y + 7);
+    g.drawLine(x + 65, y + 24, x + 95, y + 24);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + height - 9);
+    g.drawLine(x + 50, y + height - 9, x + 61, y + height - 9);
+    g.drawLine(x + 61, y + height - 9, x + 61, y + 24);
+    g.drawLine(x + 61, y + 24, x + 65, y + 24);
+    g.drawLine(x + 67, y + 24, x + 67, y + 28);
+    g.drawLine(x + 87, y + 24, x + 87, y + 28);
+    g.drawLine(x + 87, y + 24, x + 87, y + 22);
+    g.drawLine(x + 67, y + 24, x + 67, y + 22);
+    g.drawLine(x + 65, y + 25, x + 95, y + 25);
+    g.drawLine(x + 110, y + 7, x + 110, y + 9);
+    g.drawLine(x + 110, y + 9, x + 61, y + 9);
+    g.drawLine(x + 61, y + 9, x + 61, y + 25);
+    g.drawLine(x + 61, y + 25, x + 65, y + 25);
+    g.drawLine(x + 70, y + 25, x + 70, y + 28);
+    g.drawLine(x + 90, y + 25, x + 90, y + 28);
+    g.drawLine(x + 90, y + 25, x + 90, y + 22);
+    g.drawLine(x + 70, y + 25, x + 70, y + 22);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 19);
+    g.drawLine(x + 10, y + height - 19, x + 67, y + height - 19);
+    g.drawLine(x + 67, y + height - 19, x + 67, y + height - 22);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 16);
+    g.drawLine(x + 30, y + height - 16, x + 69, y + height - 16);
+    g.drawLine(x + 69, y + height - 16, x + 69, y + height - 22);
+    g.drawLine(x + 150, y + 7, x + 150, y + 25);
+    g.drawLine(x + 150, y + 25, x + 87, y + 25);
+    g.drawLine(x + 87, y + 25, x + 87, y + 28);
+    g.drawLine(x + 130, y + 7, x + 130, y + 22);
+    g.drawLine(x + 130, y + 22, x + 89, y + 22);
+    g.drawLine(x + 89, y + 22, x + 89, y + 28);
+    g.drawOval(x + 68, y + height - 22, 4, 4);
+    g.drawOval(x + 88, y + 8, 4, 4);
+    g.drawOval(x + 59, y + 22, 4, 4);
+    g.drawOval(x + 59, y + 23, 4, 4);
+    GraphicsUtil.drawCenteredText(g, "Q", x + 90, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "Q", x + 70, y + 17);
+    g.setFont(previousFont);
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
