@@ -105,28 +105,41 @@ public class Ttl74152 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var top = y + 18;
-    final var bottom = y + 42;
-    g.drawRect(x + 6, top, 128, bottom - top);
     final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "MUX", x + 80, y + 30);
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 74, y + 16, 12, 28);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + 19);
+    g.drawLine(x + 10, y + 19, x + 74, y + 19);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + 22);
+    g.drawLine(x + 30, y + 22, x + 74, y + 22);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + 25);
+    g.drawLine(x + 50, y + 25, x + 74, y + 25);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + 28);
+    g.drawLine(x + 70, y + 28, x + 74, y + 28);
+    g.drawLine(x + 70, y + 7, x + 70, y + height - 29);
+    g.drawLine(x + 70, y + height - 29, x + 74, y + height - 29);
+    g.drawLine(x + 50, y + 7, x + 50, y + height - 26);
+    g.drawLine(x + 50, y + height - 26, x + 74, y + height - 26);
+    g.drawLine(x + 30, y + 7, x + 30, y + height - 23);
+    g.drawLine(x + 30, y + height - 23, x + 74, y + height - 23);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + 19);
+    g.drawLine(x + 90, y + 19, x + 86, y + 19);
+    g.drawLine(x + 86, y + height - 30, x + 110, y + height - 30);
+    g.drawLine(x + 110, y + height - 30, x + 110, y + height - 7);
+    g.drawLine(x + 130, y + 7, x + 130, y + 13);
+    g.drawLine(x + 130, y + 13, x + 78, y + 13);
+    g.drawLine(x + 78, y + 13, x + 78, y + 16);
+    g.drawLine(x + 110, y + 7, x + 110, y + 13);
+    g.drawLine(x + 110, y + 13, x + 81, y + 13);
+    g.drawLine(x + 81, y + 13, x + 81, y + 16);
+    g.drawLine(x + 90, y + 7, x + 90, y + 13);
+    g.drawLine(x + 90, y + 13, x + 84, y + 13);
+    g.drawLine(x + 84, y + 13, x + 84, y + 16);
+    GraphicsUtil.drawCenteredText(g, "M", x + 80, y + height - 30);
     g.setFont(previousFont);
-    for (var pin = 1; pin <= 14; pin++) {
-      if (pin == GND || pin == VCC) {
-        continue;
-      }
-      final var pinX = pin <= 7 ? x + (pin - 1) * 20 + 10 : x + (14 - pin) * 20 + 10;
-      final var pinY = pin <= 7 ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
-      final var edge = pin <= 7 ? bottom : top;
-      if (pin == W) {
-        structureBubble(g, pinX, edge + 4);
-        g.drawLine(pinX, pinY, pinX, edge + 6);
-      } else {
-        g.drawLine(pinX, pinY, pinX, edge);
-      }
-    }
   }
+
+
 
   private static Value pinValue(InstanceState state, byte dsPinNr) {
     return state.getPortValue(pinNrToPortNr(dsPinNr));
