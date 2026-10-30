@@ -124,30 +124,64 @@ public class Ttl74199 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var top = y + 18;
-    final var bottom = y + height - 18;
-    g.drawRect(x + 6, top, 228, bottom - top);
     final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "REG", x + 120, (top + bottom) / 2);
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 20, y + 14, 200, 12);
+    g.drawRect(x + 20, y + height - 28, 200, 12);
+    g.drawLine(x + 120, y + 26, x + 120, y + height - 28);
+    g.drawLine(x + 70, y + height - 16, x + 70, y + height - 7);
+    g.drawLine(x + 110, y + height - 16, x + 110, y + height - 7);
+    g.drawLine(x + 150, y + height - 16, x + 150, y + height - 7);
+    g.drawLine(x + 190, y + height - 16, x + 190, y + height - 7);
+    g.drawLine(x + 190, y + height - 28, x + 190, y + 26);
+    g.drawLine(x + 190, y + 26, x + 220, y + 26);
+    g.drawLine(x + 220, y + 26, x + 224, y + 26);
+    g.drawLine(x + 224, y + 26, x + 224, y + 10);
+    g.drawLine(x + 224, y + 10, x + 190, y + 10);
+    g.drawLine(x + 190, y + 10, x + 190, y + 7);
+    g.drawLine(x + 150, y + height - 28, x + 150, y + 26);
+    g.drawLine(x + 150, y + 26, x + 20, y + 26);
+    g.drawLine(x + 20, y + 26, x + 16, y + 26);
+    g.drawLine(x + 16, y + 26, x + 16, y + 10);
+    g.drawLine(x + 16, y + 10, x + 150, y + 10);
+    g.drawLine(x + 150, y + 10, x + 150, y + 7);
+    g.drawLine(x + 110, y + height - 28, x + 110, y + 26);
+    g.drawLine(x + 110, y + 26, x + 220, y + 26);
+    g.drawLine(x + 220, y + 26, x + 224, y + 26);
+    g.drawLine(x + 224, y + 26, x + 224, y + 10);
+    g.drawLine(x + 224, y + 10, x + 110, y + 10);
+    g.drawLine(x + 110, y + 10, x + 110, y + 7);
+    g.drawLine(x + 70, y + height - 28, x + 70, y + 26);
+    g.drawLine(x + 70, y + 26, x + 20, y + 26);
+    g.drawLine(x + 20, y + 26, x + 16, y + 26);
+    g.drawLine(x + 16, y + 26, x + 16, y + 10);
+    g.drawLine(x + 16, y + 10, x + 70, y + 10);
+    g.drawLine(x + 70, y + 10, x + 70, y + 7);
+    g.drawLine(x + 210, y + height - 7, x + 210, y + height - 9);
+    g.drawLine(x + 210, y + height - 9, x + 14, y + height - 9);
+    g.drawLine(x + 14, y + height - 9, x + 14, y + 14);
+    g.drawLine(x + 14, y + 14, x + 20, y + 14);
+    g.drawLine(x + 230, y + 7, x + 230, y + 9);
+    g.drawLine(x + 230, y + 9, x + 14, y + 9);
+    g.drawLine(x + 14, y + 9, x + 14, y + height - 28);
+    g.drawLine(x + 14, y + height - 28, x + 20, y + height - 28);
+    g.drawLine(x + 24, y + height - 7, x + 24, y + height - 16);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 16);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + height - 16);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + height - 16);
+    g.drawLine(x + 130, y + height - 7, x + 130, y + height - 16);
+    g.drawLine(x + 170, y + height - 7, x + 170, y + height - 16);
+    g.drawLine(x + 170, y + 7, x + 170, y + 14);
+    g.drawLine(x + 130, y + 7, x + 130, y + 14);
+    g.drawLine(x + 90, y + 7, x + 90, y + 14);
+    g.drawLine(x + 50, y + 7, x + 50, y + 14);
+    g.drawOval(x + 12, y + 12, 4, 4);
+    GraphicsUtil.drawCenteredText(g, "SHIFT", x + 120, y + 20);
+    GraphicsUtil.drawCenteredText(g, "STORE", x + 120, y + height - 22);
     g.setFont(previousFont);
-    for (var pin = 1; pin <= 24; pin++) {
-      if (pin == 12 || pin == 24) {
-        continue;
-      }
-      final var lower = pin <= 12;
-      final var pinX = lower ? x + (pin - 1) * 20 + 10 : x + (24 - pin) * 20 + 10;
-      final var pinY = lower ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
-      final var edge = lower ? bottom : top;
-      if (pin == 2 || pin == 11 || pin == 14 || pin == 23) {
-        final var bubbleY = lower ? edge + 4 : edge - 4;
-        g.drawLine(pinX, pinY, pinX, lower ? bubbleY + 2 : bubbleY - 2);
-        g.drawOval(pinX - 2, bubbleY - 2, 4, 4);
-      } else {
-        g.drawLine(pinX, pinY, pinX, edge);
-      }
-    }
   }
+
+
 
 
 
