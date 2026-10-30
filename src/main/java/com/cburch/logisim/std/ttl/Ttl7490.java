@@ -94,36 +94,65 @@ public class Ttl7490 extends AbstractTtlGate {
         new Ttl7490HdlGenerator());
   }
 
-    public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
+  @Override
+  public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var boxTop = y + 18;
-    final var boxBottom = boxTop + 24;
-    g.drawRect(x + 6, boxTop, 272, 24);
     final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "CNT", x + 142, y + 30);
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 125, y + 12, 10, 10);
+    g.drawRect(x + 105, y + 12, 10, 10);
+    g.drawRect(x + 65, y + 12, 10, 10);
+    g.drawRect(x + 45, y + 12, 10, 10);
+    g.drawLine(x + 130, y + 12, x + 130, y + 7);
+    g.drawLine(x + 110, y + 12, x + 110, y + 7);
+    g.drawLine(x + 70, y + 12, x + 70, y + 7);
+    g.drawLine(x + 50, y + 12, x + 50, y + 7);
+    g.drawLine(x + 45, y + 24, x + 135, y + 24);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 9);
+    g.drawLine(x + 10, y + height - 9, x + 41, y + height - 9);
+    g.drawLine(x + 41, y + height - 9, x + 41, y + 24);
+    g.drawLine(x + 41, y + 24, x + 45, y + 24);
+    g.drawLine(x + 127, y + 24, x + 127, y + 22);
+    g.drawLine(x + 107, y + 24, x + 107, y + 22);
+    g.drawLine(x + 67, y + 24, x + 67, y + 22);
+    g.drawLine(x + 47, y + 24, x + 47, y + 22);
+    g.drawLine(x + 45, y + 25, x + 135, y + 25);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 9);
+    g.drawLine(x + 30, y + height - 9, x + 41, y + height - 9);
+    g.drawLine(x + 41, y + height - 9, x + 41, y + 25);
+    g.drawLine(x + 41, y + 25, x + 45, y + 25);
+    g.drawLine(x + 130, y + 25, x + 130, y + 22);
+    g.drawLine(x + 110, y + 25, x + 110, y + 22);
+    g.drawLine(x + 70, y + 25, x + 70, y + 22);
+    g.drawLine(x + 50, y + 25, x + 50, y + 22);
+    g.drawLine(x + 45, y + 25, x + 135, y + 25);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + height - 9);
+    g.drawLine(x + 50, y + height - 9, x + 41, y + height - 9);
+    g.drawLine(x + 41, y + height - 9, x + 41, y + 25);
+    g.drawLine(x + 41, y + 25, x + 45, y + 25);
+    g.drawLine(x + 133, y + 25, x + 133, y + 22);
+    g.drawLine(x + 113, y + 25, x + 113, y + 22);
+    g.drawLine(x + 73, y + 25, x + 73, y + 22);
+    g.drawLine(x + 53, y + 25, x + 53, y + 22);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + 25);
+    g.drawLine(x + 90, y + 25, x + 127, y + 25);
+    g.drawLine(x + 127, y + 25, x + 127, y + 22);
+    g.drawLine(x + 110, y + height - 7, x + 110, y + 25);
+    g.drawLine(x + 110, y + 25, x + 107, y + 25);
+    g.drawLine(x + 107, y + 25, x + 107, y + 22);
+    g.drawLine(x + 90, y + 7, x + 90, y + 9);
+    g.drawLine(x + 90, y + 9, x + 67, y + 9);
+    g.drawLine(x + 67, y + 9, x + 67, y + 12);
+    GraphicsUtil.drawCenteredText(g, "C", x + 130, y + 17);
+    GraphicsUtil.drawCenteredText(g, "B", x + 110, y + 17);
+    GraphicsUtil.drawCenteredText(g, "A", x + 70, y + 17);
+    GraphicsUtil.drawCenteredText(g, "A", x + 50, y + 17);
     g.setFont(previousFont);
-    for (var pin = 1; pin <= 14; pin++) {
-      if (pin == 7 || pin == 14) {
-        continue;
-      }
-      final var pinX = pin <= 7 ? x + (pin - 1) * 20 + 10 : x + (14 - pin) * 20 + 10;
-      final var pinY =
-          pin <= 7
-              ? y + height - AbstractTtlGate.PIN_HEIGHT
-              : y + AbstractTtlGate.PIN_HEIGHT;
-      final var edge = pin <= 7 ? boxBottom : boxTop;
-      if (false) {
-        final var bubbleY = pin <= 7 ? edge + 4 : edge - 4;
-        g.drawLine(pinX, pinY, pinX, pin <= 7 ? bubbleY + 2 : bubbleY - 2);
-        structureBubble(g, pinX, bubbleY);
-      } else {
-        g.drawLine(pinX, pinY, pinX, edge);
-      }
-    }
   }
+
+
 
   private static TtlRegisterData getStateData(InstanceState state) {
     var data = (TtlRegisterData) state.getData();
