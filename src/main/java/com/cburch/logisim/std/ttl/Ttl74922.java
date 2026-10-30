@@ -10,6 +10,7 @@
 package com.cburch.logisim.std.ttl;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import com.cburch.logisim.util.GraphicsUtil;
 import static com.cburch.logisim.std.Strings.S;
@@ -215,17 +216,66 @@ public class Ttl74922 extends AbstractTtlGate implements TickAware {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 12), (y + 18), 122, 24);
-    GraphicsUtil.drawCenteredText(g, "KEY", (x + 73), (y + 30));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 42));
-    g.drawLine((x + 10), (y + 42), (x + 12), (y + 42));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 42));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
-    g.drawLine((x + 110), (y + 7), (x + 110), (y + 18));
-    structureBubble(g, (x + 110), (y + 14));
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 125, y + 28, 10, 10);
+    g.drawRect(x + 145, y + 28, 10, 10);
+    g.drawRect(x + 165, y + 12, 10, 10);
+    g.drawRect(x + 145, y + 12, 10, 10);
+    g.drawRect(x + 125, y + 12, 10, 10);
+    g.drawRect(x + 85, y + 12, 10, 10);
+    g.drawRect(x + 65, y + 12, 10, 10);
+    g.drawRect(x + 45, y + 12, 10, 10);
+    g.drawRect(x + 25, y + 12, 10, 10);
+    g.drawLine(x + 130, y + height - 22, x + 130, y + height - 7);
+    g.drawLine(x + 150, y + height - 22, x + 150, y + height - 7);
+    g.drawLine(x + 170, y + 12, x + 170, y + 7);
+    g.drawLine(x + 150, y + 12, x + 150, y + 7);
+    g.drawLine(x + 130, y + 12, x + 130, y + 7);
+    g.drawLine(x + 90, y + 12, x + 90, y + 7);
+    g.drawLine(x + 70, y + 12, x + 70, y + 7);
+    g.drawLine(x + 50, y + 12, x + 50, y + 7);
+    g.drawLine(x + 30, y + 12, x + 30, y + 7);
+    g.drawLine(x + 25, y + 25, x + 175, y + 25);
+    g.drawLine(x + 110, y + 7, x + 110, y + 9);
+    g.drawLine(x + 110, y + 9, x + 21, y + 9);
+    g.drawLine(x + 21, y + 9, x + 21, y + 25);
+    g.drawLine(x + 21, y + 25, x + 25, y + 25);
+    g.drawLine(x + 127, y + 25, x + 127, y + 28);
+    g.drawLine(x + 147, y + 25, x + 147, y + 28);
+    g.drawLine(x + 167, y + 25, x + 167, y + 22);
+    g.drawLine(x + 147, y + 25, x + 147, y + 22);
+    g.drawLine(x + 127, y + 25, x + 127, y + 22);
+    g.drawLine(x + 87, y + 25, x + 87, y + 22);
+    g.drawLine(x + 67, y + 25, x + 67, y + 22);
+    g.drawLine(x + 47, y + 25, x + 47, y + 22);
+    g.drawLine(x + 27, y + 25, x + 27, y + 22);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + 25);
+    g.drawLine(x + 10, y + 25, x + 147, y + 25);
+    g.drawLine(x + 147, y + 25, x + 147, y + 22);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + 25);
+    g.drawLine(x + 30, y + 25, x + 167, y + 25);
+    g.drawLine(x + 167, y + 25, x + 167, y + 22);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + height - 19);
+    g.drawLine(x + 50, y + height - 19, x + 147, y + height - 19);
+    g.drawLine(x + 147, y + height - 19, x + 147, y + height - 22);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + height - 19);
+    g.drawLine(x + 70, y + height - 19, x + 127, y + height - 19);
+    g.drawLine(x + 127, y + height - 19, x + 127, y + height - 22);
+    g.drawOval(x + 19, y + 23, 4, 4);
+    GraphicsUtil.drawCenteredText(g, "4", x + 130, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "3", x + 150, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "2", x + 170, y + 17);
+    GraphicsUtil.drawCenteredText(g, "1", x + 150, y + 17);
+    GraphicsUtil.drawCenteredText(g, "V", x + 130, y + 17);
+    GraphicsUtil.drawCenteredText(g, "D", x + 90, y + 17);
+    GraphicsUtil.drawCenteredText(g, "C", x + 70, y + 17);
+    GraphicsUtil.drawCenteredText(g, "B", x + 50, y + 17);
+    GraphicsUtil.drawCenteredText(g, "A", x + 30, y + 17);
+    g.setFont(previousFont);
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
