@@ -143,36 +143,116 @@ public class Ttl74646 extends AbstractTtlGate {
     super(_ID, (byte) 24, new byte[] {}, new byte[] {}, INOUT_PINS, PORT_NAMES, null);
   }
 
-    public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
+  @Override
+  public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var boxTop = y + 18;
-    final var boxBottom = boxTop + 24;
-    g.drawRect(x + 6, boxTop, 472, 24);
-    final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "BUF", x + 242, y + 30);
-    g.setFont(previousFont);
-    for (var pin = 1; pin <= 24; pin++) {
-      if (pin == 12 || pin == 24) {
-        continue;
-      }
-      final var pinX = pin <= 12 ? x + (pin - 1) * 20 + 10 : x + (24 - pin) * 20 + 10;
-      final var pinY =
-          pin <= 12
-              ? y + height - AbstractTtlGate.PIN_HEIGHT
-              : y + AbstractTtlGate.PIN_HEIGHT;
-      final var edge = pin <= 12 ? boxBottom : boxTop;
-      if (pin == 21) {
-        final var bubbleY = pin <= 12 ? edge + 4 : edge - 4;
-        g.drawLine(pinX, pinY, pinX, pin <= 12 ? bubbleY + 2 : bubbleY - 2);
-        structureBubble(g, pinX, bubbleY);
-      } else {
-        g.drawLine(pinX, pinY, pinX, edge);
-      }
-    }
+    g.drawPolygon(new int[] {x + 230, x + 224, x + 236}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 210, x + 204, x + 216}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 190, x + 184, x + 196}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 170, x + 164, x + 176}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 150, x + 144, x + 156}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 130, x + 124, x + 136}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 110, x + 104, x + 116}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 90, x + 84, x + 96}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawPolygon(new int[] {x + 70, x + 64, x + 76}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawLine(x + 230, y + 12, x + 230, y + 7);
+    g.drawLine(x + 210, y + 12, x + 210, y + 7);
+    g.drawLine(x + 190, y + 12, x + 190, y + 7);
+    g.drawLine(x + 170, y + 12, x + 170, y + 7);
+    g.drawLine(x + 150, y + 12, x + 150, y + 7);
+    g.drawLine(x + 130, y + 12, x + 130, y + 7);
+    g.drawLine(x + 110, y + 12, x + 110, y + 7);
+    g.drawLine(x + 90, y + 12, x + 90, y + 7);
+    g.drawLine(x + 70, y + 12, x + 70, y + 7);
+    g.drawLine(x + 65, y + 24, x + 235, y + 24);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 9);
+    g.drawLine(x + 10, y + height - 9, x + 61, y + height - 9);
+    g.drawLine(x + 61, y + height - 9, x + 61, y + 24);
+    g.drawLine(x + 61, y + 24, x + 65, y + 24);
+    g.drawLine(x + 227, y + 24, x + 227, y + 22);
+    g.drawLine(x + 207, y + 24, x + 207, y + 22);
+    g.drawLine(x + 187, y + 24, x + 187, y + 22);
+    g.drawLine(x + 167, y + 24, x + 167, y + 22);
+    g.drawLine(x + 147, y + 24, x + 147, y + 22);
+    g.drawLine(x + 127, y + 24, x + 127, y + 22);
+    g.drawLine(x + 107, y + 24, x + 107, y + 22);
+    g.drawLine(x + 87, y + 24, x + 87, y + 22);
+    g.drawLine(x + 67, y + 24, x + 67, y + 22);
+    g.drawLine(x + 65, y + 24, x + 235, y + 24);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 9);
+    g.drawLine(x + 30, y + height - 9, x + 61, y + height - 9);
+    g.drawLine(x + 61, y + height - 9, x + 61, y + 24);
+    g.drawLine(x + 61, y + 24, x + 65, y + 24);
+    g.drawLine(x + 230, y + 24, x + 230, y + 22);
+    g.drawLine(x + 210, y + 24, x + 210, y + 22);
+    g.drawLine(x + 190, y + 24, x + 190, y + 22);
+    g.drawLine(x + 170, y + 24, x + 170, y + 22);
+    g.drawLine(x + 150, y + 24, x + 150, y + 22);
+    g.drawLine(x + 130, y + 24, x + 130, y + 22);
+    g.drawLine(x + 110, y + 24, x + 110, y + 22);
+    g.drawLine(x + 90, y + 24, x + 90, y + 22);
+    g.drawLine(x + 70, y + 24, x + 70, y + 22);
+    g.drawLine(x + 65, y + 25, x + 235, y + 25);
+    g.drawLine(x + 50, y + 7, x + 50, y + 9);
+    g.drawLine(x + 50, y + 9, x + 61, y + 9);
+    g.drawLine(x + 61, y + 9, x + 61, y + 25);
+    g.drawLine(x + 61, y + 25, x + 65, y + 25);
+    g.drawLine(x + 233, y + 25, x + 233, y + 22);
+    g.drawLine(x + 213, y + 25, x + 213, y + 22);
+    g.drawLine(x + 193, y + 25, x + 193, y + 22);
+    g.drawLine(x + 173, y + 25, x + 173, y + 22);
+    g.drawLine(x + 153, y + 25, x + 153, y + 22);
+    g.drawLine(x + 133, y + 25, x + 133, y + 22);
+    g.drawLine(x + 113, y + 25, x + 113, y + 22);
+    g.drawLine(x + 93, y + 25, x + 93, y + 22);
+    g.drawLine(x + 73, y + 25, x + 73, y + 22);
+    g.drawLine(x + 65, y + 25, x + 235, y + 25);
+    g.drawLine(x + 30, y + 7, x + 30, y + 9);
+    g.drawLine(x + 30, y + 9, x + 61, y + 9);
+    g.drawLine(x + 61, y + 9, x + 61, y + 25);
+    g.drawLine(x + 61, y + 25, x + 65, y + 25);
+    g.drawLine(x + 227, y + 25, x + 227, y + 22);
+    g.drawLine(x + 207, y + 25, x + 207, y + 22);
+    g.drawLine(x + 187, y + 25, x + 187, y + 22);
+    g.drawLine(x + 167, y + 25, x + 167, y + 22);
+    g.drawLine(x + 147, y + 25, x + 147, y + 22);
+    g.drawLine(x + 127, y + 25, x + 127, y + 22);
+    g.drawLine(x + 107, y + 25, x + 107, y + 22);
+    g.drawLine(x + 87, y + 25, x + 87, y + 22);
+    g.drawLine(x + 67, y + 25, x + 67, y + 22);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + 25);
+    g.drawLine(x + 50, y + 25, x + 227, y + 25);
+    g.drawLine(x + 227, y + 25, x + 227, y + 22);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + 25);
+    g.drawLine(x + 70, y + 25, x + 87, y + 25);
+    g.drawLine(x + 87, y + 25, x + 87, y + 22);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + 25);
+    g.drawLine(x + 90, y + 25, x + 107, y + 25);
+    g.drawLine(x + 107, y + 25, x + 107, y + 22);
+    g.drawLine(x + 110, y + height - 7, x + 110, y + 25);
+    g.drawLine(x + 110, y + 25, x + 127, y + 25);
+    g.drawLine(x + 127, y + 25, x + 127, y + 22);
+    g.drawLine(x + 130, y + height - 7, x + 130, y + 25);
+    g.drawLine(x + 130, y + 25, x + 147, y + 25);
+    g.drawLine(x + 147, y + 25, x + 147, y + 22);
+    g.drawLine(x + 150, y + height - 7, x + 150, y + 25);
+    g.drawLine(x + 150, y + 25, x + 167, y + 25);
+    g.drawLine(x + 167, y + 25, x + 167, y + 22);
+    g.drawLine(x + 170, y + height - 7, x + 170, y + 25);
+    g.drawLine(x + 170, y + 25, x + 187, y + 25);
+    g.drawLine(x + 187, y + 25, x + 187, y + 22);
+    g.drawLine(x + 190, y + height - 7, x + 190, y + 25);
+    g.drawLine(x + 190, y + 25, x + 207, y + 25);
+    g.drawLine(x + 207, y + 25, x + 207, y + 22);
+    g.drawLine(x + 210, y + height - 7, x + 210, y + 25);
+    g.drawLine(x + 210, y + 25, x + 227, y + 25);
+    g.drawLine(x + 227, y + 25, x + 227, y + 22);
+    g.drawOval(x + 68, y + 8, 4, 4);
   }
+
+
 
   private static void drawRegisters(Graphics2D gfx, int x, int y, int height, TtlRegisterData data) {
     if (data == null) return;
