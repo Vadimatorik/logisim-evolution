@@ -161,37 +161,163 @@ public class Ttl74593 extends AbstractTtlGate {
     return (byte) ((dsPinNr <= GND) ? dsPinNr - 1 : dsPinNr - 2);
   }
 
-    @Override
+  @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var boxTop = y + 18;
-    final var boxBottom = boxTop + 24;
-    g.drawRect(x + 6, boxTop, 392, 24);
     final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "CNT", x + 202, y + 30);
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 5, y + 28, 10, 10);
+    g.drawRect(x + 25, y + 28, 10, 10);
+    g.drawRect(x + 45, y + 28, 10, 10);
+    g.drawRect(x + 65, y + 28, 10, 10);
+    g.drawRect(x + 85, y + 28, 10, 10);
+    g.drawRect(x + 105, y + 28, 10, 10);
+    g.drawRect(x + 125, y + 28, 10, 10);
+    g.drawRect(x + 145, y + 28, 10, 10);
+    g.drawLine(x + 10, y + height - 22, x + 10, y + height - 7);
+    g.drawLine(x + 30, y + height - 22, x + 30, y + height - 7);
+    g.drawLine(x + 50, y + height - 22, x + 50, y + height - 7);
+    g.drawLine(x + 70, y + height - 22, x + 70, y + height - 7);
+    g.drawLine(x + 90, y + height - 22, x + 90, y + height - 7);
+    g.drawLine(x + 110, y + height - 22, x + 110, y + height - 7);
+    g.drawLine(x + 130, y + height - 22, x + 130, y + height - 7);
+    g.drawLine(x + 150, y + height - 22, x + 150, y + height - 7);
+    g.drawLine(x + 5, y + 24, x + 155, y + 24);
+    g.drawLine(x + 170, y + height - 7, x + 170, y + height - 9);
+    g.drawLine(x + 170, y + height - 9, x + 1, y + height - 9);
+    g.drawLine(x + 1, y + height - 9, x + 1, y + 24);
+    g.drawLine(x + 1, y + 24, x + 5, y + 24);
+    g.drawLine(x + 7, y + 24, x + 7, y + 28);
+    g.drawLine(x + 27, y + 24, x + 27, y + 28);
+    g.drawLine(x + 47, y + 24, x + 47, y + 28);
+    g.drawLine(x + 67, y + 24, x + 67, y + 28);
+    g.drawLine(x + 87, y + 24, x + 87, y + 28);
+    g.drawLine(x + 107, y + 24, x + 107, y + 28);
+    g.drawLine(x + 127, y + 24, x + 127, y + 28);
+    g.drawLine(x + 147, y + 24, x + 147, y + 28);
+    g.drawLine(x + 5, y + 24, x + 155, y + 24);
+    g.drawLine(x + 170, y + 7, x + 170, y + 9);
+    g.drawLine(x + 170, y + 9, x + 1, y + 9);
+    g.drawLine(x + 1, y + 9, x + 1, y + 24);
+    g.drawLine(x + 1, y + 24, x + 5, y + 24);
+    g.drawLine(x + 10, y + 24, x + 10, y + 28);
+    g.drawLine(x + 30, y + 24, x + 30, y + 28);
+    g.drawLine(x + 50, y + 24, x + 50, y + 28);
+    g.drawLine(x + 70, y + 24, x + 70, y + 28);
+    g.drawLine(x + 90, y + 24, x + 90, y + 28);
+    g.drawLine(x + 110, y + 24, x + 110, y + 28);
+    g.drawLine(x + 130, y + 24, x + 130, y + 28);
+    g.drawLine(x + 150, y + 24, x + 150, y + 28);
+    g.drawLine(x + 5, y + 24, x + 155, y + 24);
+    g.drawLine(x + 150, y + 7, x + 150, y + 9);
+    g.drawLine(x + 150, y + 9, x + 1, y + 9);
+    g.drawLine(x + 1, y + 9, x + 1, y + 24);
+    g.drawLine(x + 1, y + 24, x + 5, y + 24);
+    g.drawLine(x + 13, y + 24, x + 13, y + 28);
+    g.drawLine(x + 33, y + 24, x + 33, y + 28);
+    g.drawLine(x + 53, y + 24, x + 53, y + 28);
+    g.drawLine(x + 73, y + 24, x + 73, y + 28);
+    g.drawLine(x + 93, y + 24, x + 93, y + 28);
+    g.drawLine(x + 113, y + 24, x + 113, y + 28);
+    g.drawLine(x + 133, y + 24, x + 133, y + 28);
+    g.drawLine(x + 153, y + 24, x + 153, y + 28);
+    g.drawLine(x + 5, y + 24, x + 155, y + 24);
+    g.drawLine(x + 130, y + 7, x + 130, y + 9);
+    g.drawLine(x + 130, y + 9, x + 1, y + 9);
+    g.drawLine(x + 1, y + 9, x + 1, y + 24);
+    g.drawLine(x + 1, y + 24, x + 5, y + 24);
+    g.drawLine(x + 7, y + 24, x + 7, y + 28);
+    g.drawLine(x + 27, y + 24, x + 27, y + 28);
+    g.drawLine(x + 47, y + 24, x + 47, y + 28);
+    g.drawLine(x + 67, y + 24, x + 67, y + 28);
+    g.drawLine(x + 87, y + 24, x + 87, y + 28);
+    g.drawLine(x + 107, y + 24, x + 107, y + 28);
+    g.drawLine(x + 127, y + 24, x + 127, y + 28);
+    g.drawLine(x + 147, y + 24, x + 147, y + 28);
+    g.drawLine(x + 5, y + 25, x + 155, y + 25);
+    g.drawLine(x + 110, y + 7, x + 110, y + 9);
+    g.drawLine(x + 110, y + 9, x + 1, y + 9);
+    g.drawLine(x + 1, y + 9, x + 1, y + 25);
+    g.drawLine(x + 1, y + 25, x + 5, y + 25);
+    g.drawLine(x + 10, y + 25, x + 10, y + 28);
+    g.drawLine(x + 30, y + 25, x + 30, y + 28);
+    g.drawLine(x + 50, y + 25, x + 50, y + 28);
+    g.drawLine(x + 70, y + 25, x + 70, y + 28);
+    g.drawLine(x + 90, y + 25, x + 90, y + 28);
+    g.drawLine(x + 110, y + 25, x + 110, y + 28);
+    g.drawLine(x + 130, y + 25, x + 130, y + 28);
+    g.drawLine(x + 150, y + 25, x + 150, y + 28);
+    g.drawLine(x + 5, y + 25, x + 155, y + 25);
+    g.drawLine(x + 90, y + 7, x + 90, y + 9);
+    g.drawLine(x + 90, y + 9, x + 1, y + 9);
+    g.drawLine(x + 1, y + 9, x + 1, y + 25);
+    g.drawLine(x + 1, y + 25, x + 5, y + 25);
+    g.drawLine(x + 13, y + 25, x + 13, y + 28);
+    g.drawLine(x + 33, y + 25, x + 33, y + 28);
+    g.drawLine(x + 53, y + 25, x + 53, y + 28);
+    g.drawLine(x + 73, y + 25, x + 73, y + 28);
+    g.drawLine(x + 93, y + 25, x + 93, y + 28);
+    g.drawLine(x + 113, y + 25, x + 113, y + 28);
+    g.drawLine(x + 133, y + 25, x + 133, y + 28);
+    g.drawLine(x + 153, y + 25, x + 153, y + 28);
+    g.drawLine(x + 5, y + 25, x + 155, y + 25);
+    g.drawLine(x + 70, y + 7, x + 70, y + 9);
+    g.drawLine(x + 70, y + 9, x + 1, y + 9);
+    g.drawLine(x + 1, y + 9, x + 1, y + 25);
+    g.drawLine(x + 1, y + 25, x + 5, y + 25);
+    g.drawLine(x + 7, y + 25, x + 7, y + 28);
+    g.drawLine(x + 27, y + 25, x + 27, y + 28);
+    g.drawLine(x + 47, y + 25, x + 47, y + 28);
+    g.drawLine(x + 67, y + 25, x + 67, y + 28);
+    g.drawLine(x + 87, y + 25, x + 87, y + 28);
+    g.drawLine(x + 107, y + 25, x + 107, y + 28);
+    g.drawLine(x + 127, y + 25, x + 127, y + 28);
+    g.drawLine(x + 147, y + 25, x + 147, y + 28);
+    g.drawLine(x + 5, y + 25, x + 155, y + 25);
+    g.drawLine(x + 50, y + 7, x + 50, y + 9);
+    g.drawLine(x + 50, y + 9, x + 1, y + 9);
+    g.drawLine(x + 1, y + 9, x + 1, y + 25);
+    g.drawLine(x + 1, y + 25, x + 5, y + 25);
+    g.drawLine(x + 10, y + 25, x + 10, y + 28);
+    g.drawLine(x + 30, y + 25, x + 30, y + 28);
+    g.drawLine(x + 50, y + 25, x + 50, y + 28);
+    g.drawLine(x + 70, y + 25, x + 70, y + 28);
+    g.drawLine(x + 90, y + 25, x + 90, y + 28);
+    g.drawLine(x + 110, y + 25, x + 110, y + 28);
+    g.drawLine(x + 130, y + 25, x + 130, y + 28);
+    g.drawLine(x + 150, y + 25, x + 150, y + 28);
+    g.drawLine(x + 5, y + 25, x + 155, y + 25);
+    g.drawLine(x + 30, y + 7, x + 30, y + 9);
+    g.drawLine(x + 30, y + 9, x + 1, y + 9);
+    g.drawLine(x + 1, y + 9, x + 1, y + 25);
+    g.drawLine(x + 1, y + 25, x + 5, y + 25);
+    g.drawLine(x + 13, y + 25, x + 13, y + 28);
+    g.drawLine(x + 33, y + 25, x + 33, y + 28);
+    g.drawLine(x + 53, y + 25, x + 53, y + 28);
+    g.drawLine(x + 73, y + 25, x + 73, y + 28);
+    g.drawLine(x + 93, y + 25, x + 93, y + 28);
+    g.drawLine(x + 113, y + 25, x + 113, y + 28);
+    g.drawLine(x + 133, y + 25, x + 133, y + 28);
+    g.drawLine(x + 153, y + 25, x + 153, y + 28);
+    g.drawOval(x + -1, y + 22, 4, 4);
+    g.drawOval(x + -1, y + 22, 4, 4);
+    g.drawOval(x + -1, y + 22, 4, 4);
+    g.drawOval(x + -1, y + 23, 4, 4);
+    g.drawOval(x + -1, y + 23, 4, 4);
+    GraphicsUtil.drawCenteredText(g, "A", x + 10, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "B", x + 30, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "C", x + 50, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "D", x + 70, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "E", x + 90, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "F", x + 110, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "G", x + 130, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "H", x + 150, y + height - 27);
     g.setFont(previousFont);
-    for (var pin = 1; pin <= 20; pin++) {
-      if (pin == GND || pin == VCC) {
-        continue;
-      }
-      final var pinX = pin <= 10 ? x + (pin - 1) * 20 + 10 : x + (20 - pin) * 20 + 10;
-      final var pinY =
-          pin <= 10
-              ? y + height - AbstractTtlGate.PIN_HEIGHT
-              : y + AbstractTtlGate.PIN_HEIGHT;
-      final var edge = pin <= 10 ? boxBottom : boxTop;
-      if (pin == NCLOAD || pin == NRCO || pin == NCCLR || pin == NCCKEN || pin == NRCKEN || pin == NG) {
-        final var bubbleY = pin <= 10 ? edge + 4 : edge - 4;
-        g.drawLine(pinX, pinY, pinX, pin <= 10 ? bubbleY + 2 : bubbleY - 2);
-        structureBubble(g, pinX, bubbleY);
-      } else {
-        g.drawLine(pinX, pinY, pinX, edge);
-      }
-    }
   }
+
+
 
 
   @Override
