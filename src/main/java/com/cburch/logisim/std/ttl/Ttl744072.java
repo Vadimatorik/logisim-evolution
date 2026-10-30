@@ -60,29 +60,42 @@ public class Ttl744072 extends AbstractTtlGate {
     super(_ID, PIN_COUNT, OUTPUT_PINS, UNUSED_PINS, PORT_NAMES, new Ttl744072HdlGenerator());
   }
 
-    @Override
+  @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var bodyFont = g.getFont();
-    g.setFont(bodyFont.deriveFont(9f));
-    g.drawRect((x + 12), (y + 18), 122, 24);
-    GraphicsUtil.drawCenteredText(g, "BUF", (x + 73), (y + 30));
-    g.setFont(bodyFont);
-    final var top = y + PIN_HEIGHT;
-    final var bottom = y + height - PIN_HEIGHT;
-    g.drawLine((x + 10), bottom, (x + 10), (y + 42));
-    g.drawLine((x + 30), bottom, (x + 30), (y + 42));
-    g.drawLine((x + 50), bottom, (x + 50), (y + 42));
-    g.drawLine((x + 70), bottom, (x + 70), (y + 42));
-    g.drawLine((x + 90), bottom, (x + 90), (y + 42));
-    g.drawLine((x + 110), top, (x + 110), (y + 18));
-    g.drawLine((x + 90), top, (x + 90), (y + 18));
-    g.drawLine((x + 70), top, (x + 70), (y + 18));
-    g.drawLine((x + 50), top, (x + 50), (y + 18));
-    g.drawLine((x + 30), top, (x + 30), (y + 18));
+    g.drawPolygon(new int[] {x + 10, x + 4, x + 16}, new int[] {y + height - 22, y + 28, y + 28}, 3);
+    g.drawPolygon(new int[] {x + 30, x + 24, x + 36}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawLine(x + 10, y + height - 22, x + 10, y + height - 7);
+    g.drawLine(x + 30, y + 12, x + 30, y + 7);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 19);
+    g.drawLine(x + 30, y + height - 19, x + 7, y + height - 19);
+    g.drawLine(x + 7, y + height - 19, x + 7, y + height - 22);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + height - 16);
+    g.drawLine(x + 50, y + height - 16, x + 9, y + height - 16);
+    g.drawLine(x + 9, y + height - 16, x + 9, y + height - 22);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + height - 13);
+    g.drawLine(x + 70, y + height - 13, x + 11, y + height - 13);
+    g.drawLine(x + 11, y + height - 13, x + 11, y + height - 22);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + height - 10);
+    g.drawLine(x + 90, y + height - 10, x + 7, y + height - 10);
+    g.drawLine(x + 7, y + height - 10, x + 7, y + height - 22);
+    g.drawLine(x + 110, y + 7, x + 110, y + 9);
+    g.drawLine(x + 110, y + 9, x + 27, y + 9);
+    g.drawLine(x + 27, y + 9, x + 27, y + 12);
+    g.drawLine(x + 90, y + 7, x + 90, y + 6);
+    g.drawLine(x + 90, y + 6, x + 29, y + 6);
+    g.drawLine(x + 29, y + 6, x + 29, y + 12);
+    g.drawLine(x + 70, y + 7, x + 70, y + 3);
+    g.drawLine(x + 70, y + 3, x + 31, y + 3);
+    g.drawLine(x + 31, y + 3, x + 31, y + 12);
+    g.drawLine(x + 50, y + 7, x + 50, y + 9);
+    g.drawLine(x + 50, y + 9, x + 27, y + 9);
+    g.drawLine(x + 27, y + 9, x + 27, y + 12);
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
