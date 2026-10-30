@@ -10,6 +10,7 @@
 package com.cburch.logisim.std.ttl;
 
 import com.cburch.logisim.data.Value;
+import java.awt.Color;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.util.GraphicsUtil;
@@ -84,26 +85,24 @@ public class Ttl741G125 extends AbstractTtlGate {
 
   @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
-    super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    final var top = y + 22;
-    final var bottom = y + height - 22;
-    final var left = x + 8;
-    final var right = x + 42;
-    g.drawRect(left, top, right - left, bottom - top);
-    final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "BUF", x + 18, (top + bottom) / 2);
-    g.setFont(previousFont);
-    // nOE is pin 1. The bubble sits outside the rectangle.
-    final var oeX = x + 10;
-    g.drawLine(oeX, y + height - PIN_HEIGHT, oeX, bottom + 6);
-    g.drawOval(oeX - 2, bottom + 2, 4, 4);
-    // A (pin 2) and Y (pin 4) share an x on this five-pin body, so each lead stops on the near edge.
-    final var dataX = x + 30;
-    g.drawLine(dataX, y + height - PIN_HEIGHT, dataX, bottom);
-    g.drawLine(dataX, y + PIN_HEIGHT, dataX, top);
+    super.paintBase(painter, false, false);
+    g.setColor(Color.BLACK);
+    g.drawPolygon(new int[] {x + 30, x + 24, x + 36}, new int[] {y + 12, y + 22, y + 22}, 3);
+    g.drawLine(x + 30, y + 12, x + 30, y + 7);
+    g.drawLine(x + 25, y + 25, x + 35, y + 25);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 9);
+    g.drawLine(x + 10, y + height - 9, x + 21, y + height - 9);
+    g.drawLine(x + 21, y + height - 9, x + 21, y + 25);
+    g.drawLine(x + 21, y + 25, x + 25, y + 25);
+    g.drawLine(x + 27, y + 25, x + 27, y + 22);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + 25);
+    g.drawLine(x + 30, y + 25, x + 27, y + 25);
+    g.drawLine(x + 27, y + 25, x + 27, y + 22);
+    g.drawOval(x + 19, y + 23, 4, 4);
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
