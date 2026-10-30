@@ -133,30 +133,63 @@ public class Ttl74150 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var top = y + 18;
-    final var bottom = y + 42;
-    g.drawRect(x + 6, top, 228, bottom - top);
     final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "MUX", x + 120, y + 30);
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 114, y + 16, 12, 28);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + 19);
+    g.drawLine(x + 10, y + 19, x + 114, y + 19);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + 21);
+    g.drawLine(x + 30, y + 21, x + 114, y + 21);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + 23);
+    g.drawLine(x + 50, y + 23, x + 114, y + 23);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + 25);
+    g.drawLine(x + 70, y + 25, x + 114, y + 25);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + 27);
+    g.drawLine(x + 90, y + 27, x + 114, y + 27);
+    g.drawLine(x + 110, y + height - 7, x + 110, y + 29);
+    g.drawLine(x + 110, y + 29, x + 114, y + 29);
+    g.drawLine(x + 110, y + 7, x + 110, y + height - 29);
+    g.drawLine(x + 110, y + height - 29, x + 114, y + height - 29);
+    g.drawLine(x + 90, y + 7, x + 90, y + height - 27);
+    g.drawLine(x + 90, y + height - 27, x + 114, y + height - 27);
+    g.drawLine(x + 70, y + 7, x + 70, y + height - 25);
+    g.drawLine(x + 70, y + height - 25, x + 114, y + height - 25);
+    g.drawLine(x + 50, y + 7, x + 50, y + height - 23);
+    g.drawLine(x + 50, y + height - 23, x + 114, y + height - 23);
+    g.drawLine(x + 30, y + 7, x + 30, y + height - 21);
+    g.drawLine(x + 30, y + height - 21, x + 114, y + height - 21);
+    g.drawLine(x + 130, y + height - 7, x + 130, y + 19);
+    g.drawLine(x + 130, y + 19, x + 126, y + 19);
+    g.drawLine(x + 150, y + height - 7, x + 150, y + 23);
+    g.drawLine(x + 150, y + 23, x + 126, y + 23);
+    g.drawLine(x + 170, y + 7, x + 170, y + 27);
+    g.drawLine(x + 170, y + 27, x + 126, y + 27);
+    g.drawLine(x + 150, y + 7, x + 150, y + height - 28);
+    g.drawLine(x + 150, y + height - 28, x + 126, y + height - 28);
+    g.drawLine(x + 130, y + 7, x + 130, y + height - 24);
+    g.drawLine(x + 130, y + height - 24, x + 126, y + height - 24);
+    g.drawLine(x + 126, y + height - 30, x + 190, y + height - 30);
+    g.drawLine(x + 190, y + height - 30, x + 190, y + height - 7);
+    g.drawLine(x + 170, y + height - 7, x + 170, y + 13);
+    g.drawLine(x + 170, y + 13, x + 118, y + 13);
+    g.drawLine(x + 118, y + 13, x + 118, y + 16);
+    g.drawLine(x + 210, y + height - 7, x + 210, y + 13);
+    g.drawLine(x + 210, y + 13, x + 121, y + 13);
+    g.drawLine(x + 121, y + 13, x + 121, y + 16);
+    g.drawLine(x + 230, y + 7, x + 230, y + 13);
+    g.drawLine(x + 230, y + 13, x + 124, y + 13);
+    g.drawLine(x + 124, y + 13, x + 124, y + 16);
+    g.drawLine(x + 210, y + 7, x + 210, y + 13);
+    g.drawLine(x + 210, y + 13, x + 127, y + 13);
+    g.drawLine(x + 127, y + 13, x + 127, y + 16);
+    g.drawLine(x + 190, y + 7, x + 190, y + 13);
+    g.drawLine(x + 190, y + 13, x + 118, y + 13);
+    g.drawLine(x + 118, y + 13, x + 118, y + 16);
+    GraphicsUtil.drawCenteredText(g, "M", x + 120, y + height - 30);
     g.setFont(previousFont);
-    for (var pin = 1; pin <= 24; pin++) {
-      if (pin == GND || pin == 24) {
-        continue;
-      }
-      final var pinX = pin <= 12 ? x + (pin - 1) * 20 + 10 : x + (24 - pin) * 20 + 10;
-      final var pinY = pin <= 12 ? y + height - AbstractTtlGate.PIN_HEIGHT : y + AbstractTtlGate.PIN_HEIGHT;
-      final var edge = pin <= 12 ? bottom : top;
-      if (pin == G || pin == W) {
-        final var bubbleY = pin <= 12 ? edge + 4 : edge - 4;
-        final var stop = pin <= 12 ? bubbleY + 2 : bubbleY - 2;
-        g.drawLine(pinX, pinY, pinX, stop);
-        structureBubble(g, pinX, bubbleY);
-      } else {
-        g.drawLine(pinX, pinY, pinX, edge);
-      }
-    }
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
