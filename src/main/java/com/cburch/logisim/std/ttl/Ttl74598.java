@@ -192,36 +192,61 @@ public class Ttl74598 extends AbstractTtlGate {
     driveOutputs(state, data.shift, state.getPortValue(pinNrToPortNr(OE)));
   }
 
-    public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
+  @Override
+  public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var boxTop = y + 18;
-    final var boxBottom = boxTop + 24;
-    g.drawRect(x + 6, boxTop, 392, 24);
     final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "REG", x + 202, y + 30);
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 94, y + 16, 12, 28);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + 19);
+    g.drawLine(x + 10, y + 19, x + 94, y + 19);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + 21);
+    g.drawLine(x + 30, y + 21, x + 94, y + 21);
+    g.drawLine(x + 50, y + height - 7, x + 50, y + 24);
+    g.drawLine(x + 50, y + 24, x + 94, y + 24);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + 27);
+    g.drawLine(x + 70, y + 27, x + 94, y + 27);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + height - 30);
+    g.drawLine(x + 90, y + height - 30, x + 94, y + height - 30);
+    g.drawLine(x + 70, y + 7, x + 70, y + height - 28);
+    g.drawLine(x + 70, y + height - 28, x + 94, y + height - 28);
+    g.drawLine(x + 50, y + 7, x + 50, y + height - 25);
+    g.drawLine(x + 50, y + height - 25, x + 94, y + height - 25);
+    g.drawLine(x + 30, y + 7, x + 30, y + height - 22);
+    g.drawLine(x + 30, y + height - 22, x + 94, y + height - 22);
+    g.drawLine(x + 110, y + height - 7, x + 110, y + 19);
+    g.drawLine(x + 110, y + 19, x + 106, y + 19);
+    g.drawLine(x + 130, y + height - 7, x + 130, y + 22);
+    g.drawLine(x + 130, y + 22, x + 106, y + 22);
+    g.drawLine(x + 150, y + height - 7, x + 150, y + 26);
+    g.drawLine(x + 150, y + 26, x + 106, y + 26);
+    g.drawLine(x + 150, y + 7, x + 150, y + height - 30);
+    g.drawLine(x + 150, y + height - 30, x + 106, y + height - 30);
+    g.drawLine(x + 130, y + 7, x + 130, y + height - 27);
+    g.drawLine(x + 130, y + height - 27, x + 106, y + height - 27);
+    g.drawLine(x + 110, y + 7, x + 110, y + height - 23);
+    g.drawLine(x + 110, y + height - 23, x + 106, y + height - 23);
+    g.drawLine(x + 106, y + height - 30, x + 190, y + height - 30);
+    g.drawLine(x + 190, y + height - 30, x + 190, y + 7);
+    g.drawLine(x + 170, y + height - 7, x + 170, y + 13);
+    g.drawLine(x + 170, y + 13, x + 98, y + 13);
+    g.drawLine(x + 98, y + 13, x + 98, y + 16);
+    g.drawLine(x + 170, y + 7, x + 170, y + 13);
+    g.drawLine(x + 170, y + 13, x + 101, y + 13);
+    g.drawLine(x + 101, y + 13, x + 101, y + 16);
+    g.drawLine(x + 90, y + 7, x + 90, y + 13);
+    g.drawLine(x + 90, y + 13, x + 104, y + 13);
+    g.drawLine(x + 104, y + 13, x + 104, y + 16);
+    g.drawOval(x + 96, y + 12, 4, 4);
+    g.drawOval(x + 99, y + 12, 4, 4);
+    g.drawOval(x + 102, y + 12, 4, 4);
+    GraphicsUtil.drawCenteredText(g, "F", x + 100, y + height - 30);
     g.setFont(previousFont);
-    for (var pin = 1; pin <= 20; pin++) {
-      if (pin == 10 || pin == 20) {
-        continue;
-      }
-      final var pinX = pin <= 10 ? x + (pin - 1) * 20 + 10 : x + (20 - pin) * 20 + 10;
-      final var pinY =
-          pin <= 10
-              ? y + height - AbstractTtlGate.PIN_HEIGHT
-              : y + AbstractTtlGate.PIN_HEIGHT;
-      final var edge = pin <= 10 ? boxBottom : boxTop;
-      if (pin == 9 || pin == 12 || pin == 14 || pin == 16) {
-        final var bubbleY = pin <= 10 ? edge + 4 : edge - 4;
-        g.drawLine(pinX, pinY, pinX, pin <= 10 ? bubbleY + 2 : bubbleY - 2);
-        structureBubble(g, pinX, bubbleY);
-      } else {
-        g.drawLine(pinX, pinY, pinX, edge);
-      }
-    }
   }
+
+
 
   @Override
   public boolean checkForGatedClocks(netlistComponent comp) {
