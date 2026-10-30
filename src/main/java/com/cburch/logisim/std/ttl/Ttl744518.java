@@ -18,6 +18,7 @@ import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.util.GraphicsUtil;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -96,37 +97,58 @@ public class Ttl744518 extends AbstractTtlGate {
     super(_ID, (byte) 16, OUTPUT_PORTS, PORT_NAMES, new Ttl744518HdlGenerator());
   }
 
-    @Override
+  @Override
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var bodyFont = g.getFont();
-    g.setFont(bodyFont.deriveFont(9f));
-    g.drawRect((x + 12), (y + 18), 142, 24);
-    GraphicsUtil.drawCenteredText(g, "CNT", (x + 83), (y + 30));
-    g.setFont(bodyFont);
-    final var top = y + PIN_HEIGHT;
-    final var bottom = y + height - PIN_HEIGHT;
-    g.drawLine((x + 10), bottom, (x + 10), (y + 42));
-    g.drawLine((x + 30), bottom, (x + 30), (y + 42));
-    g.drawLine((x + 50), bottom, (x + 50), (y + 42));
-    g.drawLine((x + 70), bottom, (x + 70), (y + 42));
-    g.drawLine((x + 90), bottom, (x + 90), (y + 42));
-    g.drawLine((x + 110), bottom, (x + 110), (y + 42));
-    structureBubble(g, (x + 130), (y + 42));
-    g.drawLine((x + 130), bottom, (x + 130), (y + 44));
-    g.drawLine((x + 150), bottom, (x + 150), (y + 42));
-    g.drawLine((x + 150), top, (x + 150), (y + 18));
-    g.drawLine((x + 130), top, (x + 130), (y + 18));
-    g.drawLine((x + 110), top, (x + 110), (y + 18));
-    g.drawLine((x + 90), top, (x + 90), (y + 18));
-    g.drawLine((x + 70), top, (x + 70), (y + 18));
-    structureBubble(g, (x + 50), (y + 18));
-    g.drawLine((x + 50), top, (x + 50), (y + 16));
-    g.drawLine((x + 30), top, (x + 30), (y + 18));
-    g.drawLine((x + 10), top, (x + 10), (y + 18));
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 20, y + 14, 120, 12);
+    g.drawRect(x + 20, y + height - 28, 120, 12);
+    g.drawLine(x + 80, y + 26, x + 80, y + height - 28);
+    g.drawLine(x + 50, y + height - 16, x + 50, y + height - 7);
+    g.drawLine(x + 70, y + height - 16, x + 70, y + height - 7);
+    g.drawLine(x + 90, y + height - 16, x + 90, y + height - 7);
+    g.drawLine(x + 110, y + height - 16, x + 110, y + height - 7);
+    g.drawLine(x + 110, y + height - 28, x + 110, y + 26);
+    g.drawLine(x + 110, y + 26, x + 140, y + 26);
+    g.drawLine(x + 140, y + 26, x + 144, y + 26);
+    g.drawLine(x + 144, y + 26, x + 144, y + 10);
+    g.drawLine(x + 144, y + 10, x + 110, y + 10);
+    g.drawLine(x + 110, y + 10, x + 110, y + 7);
+    g.drawLine(x + 90, y + height - 28, x + 90, y + 26);
+    g.drawLine(x + 90, y + 26, x + 20, y + 26);
+    g.drawLine(x + 20, y + 26, x + 16, y + 26);
+    g.drawLine(x + 16, y + 26, x + 16, y + 10);
+    g.drawLine(x + 16, y + 10, x + 90, y + 10);
+    g.drawLine(x + 90, y + 10, x + 90, y + 7);
+    g.drawLine(x + 70, y + height - 28, x + 70, y + 26);
+    g.drawLine(x + 70, y + 26, x + 140, y + 26);
+    g.drawLine(x + 140, y + 26, x + 144, y + 26);
+    g.drawLine(x + 144, y + 26, x + 144, y + 10);
+    g.drawLine(x + 144, y + 10, x + 70, y + 10);
+    g.drawLine(x + 70, y + 10, x + 70, y + 7);
+    g.drawLine(x + 50, y + height - 28, x + 50, y + 26);
+    g.drawLine(x + 50, y + 26, x + 20, y + 26);
+    g.drawLine(x + 20, y + 26, x + 16, y + 26);
+    g.drawLine(x + 16, y + 26, x + 16, y + 10);
+    g.drawLine(x + 16, y + 10, x + 50, y + 10);
+    g.drawLine(x + 50, y + 10, x + 50, y + 7);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 9);
+    g.drawLine(x + 10, y + height - 9, x + 14, y + height - 9);
+    g.drawLine(x + 14, y + height - 9, x + 14, y + 14);
+    g.drawLine(x + 14, y + 14, x + 20, y + 14);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 9);
+    g.drawLine(x + 30, y + height - 9, x + 14, y + height - 9);
+    g.drawLine(x + 14, y + height - 9, x + 14, y + height - 28);
+    g.drawLine(x + 14, y + height - 28, x + 20, y + height - 28);
+    GraphicsUtil.drawCenteredText(g, "SHIFT", x + 80, y + 20);
+    GraphicsUtil.drawCenteredText(g, "STORE", x + 80, y + height - 22);
+    g.setFont(previousFont);
   }
+
+
 
   private static void drawNibble(Graphics2D gfx, int originX, int y, int height, Value word) {
     for (var bit = 0; bit < BITS; bit++) {
