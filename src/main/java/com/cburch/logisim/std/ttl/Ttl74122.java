@@ -144,22 +144,32 @@ public class Ttl74122 extends AbstractTtlGate implements TickAware {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    g.drawRect((x + 12), (y + 18), 116, 24);
     final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 9));
-    GraphicsUtil.drawCenteredText(g, "1SHOT", (x + 60), (y + 26));
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 105, y + 28, 10, 10);
+    g.drawRect(x + 125, y + 12, 10, 10);
+    g.drawLine(x + 110, y + height - 22, x + 110, y + height - 7);
+    g.drawLine(x + 130, y + 12, x + 130, y + 7);
+    g.drawLine(x + 105, y + 25, x + 135, y + 25);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + height - 9);
+    g.drawLine(x + 90, y + height - 9, x + 101, y + height - 9);
+    g.drawLine(x + 101, y + height - 9, x + 101, y + 25);
+    g.drawLine(x + 101, y + 25, x + 105, y + 25);
+    g.drawLine(x + 107, y + 25, x + 107, y + 28);
+    g.drawLine(x + 127, y + 25, x + 127, y + 22);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 19);
+    g.drawLine(x + 10, y + height - 19, x + 107, y + height - 19);
+    g.drawLine(x + 107, y + height - 19, x + 107, y + height - 22);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + 25);
+    g.drawLine(x + 30, y + 25, x + 127, y + 25);
+    g.drawLine(x + 127, y + 25, x + 127, y + 22);
+    g.drawOval(x + 108, y + height - 22, 4, 4);
+    g.drawOval(x + 99, y + 23, 4, 4);
+    GraphicsUtil.drawCenteredText(g, "Q", x + 130, y + 17);
     g.setFont(previousFont);
-    drawEdge(g, x + 110, y + height - 7, y + 42, true);
-    g.drawLine((x + 130), (y + 7), (x + 130), (y + 18));
-    drawEdge(g, x + 16, y + height - 7, y + 42, true);
-    drawEdge(g, x + 30, y + height - 7, y + 42, true);
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 42));
-    g.drawLine((x + 70), (y + height - 7), (x + 70), (y + 42));
-    drawEdge(g, x + 90, y + height - 7, y + 42, true);
-    g.drawLine((x + 90), (y + 7), (x + 90), (y + 18));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 18));
-    drawTiming((Graphics2D) g, painter, x, y, height);
   }
+
+
 
   @Override
   public void propagateTtl(InstanceState state) {
