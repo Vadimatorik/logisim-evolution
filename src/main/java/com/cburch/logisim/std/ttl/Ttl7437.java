@@ -10,6 +10,7 @@
 package com.cburch.logisim.std.ttl;
 import java.awt.Color;
 import com.cburch.logisim.util.GraphicsUtil;
+import java.awt.Font;
 import com.cburch.logisim.instance.InstancePainter;
 
 /**
@@ -51,24 +52,46 @@ public class Ttl7437 extends Ttl7400 {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var bodyFont = g.getFont();
-    g.setFont(bodyFont.deriveFont(9f));
-    g.drawRect((x + 12), (y + 18), 122, 24);
-    GraphicsUtil.drawCenteredText(g, "BUF", (x + 73), (y + 30));
-    g.setFont(bodyFont);
-    final var top = y + PIN_HEIGHT;
-    final var bottom = y + height - PIN_HEIGHT;
-    g.drawLine((x + 10), bottom, (x + 10), (y + 42));
-    g.drawLine((x + 30), bottom, (x + 30), (y + 42));
-    g.drawLine((x + 50), bottom, (x + 50), (y + 42));
-    g.drawLine((x + 70), bottom, (x + 70), (y + 42));
-    g.drawLine((x + 90), bottom, (x + 90), (y + 42));
-    g.drawLine((x + 110), bottom, (x + 110), (y + 42));
-    g.drawLine((x + 130), top, (x + 130), (y + 18));
-    g.drawLine((x + 110), top, (x + 110), (y + 18));
-    g.drawLine((x + 90), top, (x + 90), (y + 18));
-    g.drawLine((x + 70), top, (x + 70), (y + 18));
-    g.drawLine((x + 50), top, (x + 50), (y + 18));
-    g.drawLine((x + 30), top, (x + 30), (y + 18));
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
+    g.drawRect(x + 45, y + 28, 10, 10);
+    g.drawRect(x + 105, y + 28, 10, 10);
+    g.drawRect(x + 125, y + 12, 10, 10);
+    g.drawRect(x + 65, y + 12, 10, 10);
+    g.drawLine(x + 50, y + height - 22, x + 50, y + height - 7);
+    g.drawLine(x + 110, y + height - 22, x + 110, y + height - 7);
+    g.drawLine(x + 130, y + 12, x + 130, y + 7);
+    g.drawLine(x + 70, y + 12, x + 70, y + 7);
+    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 19);
+    g.drawLine(x + 10, y + height - 19, x + 47, y + height - 19);
+    g.drawLine(x + 47, y + height - 19, x + 47, y + height - 22);
+    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 16);
+    g.drawLine(x + 30, y + height - 16, x + 49, y + height - 16);
+    g.drawLine(x + 49, y + height - 16, x + 49, y + height - 22);
+    g.drawLine(x + 70, y + height - 7, x + 70, y + height - 19);
+    g.drawLine(x + 70, y + height - 19, x + 107, y + height - 19);
+    g.drawLine(x + 107, y + height - 19, x + 107, y + height - 22);
+    g.drawLine(x + 90, y + height - 7, x + 90, y + height - 16);
+    g.drawLine(x + 90, y + height - 16, x + 109, y + height - 16);
+    g.drawLine(x + 109, y + height - 16, x + 109, y + height - 22);
+    g.drawLine(x + 110, y + 7, x + 110, y + 9);
+    g.drawLine(x + 110, y + 9, x + 127, y + 9);
+    g.drawLine(x + 127, y + 9, x + 127, y + 12);
+    g.drawLine(x + 90, y + 7, x + 90, y + 6);
+    g.drawLine(x + 90, y + 6, x + 129, y + 6);
+    g.drawLine(x + 129, y + 6, x + 129, y + 12);
+    g.drawLine(x + 50, y + 7, x + 50, y + 9);
+    g.drawLine(x + 50, y + 9, x + 67, y + 9);
+    g.drawLine(x + 67, y + 9, x + 67, y + 12);
+    g.drawLine(x + 30, y + 7, x + 30, y + 6);
+    g.drawLine(x + 30, y + 6, x + 69, y + 6);
+    g.drawLine(x + 69, y + 6, x + 69, y + 12);
+    GraphicsUtil.drawCenteredText(g, "Y", x + 50, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "Y", x + 110, y + height - 27);
+    GraphicsUtil.drawCenteredText(g, "Y", x + 130, y + 17);
+    GraphicsUtil.drawCenteredText(g, "Y", x + 70, y + 17);
+    g.setFont(previousFont);
   }
+
+
 }
