@@ -62,15 +62,28 @@ public class Ttl744075 extends AbstractTtlGate {
   public void paintInternal(InstancePainter painter, int x, int y, int height, boolean up) {
     super.paintBase(painter, false, false);
     final var g = painter.getGraphics();
-    final var bottom = y + height - PIN_HEIGHT;
     final var top = y + PIN_HEIGHT;
-    // 1A, 1B, 1C and 1Y are bottom pins 3 to 6.
-    paintOrToPin(g, x + 100, y + 44, x + 110, bottom, new int[] {x + 50, x + 70, x + 90}, bottom);
-    // 3A, 3B and 3C are top pins 11 to 13, and 3Y is top pin 10.
-    paintOrToPin(g, x + 80, y + 16, x + 90, top, new int[] {x + 70, x + 50, x + 30}, top);
-    // 2A and 2B are bottom pins 1 and 2. 2C is top pin 8 and 2Y is top pin 9.
-    paintOrToPin(g, x + 100, y + 30, x + 110, top, new int[] {x + 10, x + 30}, bottom);
-    g.drawPolyline(new int[] {x + 130, x + 130, x + 84}, new int[] {top, y + 34, y + 34}, 3);
+    final var bottom = y + height - PIN_HEIGHT;
+    // Gate 3 and gate 2 sit 4px below the top edge. Gate 1 stops 4px above the
+    // bottom edge. Gate 2 faces left; all three inputs use the right edge.
+    Drawgates.paintOr(g, x + 88, y + 18, 16, 15, false, false);
+    Drawgates.paintOr(g, x + 108, y + 41, 16, 15, false, false);
+    Drawgates.paintOr(g, x + 112, y + 18, 16, 15, false, true);
+
+    wire(g, x + 70, top, x + 70, y + 14, x + 72, y + 14);
+    wire(g, x + 50, top, x + 50, y + 20, x + 72, y + 20);
+    wire(g, x + 30, top, x + 30, y + 24, x + 72, y + 24);
+    wire(g, x + 90, top, x + 90, y + 18, x + 88, y + 18);
+
+    wire(g, x + 50, bottom, x + 50, y + 39, x + 92, y + 39);
+    wire(g, x + 70, bottom, x + 70, y + 43, x + 92, y + 43);
+    wire(g, x + 90, bottom, x + 90, y + 47, x + 92, y + 47);
+    wire(g, x + 110, bottom, x + 110, y + 41, x + 108, y + 41);
+
+    wire(g, x + 110, top, x + 110, y + 18, x + 112, y + 18);
+    wire(g, x + 130, top, x + 130, y + 14, x + 128, y + 14);
+    wire(g, x + 10, bottom, x + 10, y + 28, x + 130, y + 28, x + 130, y + 24, x + 128, y + 24);
+    wire(g, x + 30, bottom, x + 30, y + 32, x + 134, y + 32, x + 134, y + 20, x + 128, y + 20);
   }
 
   @Override
@@ -84,26 +97,10 @@ public class Ttl744075 extends AbstractTtlGate {
     return state.getPortValue(portA).or(state.getPortValue(portB)).or(state.getPortValue(portC));
   }
 
-  /** Draws one right-facing OR and wires its inputs and output to the given pin columns. */
-  private static void paintOrToPin(
-      Graphics g,
-      int outX,
-      int outY,
-      int outputPinX,
-      int outputPinY,
-      int[] inputX,
-      int inputPinY) {
-    final var width = 16;
-    final var height = 12;
-    Drawgates.paintOr(g, outX, outY, width, height, false, false);
-    g.drawPolyline(
-        new int[] {outX, outputPinX, outputPinX}, new int[] {outY, outY, outputPinY}, 3);
-    final var inputEdge = outX - width;
-    for (var i = 0; i < inputX.length; i++) {
-      final var entry = outY - 4 + i * 4;
-      g.drawPolyline(
-          new int[] {inputX[i], inputX[i], inputEdge}, new int[] {inputPinY, entry, entry}, 3);
+  /** Orthogonal wire through the given points. The first point is the package pin. */
+  private static void wire(Graphics g, int... points) {
+    for (var i = 2; i < points.length; i += 2) {
+      g.drawLine(points[i - 2], points[i - 1], points[i], points[i + 1]);
     }
   }
-
 }
