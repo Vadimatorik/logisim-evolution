@@ -31,8 +31,8 @@ import org.junit.jupiter.api.Test;
 
 /** Functional tests for the 74HC4060 14-stage binary ripple counter. */
 class Ttl744060Test {
-  private static final int GND_PORT = 12;
-  private static final int VCC_PORT = 13;
+  private static final int GND_PORT = 14;
+  private static final int VCC_PORT = 15;
   private static final BitWidth WIDTH = BitWidth.create(14);
   private static final int[] VISIBLE_BITS = {3, 4, 5, 6, 7, 8, 9, 11, 12, 13};
   private static final int[] VISIBLE_PORTS = {
@@ -53,7 +53,7 @@ class Ttl744060Test {
     final var gate = new Ttl744060();
     final var hiddenPower = createInstance(gate, false);
 
-    assertEquals(12, hiddenPower.getPorts().size());
+    assertEquals(14, hiddenPower.getPorts().size());
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_Q12, 10, 30, EndData.OUTPUT_ONLY);
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_Q13, 30, 30, EndData.OUTPUT_ONLY);
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_Q14, 50, 30, EndData.OUTPUT_ONLY);
@@ -61,6 +61,8 @@ class Ttl744060Test {
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_Q5, 90, 30, EndData.OUTPUT_ONLY);
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_Q7, 110, 30, EndData.OUTPUT_ONLY);
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_Q4, 130, 30, EndData.OUTPUT_ONLY);
+    assertPort(hiddenPower, Ttl744060.PORT_INDEX_CTC, 150, -30, EndData.OUTPUT_ONLY);
+    assertPort(hiddenPower, Ttl744060.PORT_INDEX_RTC, 130, -30, EndData.OUTPUT_ONLY);
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_RS, 110, -30, EndData.INPUT_ONLY);
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_MR, 90, -30, EndData.INPUT_ONLY);
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_Q9, 70, -30, EndData.OUTPUT_ONLY);
@@ -68,7 +70,7 @@ class Ttl744060Test {
     assertPort(hiddenPower, Ttl744060.PORT_INDEX_Q10, 30, -30, EndData.OUTPUT_ONLY);
 
     final var shownPower = createInstance(gate, true);
-    assertEquals(14, shownPower.getPorts().size());
+    assertEquals(16, shownPower.getPorts().size());
     assertPort(shownPower, GND_PORT, 150, 30, EndData.INPUT_ONLY);
     assertPort(shownPower, VCC_PORT, 10, -30, EndData.INPUT_ONLY);
   }
