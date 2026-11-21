@@ -12,7 +12,7 @@ package com.cburch.logisim.std.ttl;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import com.cburch.logisim.util.GraphicsUtil;
+import java.awt.Graphics2D;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -88,6 +88,42 @@ public class Ttl74257 extends AbstractTtlGate {
     "nOE (Output enable, active low)"
   };
 
+  /** Square section between the I1 column and the Y column. */
+  private static final int BLOCK_WIDTH = 14;
+
+  /** Tall enough for a two-line label and a four-pixel gap beside the inputs. */
+  private static final int BLOCK_HEIGHT = 16;
+
+  /** Four pixels below the top pin line, clear of the Vcc label. */
+  private static final int UPPER_TOP = PIN_HEIGHT + 4;
+
+  /** Lower row. Its bottom stays six pixels above the bottom pin line. */
+  private static final int LOWER_TOP = 31;
+
+  /** Equal inset of the four inputs from both corners of the face. */
+  private static final int INPUT_INSET = 2;
+
+  private static final int INPUT_STEP = 4;
+
+  /** Under the lower row: four pixels inside the package edge and two below the blocks. */
+  private static final int SELECT_Y = 49;
+
+  /** Between the rows, two pixels clear of both. */
+  private static final int ENABLE_Y = 29;
+
+  /** Riser that continues to the upper-right section. Section 2 taps this riser. */
+  private static final int FAR_SELECT_X = 96;
+
+  /** Enable riser beside the select riser, six pixels short of column 110. */
+  private static final int FAR_ENABLE_X = 104;
+
+  private static final Section[] SECTIONS = {
+    new Section(L1_I0, L1_I1, L1_Y, false, 1),
+    new Section(L2_I0, L2_I1, L2_Y, false, 2),
+    new Section(L4_I0, L4_I1, L4_Y, true, 4),
+    new Section(L3_I0, L3_I1, L3_Y, true, 3)
+  };
+
   /** Creates a 74257 quad 2-line to 1-line data selector with 3-state outputs. */
   public Ttl74257() {
     super(_ID, (byte) 16, OUTPUTS, PORT_NAMES, new Ttl74257HdlGenerator());
@@ -111,58 +147,123 @@ public class Ttl74257 extends AbstractTtlGate {
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
     final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
-    g.drawRect(x + 65, y + 28, 10, 10);
-    g.drawRect(x + 125, y + 28, 10, 10);
-    g.drawRect(x + 145, y + 12, 10, 10);
-    g.drawRect(x + 85, y + 12, 10, 10);
-    g.drawLine(x + 70, y + height - 22, x + 70, y + height - 7);
-    g.drawLine(x + 130, y + height - 22, x + 130, y + height - 7);
-    g.drawLine(x + 150, y + 12, x + 150, y + 7);
-    g.drawLine(x + 90, y + 12, x + 90, y + 7);
-    g.drawLine(x + 65, y + 24, x + 155, y + 24);
-    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 9);
-    g.drawLine(x + 10, y + height - 9, x + 61, y + height - 9);
-    g.drawLine(x + 61, y + height - 9, x + 61, y + 24);
-    g.drawLine(x + 61, y + 24, x + 65, y + 24);
-    g.drawLine(x + 67, y + 24, x + 67, y + 28);
-    g.drawLine(x + 127, y + 24, x + 127, y + 28);
-    g.drawLine(x + 147, y + 24, x + 147, y + 22);
-    g.drawLine(x + 87, y + 24, x + 87, y + 22);
-    g.drawLine(x + 65, y + 25, x + 155, y + 25);
-    g.drawLine(x + 30, y + 7, x + 30, y + 9);
-    g.drawLine(x + 30, y + 9, x + 61, y + 9);
-    g.drawLine(x + 61, y + 9, x + 61, y + 25);
-    g.drawLine(x + 61, y + 25, x + 65, y + 25);
-    g.drawLine(x + 70, y + 25, x + 70, y + 28);
-    g.drawLine(x + 130, y + 25, x + 130, y + 28);
-    g.drawLine(x + 150, y + 25, x + 150, y + 22);
-    g.drawLine(x + 90, y + 25, x + 90, y + 22);
-    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 19);
-    g.drawLine(x + 30, y + height - 19, x + 67, y + height - 19);
-    g.drawLine(x + 67, y + height - 19, x + 67, y + height - 22);
-    g.drawLine(x + 50, y + height - 7, x + 50, y + height - 19);
-    g.drawLine(x + 50, y + height - 19, x + 127, y + height - 19);
-    g.drawLine(x + 127, y + height - 19, x + 127, y + height - 22);
-    g.drawLine(x + 90, y + height - 7, x + 90, y + 25);
-    g.drawLine(x + 90, y + 25, x + 147, y + 25);
-    g.drawLine(x + 147, y + 25, x + 147, y + 22);
-    g.drawLine(x + 110, y + height - 7, x + 110, y + 25);
-    g.drawLine(x + 110, y + 25, x + 87, y + 25);
-    g.drawLine(x + 87, y + 25, x + 87, y + 22);
-    g.drawOval(x + 59, y + 23, 4, 4);
-    GraphicsUtil.drawCenteredText(g, "Y", x + 70, y + height - 27);
-    GraphicsUtil.drawCenteredText(g, "Y", x + 130, y + height - 27);
-    GraphicsUtil.drawCenteredText(g, "Y", x + 150, y + 17);
-    GraphicsUtil.drawCenteredText(g, "Y", x + 90, y + 17);
+    g.setFont(new Font(Font.DIALOG, Font.BOLD, 5));
+    drawStructure(g, x, y, height);
     g.setFont(previousFont);
   }
 
+  /**
+   * Four 2-to-1 sections. A low select passes I0 and a high select passes I1, without inversion. A
+   * low output enable drives every output; a high enable releases them. Every input enters the left
+   * face and Y leaves the right face. Sections 1 and 2 sit on the lower pins, clear of the package
+   * edge; sections 4 and 3 sit on the upper pins.
+   */
+  private static void drawStructure(Graphics g, int x, int y, int height) {
+    final var pinTop = y + PIN_HEIGHT;
+    final var pinBottom = y + height - PIN_HEIGHT;
+    for (final var section : SECTIONS) {
+      drawSection(g, x, y, pinTop, pinBottom, section);
+    }
+    drawSelect(g, x, y, pinBottom);
+    drawEnable(g, x, y, pinTop);
+  }
 
+  /** I0, I1, select, and enable on the left. Y on the right, off every input axis. */
+  private static void drawSection(
+      Graphics g, int x, int y, int pinTop, int pinBottom, Section section) {
+    final var top = y + (section.upper ? UPPER_TOP : LOWER_TOP);
+    final var left = pinX(x, section.source1) + 4;
+    final var right = left + BLOCK_WIDTH;
+    final var source1Y = top + inputOffset(section.upper, 0);
+    final var source0Y = top + inputOffset(section.upper, 1);
+    final var pinY = section.upper ? pinTop : pinBottom;
 
+    g.drawRect(left, top, BLOCK_WIDTH, BLOCK_HEIGHT);
+    drawLabel(g, "MUX\n" + section.number(), left + BLOCK_WIDTH / 2, top + BLOCK_HEIGHT / 2);
+    // The nearer source stops first, so the farther horizontal clears it by four pixels.
+    wire(g, pinX(x, section.source1), pinY, pinX(x, section.source1), source1Y, left, source1Y);
+    wire(g, pinX(x, section.source0), pinY, pinX(x, section.source0), source0Y, left, source0Y);
+    final var outY = top + BLOCK_HEIGHT / 2;
+    wire(g, right, outY, pinX(x, section.output), outY, pinX(x, section.output), pinY);
+  }
 
+  /**
+   * Select rises on its own pin and taps sections 1 and 4 directly. The riser that continues to the
+   * upper-right section also feeds section 2, so that input has no extra corner.
+   */
+  private static void drawSelect(Graphics g, int x, int y, int pinBottom) {
+    final var selectX = pinX(x, SELECT);
+    final var upperY = y + UPPER_TOP + inputOffset(true, 2);
+    final var lowerY = y + LOWER_TOP + inputOffset(false, 2);
+    final var railY = y + SELECT_Y;
+    final var farX = x + FAR_SELECT_X;
 
+    wire(g, selectX, pinBottom, selectX, upperY);
+    wire(g, selectX, lowerY, pinX(x, L1_I1) + 4, lowerY);
+    wire(g, selectX, upperY, pinX(x, L4_I1) + 4, upperY);
+    wire(g, selectX, railY, farX, railY);
+    wire(g, farX, railY, farX, upperY, pinX(x, L3_I1) + 4, upperY);
+    wire(g, farX, lowerY, pinX(x, L2_I1) + 4, lowerY);
+    drawNode(g, selectX, railY);
+    drawNode(g, selectX, lowerY);
+    drawNode(g, farX, lowerY);
+  }
 
+  /**
+   * Enable meets the rail between the rows. Sections 1 and 4 take a short rise from that rail, the
+   * same shape, instead of a second line from the pin. Sections 2 and 3 use the riser at the rail's
+   * end. The bubble is only on this input.
+   */
+  private static void drawEnable(Graphics g, int x, int y, int pinTop) {
+    final var enableX = pinX(x, OE);
+    final var upperY = y + UPPER_TOP + inputOffset(true, 3);
+    final var lowerY = y + LOWER_TOP + inputOffset(false, 3);
+    final var railY = y + ENABLE_Y;
+    final var farX = x + FAR_ENABLE_X;
+    final var section1Tap = pinX(x, L1_I1);
+    final var section4Tap = pinX(x, L4_I1);
+
+    wire(g, enableX, pinTop, enableX, railY, farX, railY);
+    wire(g, section1Tap, railY, section1Tap, lowerY, section1Tap + 2, lowerY);
+    wire(g, section4Tap, railY, section4Tap, upperY, section4Tap + 2, upperY);
+    wire(g, farX, upperY, farX, lowerY);
+    wire(g, farX, upperY, pinX(x, L3_I1) + 2, upperY);
+    wire(g, farX, lowerY, pinX(x, L2_I1) + 2, lowerY);
+    drawBubble(g, section4Tap + 3, upperY);
+    drawBubble(g, section1Tap + 3, lowerY);
+    drawBubble(g, pinX(x, L3_I1) + 3, upperY);
+    drawBubble(g, pinX(x, L2_I1) + 3, lowerY);
+    drawNode(g, section1Tap, railY);
+    drawNode(g, section4Tap, railY);
+    drawNode(g, farX, railY);
+  }
+
+  /**
+   * Centers each line on its real string bounds. Integer width truncates a fractional advance and
+   * shifts the bold label to the right.
+   */
+  private static void drawLabel(Graphics g, String text, int centerX, int centerY) {
+    final var g2 = (Graphics2D) g;
+    final var font = g2.getFont();
+    final var context = g2.getFontRenderContext();
+    final var lines = text.split("\n", -1);
+    final var metrics = font.getLineMetrics(lines[0], context);
+    final var ascent = (int) Math.ceil(metrics.getAscent());
+    final var lineHeight =
+        ascent + (int) Math.ceil(metrics.getDescent()) + (int) Math.ceil(metrics.getLeading());
+    final var top = centerY - (lineHeight * lines.length) / 2;
+    for (var i = 0; i < lines.length; i++) {
+      final var bounds = font.getStringBounds(lines[i], context);
+      final var drawX = (float) (centerX - bounds.getX() - bounds.getWidth() / 2.0);
+      g2.drawString(lines[i], drawX, top + ascent + i * lineHeight);
+    }
+  }
+
+  /** Input {@code index} from the outer corner: 0 is I1, then I0, select, and enable. */
+  private static int inputOffset(boolean upper, int index) {
+    final var fromOuter = INPUT_INSET + index * INPUT_STEP;
+    return upper ? fromOuter : BLOCK_HEIGHT - fromOuter;
+  }
 
   @Override
   public void propagateTtl(InstanceState state) {
@@ -216,39 +317,30 @@ public class Ttl74257 extends AbstractTtlGate {
     return Value.UNKNOWN;
   }
 
-  private static int structureX(int originX, int pins, int pin) {
-    if (pin <= pins / 2) {
+  private static int pinX(int originX, int pin) {
+    if (pin <= GND) {
       return originX + (pin - 1) * 20 + 10;
     }
-    return originX + (pins - pin) * 20 + 10;
+    return originX + (VCC - pin) * 20 + 10;
   }
 
-  private static int structureY(int originY, int bodyHeight, int pins, int pin) {
-    if (pin <= pins / 2) {
-      return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
+  /** Orthogonal wire. A run that starts at a package pin keeps a visible stub before the bend. */
+  private static void wire(Graphics g, int... points) {
+    for (var i = 2; i < points.length; i += 2) {
+      g.drawLine(points[i - 2], points[i - 1], points[i], points[i + 1]);
     }
-    return originY + AbstractTtlGate.PIN_HEIGHT;
   }
 
-  private static void structureBubble(Graphics g, int centerX, int centerY) {
-    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  /** Active-low mark. Even 2×2 oval, center on the wire axis. */
+  private static void drawBubble(Graphics g, int centerX, int centerY) {
+    g.drawOval(centerX - 1, centerY - 1, 2, 2);
   }
 
-  private static void structureDot(
-      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
-    if (data == null) {
-      return;
-    }
-    final var value = data.getValue(word);
-    if (bit < 0 || bit >= value.getWidth()) {
-      return;
-    }
-    final var bitValue = value.get(bit);
-    g.setColor(bitValue.getColor());
-    g.fillOval(centerX - 3, centerY - 3, 6, 6);
-    g.setColor(Color.WHITE);
-    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
-    g.setColor(Color.BLACK);
+  /** Junction of a rail and a tap. The oval center is the common point. */
+  private static void drawNode(Graphics g, int centerX, int centerY) {
+    g.fillOval(centerX - 1, centerY - 1, 2, 2);
   }
 
+  /** One selector. {@code upper} is true when its data pins are on the top edge. */
+  private record Section(byte source0, byte source1, byte output, boolean upper, int number) {}
 }
