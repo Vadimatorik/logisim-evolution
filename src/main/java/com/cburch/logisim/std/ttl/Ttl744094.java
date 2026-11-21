@@ -16,9 +16,12 @@ import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.prefs.AppPreferences;
 import com.cburch.logisim.util.GraphicsUtil;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Path2D;
 import java.util.Arrays;
 
 /**
@@ -118,94 +121,83 @@ public class Ttl744094 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var previousFont = g.getFont();
-    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 8));
-    g.drawRect(x + 65, y + 28, 10, 10);
-    g.drawRect(x + 85, y + 28, 10, 10);
-    g.drawRect(x + 105, y + 28, 10, 10);
-    g.drawRect(x + 125, y + 28, 10, 10);
-    g.drawRect(x + 145, y + 12, 10, 10);
-    g.drawRect(x + 125, y + 12, 10, 10);
-    g.drawRect(x + 45, y + 12, 10, 10);
-    g.drawRect(x + 65, y + 12, 10, 10);
-    g.drawRect(x + 85, y + 12, 10, 10);
-    g.drawRect(x + 105, y + 12, 10, 10);
-    g.drawLine(x + 70, y + height - 22, x + 70, y + height - 7);
-    g.drawLine(x + 90, y + height - 22, x + 90, y + height - 7);
-    g.drawLine(x + 110, y + height - 22, x + 110, y + height - 7);
-    g.drawLine(x + 130, y + height - 22, x + 130, y + height - 7);
-    g.drawLine(x + 150, y + 12, x + 150, y + 7);
-    g.drawLine(x + 130, y + 12, x + 130, y + 7);
-    g.drawLine(x + 50, y + 12, x + 50, y + 7);
-    g.drawLine(x + 70, y + 12, x + 70, y + 7);
-    g.drawLine(x + 90, y + 12, x + 90, y + 7);
-    g.drawLine(x + 110, y + 12, x + 110, y + 7);
-    g.drawLine(x + 45, y + 24, x + 155, y + 24);
-    g.drawLine(x + 10, y + height - 7, x + 10, y + height - 9);
-    g.drawLine(x + 10, y + height - 9, x + 41, y + height - 9);
-    g.drawLine(x + 41, y + height - 9, x + 41, y + 24);
-    g.drawLine(x + 41, y + 24, x + 45, y + 24);
-    g.drawLine(x + 67, y + 24, x + 67, y + 28);
-    g.drawLine(x + 87, y + 24, x + 87, y + 28);
-    g.drawLine(x + 107, y + 24, x + 107, y + 28);
-    g.drawLine(x + 127, y + 24, x + 127, y + 28);
-    g.drawLine(x + 147, y + 24, x + 147, y + 22);
-    g.drawLine(x + 127, y + 24, x + 127, y + 22);
-    g.drawLine(x + 47, y + 24, x + 47, y + 22);
-    g.drawLine(x + 67, y + 24, x + 67, y + 22);
-    g.drawLine(x + 87, y + 24, x + 87, y + 22);
-    g.drawLine(x + 107, y + 24, x + 107, y + 22);
-    g.drawLine(x + 45, y + 25, x + 155, y + 25);
-    g.drawLine(x + 50, y + height - 7, x + 50, y + height - 9);
-    g.drawLine(x + 50, y + height - 9, x + 41, y + height - 9);
-    g.drawLine(x + 41, y + height - 9, x + 41, y + 25);
-    g.drawLine(x + 41, y + 25, x + 45, y + 25);
-    g.drawLine(x + 70, y + 25, x + 70, y + 28);
-    g.drawLine(x + 90, y + 25, x + 90, y + 28);
-    g.drawLine(x + 110, y + 25, x + 110, y + 28);
-    g.drawLine(x + 130, y + 25, x + 130, y + 28);
-    g.drawLine(x + 150, y + 25, x + 150, y + 22);
-    g.drawLine(x + 130, y + 25, x + 130, y + 22);
-    g.drawLine(x + 50, y + 25, x + 50, y + 22);
-    g.drawLine(x + 70, y + 25, x + 70, y + 22);
-    g.drawLine(x + 90, y + 25, x + 90, y + 22);
-    g.drawLine(x + 110, y + 25, x + 110, y + 22);
-    g.drawLine(x + 45, y + 25, x + 155, y + 25);
-    g.drawLine(x + 30, y + 7, x + 30, y + 9);
-    g.drawLine(x + 30, y + 9, x + 41, y + 9);
-    g.drawLine(x + 41, y + 9, x + 41, y + 25);
-    g.drawLine(x + 41, y + 25, x + 45, y + 25);
-    g.drawLine(x + 73, y + 25, x + 73, y + 28);
-    g.drawLine(x + 93, y + 25, x + 93, y + 28);
-    g.drawLine(x + 113, y + 25, x + 113, y + 28);
-    g.drawLine(x + 133, y + 25, x + 133, y + 28);
-    g.drawLine(x + 153, y + 25, x + 153, y + 22);
-    g.drawLine(x + 133, y + 25, x + 133, y + 22);
-    g.drawLine(x + 53, y + 25, x + 53, y + 22);
-    g.drawLine(x + 73, y + 25, x + 73, y + 22);
-    g.drawLine(x + 93, y + 25, x + 93, y + 22);
-    g.drawLine(x + 113, y + 25, x + 113, y + 22);
-    g.drawLine(x + 30, y + height - 7, x + 30, y + height - 19);
-    g.drawLine(x + 30, y + height - 19, x + 67, y + height - 19);
-    g.drawLine(x + 67, y + height - 19, x + 67, y + height - 22);
-    GraphicsUtil.drawCenteredText(g, "0", x + 70, y + height - 27);
-    GraphicsUtil.drawCenteredText(g, "1", x + 90, y + height - 27);
-    GraphicsUtil.drawCenteredText(g, "2", x + 110, y + height - 27);
-    GraphicsUtil.drawCenteredText(g, "3", x + 130, y + height - 27);
-    GraphicsUtil.drawCenteredText(g, "1", x + 150, y + 17);
-    GraphicsUtil.drawCenteredText(g, "2", x + 130, y + 17);
-    GraphicsUtil.drawCenteredText(g, "4", x + 50, y + 17);
-    GraphicsUtil.drawCenteredText(g, "5", x + 70, y + 17);
-    GraphicsUtil.drawCenteredText(g, "6", x + 90, y + 17);
-    GraphicsUtil.drawCenteredText(g, "7", x + 110, y + 17);
-    g.setFont(previousFont);
+    drawStructure(g, x, y, height);
   }
 
+  /**
+   * Logic diagram of the 74HC4094. Rising CP clocks D through the shift register; QS1 leaves its
+   * last stage. STR high lets storage follow that register. OE high, with no bubble, enables one
+   * buffer on each stored bit. A second flip-flop copies QS1 into QS2 on the falling edge.
+   */
+  private static void drawStructure(Graphics g, int x, int y, int height) {
+    final var top = y + PIN_HEIGHT;
+    final var bottom = y + height - PIN_HEIGHT;
+    final var previous = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.PLAIN, 5));
+    g.drawRect(x + 22, y + 35, 36, 10);
+    g.drawRect(x + 9, y + 23, 30, 10);
+    g.drawRect(x + 122, y + 17, 24, 10);
+    // Dialog 5 is 8 px tall. V_CENTER_OVERALL puts that box on the block center.
+    GraphicsUtil.drawText(
+        g, "SHIFT", x + 40, y + 40, GraphicsUtil.H_CENTER, GraphicsUtil.V_CENTER_OVERALL);
+    GraphicsUtil.drawText(
+        g, "STORE", x + 24, y + 28, GraphicsUtil.H_CENTER, GraphicsUtil.V_CENTER_OVERALL);
+    GraphicsUtil.drawText(
+        g, "QS2", x + 134, y + 22, GraphicsUtil.H_CENTER, GraphicsUtil.V_CENTER_OVERALL);
+    g.setFont(previous);
 
+    for (var px : new int[] {50, 70, 90, 110}) {
+      drawBuffer(g, x + px, y + 11, x + px - 4, y + 15, x + px + 4, y + 15);
+    }
+    for (var px : new int[] {70, 90, 110, 130}) {
+      drawBuffer(g, x + px - 4, y + 41, x + px + 4, y + 41, x + px, y + 45);
+    }
+    drawClockUp(g, x + 50, y + 45, 1);
+    drawClockUp(g, x + 142, y + 27, 2);
+    g.drawOval(x + 141, y + 27, 2, 2);
 
+    wire(g, x + 10, bottom, x + 10, y + 33);
+    wire(g, x + 30, bottom, x + 30, y + 45);
+    wire(g, x + 50, bottom, x + 50, y + 45);
+    wire(g, x + 50, y + 48, x + 142, y + 48, x + 142, y + 29);
+    drawNode(g, x + 50, y + 48);
+    wire(g, x + 44, y + 35, x + 44, y + 31, x + 150, y + 31, x + 150, top);
+    wire(g, x + 126, y + 31, x + 126, y + 27);
+    drawNode(g, x + 126, y + 31);
+    wire(g, x + 130, y + 17, x + 130, top);
+    wire(g, x + 30, top, x + 30, y + 13, x + 48, y + 13);
+    wire(g, x + 42, y + 13, x + 42, y + 27, x + 118, y + 27, x + 118, y + 43);
+    drawNode(g, x + 42, y + 13);
+    for (var px : new int[] {70, 90}) {
+      final var drop = px - 8;
+      wire(g, x + drop, y + 13, x + drop, y + 43);
+      wire(g, x + drop, y + 13, x + px - 2, y + 13);
+      wire(g, x + drop, y + 43, x + px - 2, y + 43);
+      drawNode(g, x + drop, y + 27);
+    }
+    wire(g, x + 102, y + 13, x + 102, y + 27);
+    wire(g, x + 102, y + 13, x + 108, y + 13);
+    drawNode(g, x + 102, y + 27);
+    wire(g, x + 112, y + 43, x + 128, y + 43);
+    drawNode(g, x + 118, y + 43);
+    for (var px : new int[] {50, 70, 90, 110}) {
+      wire(g, x + px, y + 11, x + px, top);
+    }
+    for (var px : new int[] {70, 90, 110, 130}) {
+      wire(g, x + px, y + 45, x + px, bottom);
+    }
+    for (var px : new int[] {50, 70, 90, 110}) {
+      wire(g, x + px, y + 19, x + px, y + 15);
+    }
+    for (var px : new int[] {70, 90, 110, 130}) {
+      wire(g, x + px, y + 37, x + px, y + 41);
+    }
 
-
-
+    bus(g, x + 36, y + 33, x + 36, y + 35);
+    bus(g, x + 23, y + 23, x + 23, y + 19, x + 110, y + 19, x + 110, y + 36);
+    // Butt cap meets the outer face of the width-1 taps at pins 4 and 7.
+    bus(g, x + 69.5, y + 37, x + 130.5, y + 37);
+  }
 
   @Override
   public void propagateTtl(InstanceState state) {
@@ -303,39 +295,45 @@ public class Ttl744094 extends AbstractTtlGate {
     }
   }
 
-  private static int structureX(int originX, int pins, int pin) {
-    if (pin <= pins / 2) {
-      return originX + (pin - 1) * 20 + 10;
+  /** Orthogonal wire through the given points. */
+  private static void wire(Graphics g, int... points) {
+    for (var i = 2; i < points.length; i += 2) {
+      g.drawLine(points[i - 2], points[i - 1], points[i], points[i + 1]);
     }
-    return originX + (pins - pin) * 20 + 10;
   }
 
-  private static int structureY(int originY, int bodyHeight, int pins, int pin) {
-    if (pin <= pins / 2) {
-      return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
-    }
-    return originY + AbstractTtlGate.PIN_HEIGHT;
+  /** Closed buffer triangle. Bevel join keeps the apex from mitering past the tip. */
+  private static void drawBuffer(Graphics g, int x0, int y0, int x1, int y1, int x2, int y2) {
+    final var g2 = (Graphics2D) g;
+    final var previous = g2.getStroke();
+    g2.setStroke(new BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
+    g.drawPolygon(new int[] {x0, x1, x2}, new int[] {y0, y1, y2}, 3);
+    g2.setStroke(previous);
   }
 
-  private static void structureBubble(Graphics g, int centerX, int centerY) {
-    g.drawOval(centerX - 2, centerY - 2, 4, 4);
+  /** Clock mark on the bottom edge. The point is inside the block. */
+  private static void drawClockUp(Graphics g, int centerX, int edgeY, int halfBase) {
+    g.drawLine(centerX - halfBase, edgeY, centerX, edgeY - 3);
+    g.drawLine(centerX + halfBase, edgeY, centerX, edgeY - 3);
   }
 
-  private static void structureDot(
-      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
-    if (data == null) {
-      return;
+  /** Several signals of one kind. One path, so a corner does not leave a gap. */
+  private static void bus(Graphics g, double... points) {
+    final var path = new Path2D.Double();
+    path.moveTo(points[0], points[1]);
+    for (var i = 2; i < points.length; i += 2) {
+      path.lineTo(points[i], points[i + 1]);
     }
-    final var value = data.getValue(word);
-    if (bit < 0 || bit >= value.getWidth()) {
-      return;
-    }
-    final var bitValue = value.get(bit);
-    g.setColor(bitValue.getColor());
-    g.fillOval(centerX - 3, centerY - 3, 6, 6);
-    g.setColor(Color.WHITE);
-    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
-    g.setColor(Color.BLACK);
+    final var g2 = (Graphics2D) g;
+    final var previous = g2.getStroke();
+    g2.setStroke(new BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+    g2.draw(path);
+    g2.setStroke(previous);
+  }
+
+  /** Junction of three branches. The oval center is the common point. */
+  private static void drawNode(Graphics g, int centerX, int centerY) {
+    g.fillOval(centerX - 1, centerY - 1, 2, 2);
   }
 
 }
