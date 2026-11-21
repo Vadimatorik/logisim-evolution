@@ -3,6 +3,41 @@
 # Changes #
 
 * @dev (????-??-??)
+  * Fixed the FP Round component turning values beyond the long range, infinities and NaN into
+    9.223372036854776E18 or 0 in its truncate and round modes (@emincan2000).
+  * Added missing cache instructions of the NIOS-V g CPU to be able to simulate the programs in the SOC environment (@BFH-ktt1).
+  * Drew the internal logic diagram of TTL 74365 (@Vadimatorik).
+  * Drew the internal logic diagram of TTL 74138 (@Vadimatorik).
+  * Drew the internal logic diagram of TTL 74266 (@Vadimatorik).
+  * Drew the internal logic diagram of TTL 74194 (@Vadimatorik).
+  * Drew the internal logic diagram of TTL 744017 (@Vadimatorik).
+  * Fixed the Exponentiator returning 1 or failing with an exception for exponents of 2^31 or more
+    when it is unsigned or wider than 32 bits (@emincan2000).
+  * Fixed the file browser reopening in the Windows Recent Items folder after creating a folder there
+    [#3211] (@LachlanMayes).
+  * Added a `--load-lib` command line option to load JAR and Logisim libraries at startup [#2966] (@DhruviiPatell).
+  * Add (v)hdl support for the floating point Absolute component (@zOnlyKroks)
+  * Drew the internal logic diagram of TTL 74123 (@Vadimatorik).
+  * Drew the internal logic diagram of TTL 7476 (@Vadimatorik).
+  * Drew the internal logic diagram of TTL 74390 (@Vadimatorik).
+  * Added a Window preference to open circuits at the last-used zoom instead of always fitting
+    them to the window [#3070] (@LachlanMayes).
+  * Drew the internal logic diagram of TTL 7493 (@Vadimatorik).
+  * Drew the internal logic diagram of TTL 74283 (@Vadimatorik).
+  * Drew the internal logic diagram of TTL 7447 (@Vadimatorik).
+  * Drew the internal logic diagram of TTL 7485 (@Vadimatorik).
+  * Fixed 8-bit floats turning some NaN values into infinity, and an assertion in the conversion that failed
+    whenever rounding carried into the exponent (@emincan2000).
+  * Drew the internal logic diagram of TTL 7487 (@Vadimatorik).
+  * Added an optional Unified Header Bar component, which could be toggled via Window Preferences [#3166] (@friendsgamingyt611-sys).
+  * Preserved look-and-feel UI fonts when the Application font is Default [#3162] (@mvanhorn).
+  * Sped up simulation by running a queued component once per step and caching which of its ports are connected
+    [#3065] (@Kejoki).
+  * Made resetting the simulation of designs with many subcircuit instances faster and lighter on memory
+    [#3156] (@iSlavok).
+  * Fixed the simulation tree duplicating and leaking nodes, which made editing designs with nested
+    subcircuits slower and slower [#3152] (@iSlavok).
+  * Added TTL 74594: 8-bit shift register with output register (@Vadimatorik).
   * Added an option to follow the system light or dark setting, on by default for new installations
     [#3132] (@tejastagra).
   * Fixed the Multiplier VHDL/Verilog generators: the VHDL did not compile, and every numeric type
@@ -19,6 +54,7 @@
     editor and in TikZ export [#2942] (@Vadimatorik).
   * Extended label formulas with modulus, comparisons, bare subscripts, and superscripts
     [#2942] (@Vadimatorik).
+  * Added TTL 74107: dual negative-edge J-K flip-flops with reset (@Vadimatorik).
   * Added TTL 744075: triple 3-input OR gate (@Vadimatorik).
   * Added TTL 7405: hex inverter with open-drain outputs (@Vadimatorik).
   * Added TTL 74132: quad 2-input NAND gate (Schmitt trigger) (@Vadimatorik).
@@ -77,6 +113,9 @@
   * Added TTL 74190: synchronous presettable BCD up/down counter (@Vadimatorik).
   * Added TTL 74365: hex buffer/line driver with three-state outputs (@Vadimatorik).
   * Added TTL 74259: 8-bit addressable latch (@Vadimatorik).
+  * Added TTL 74393: dual 4-bit binary ripple counter (@Vadimatorik).
+  * Added TTL 74640: octal inverting bus transceivers with three-state outputs (@Vadimatorik).
+  * Added TTL 74688: 8-bit identity comparator (@Vadimatorik).
   * Fixed TTL 74173 clear operation. [#3146] (@davidhutchens)
 
 * v5.0.0 (2026-09-12)
