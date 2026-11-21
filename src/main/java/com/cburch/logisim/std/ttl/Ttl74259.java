@@ -10,8 +10,12 @@
 package com.cburch.logisim.std.ttl;
 
 import com.cburch.logisim.util.GraphicsUtil;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Path2D;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
@@ -105,56 +109,95 @@ public class Ttl74259 extends AbstractTtlGate {
     final var g = painter.getGraphics();
     super.paintBase(painter, false, false);
     g.setColor(Color.BLACK);
-    final var rawState = painter.getData();
-    final TtlRegisterData stored = rawState instanceof TtlRegisterData ? (TtlRegisterData) rawState : null;
-    g.drawRect((x + 64), (y + height - 28), 12, 14);
-    g.drawLine((x + 70), ((y + height - 28)) + 14, (x + 70), (y + height - 7));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 70), ((y + height - 28)) + 8);
-    structureDot(g, (x + 70), ((y + height - 28)) + 7, stored, 0, 0);
-    g.drawRect((x + 84), (y + height - 28), 12, 14);
-    g.drawLine((x + 90), ((y + height - 28)) + 14, (x + 90), (y + height - 7));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 90), ((y + height - 28)) + 8);
-    g.drawRect((x + 104), (y + height - 28), 12, 14);
-    g.drawLine((x + 110), ((y + height - 28)) + 14, (x + 110), (y + height - 7));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 110), ((y + height - 28)) + 8);
-    g.drawRect((x + 124), (y + height - 28), 12, 14);
-    g.drawLine((x + 130), ((y + height - 28)) + 14, (x + 130), (y + height - 7));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 130), ((y + height - 28)) + 8);
-    g.drawRect((x + 144), (y + 12), 12, 14);
-    g.drawLine((x + 150), (y + 12), (x + 150), (y + 7));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 150), ((y + 12)) + 8);
-    g.drawRect((x + 124), (y + 12), 12, 14);
-    g.drawLine((x + 130), (y + 12), (x + 130), (y + 7));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 130), ((y + 12)) + 8);
-    g.drawRect((x + 104), (y + 12), 12, 14);
-    g.drawLine((x + 110), (y + 12), (x + 110), (y + 7));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 110), ((y + 12)) + 8);
-    g.drawRect((x + 84), (y + 12), 12, 14);
-    g.drawLine((x + 90), (y + 12), (x + 90), (y + 7));
-    GraphicsUtil.drawCenteredText(g, "L", (x + 90), ((y + 12)) + 8);
-    g.drawLine((x + 64), (y + 28), (x + 156), (y + 28));
-    g.drawLine((x + 70), (y + 28), (x + 70), (y + 26));
-    g.drawLine((x + 90), (y + 28), (x + 90), (y + 26));
-    g.drawLine((x + 110), (y + 28), (x + 110), (y + 26));
-    g.drawLine((x + 130), (y + 28), (x + 130), (y + 26));
-    g.drawLine((x + 150), (y + 28), (x + 150), (y + 26));
-    g.drawLine((x + 130), (y + 28), (x + 130), (y + 26));
-    g.drawLine((x + 110), (y + 28), (x + 110), (y + 26));
-    g.drawLine((x + 90), (y + 28), (x + 90), (y + 26));
-    g.drawLine((x + 50), (y + 7), (x + 50), (y + 13));
-    g.drawLine((x + 50), (y + 13), (x + 64), (y + 13));
-    g.drawLine((x + 64), (y + 13), (x + 64), (y + 28));
-    structureBubble(g, (x + 50), (y + 7));
-    g.drawLine((x + 10), (y + height - 7), (x + 10), (y + 30));
-    GraphicsUtil.drawCenteredText(g, "A", (x + 10), (y + 30));
-    g.drawLine((x + 30), (y + height - 7), (x + 30), (y + 30));
-    GraphicsUtil.drawCenteredText(g, "A", (x + 30), (y + 30));
-    g.drawLine((x + 50), (y + height - 7), (x + 50), (y + 30));
-    GraphicsUtil.drawCenteredText(g, "A", (x + 50), (y + 30));
-    g.drawLine((x + 70), (y + 7), (x + 70), (y + 30));
-    GraphicsUtil.drawCenteredText(g, "D", (x + 70), (y + 30));
-    g.drawLine((x + 30), (y + 7), (x + 30), (y + 30));
-    structureBubble(g, (x + 30), (y + 7));
+    final var previousFont = g.getFont();
+    g.setFont(new Font(Font.DIALOG, Font.BOLD, 5));
+    drawSchematic(g, x, y, height);
+    g.setFont(previousFont);
+  }
+
+  /**
+   * Address S0–S2 enters the bottom of the decoder. The select bus leaves its top. Pin 14, D and
+   * active-low CLR enter the top of the latch; Q leaves the bottom, opposite those inputs, and one
+   * bus reaches both pin rows. Address and data inverters stay inside the blocks.
+   */
+  private static void drawSchematic(Graphics g, int x, int y, int height) {
+    final var pinTop = y + PIN_HEIGHT;
+    final var pinBottom = y + height - PIN_HEIGHT;
+    g.drawRect(x + 10, y + 32, 24, 12);
+    g.drawRect(x + 38, y + 32, 40, 12);
+    label(g, "DEC", x + 22, y + 38);
+    label(g, "LATCH", x + 58, y + 38);
+
+    // Address bus into the decoder bottom. The stub stops one pixel outside the rail.
+    bus(g, x + 9.5f, y + 48, x + 50.5f, y + 48);
+    wire(g, x + 10, pinBottom, x + 10, y + 48);
+    wire(g, x + 30, pinBottom, x + 30, y + 48);
+    wire(g, x + 50, pinBottom, x + 50, y + 48);
+    bus(g, x + 22, y + 44, x + 22, y + 47);
+
+    // Pin 14 runs along the top into the latch. Active low, so the bubble is on that block.
+    wire(g, x + 50, pinTop, x + 50, y + 12, x + 62, y + 12, x + 62, y + 30);
+    bubble(g, x + 62, y + 31);
+
+    // Select bus leaves the decoder top and enters the latch top.
+    bus(g, x + 22, y + 32, x + 22, y + 28, x + 46, y + 28, x + 46, y + 32);
+
+    // Pin 13 drops straight into the latch on its own column.
+    wire(g, x + 70, pinTop, x + 70, y + 32);
+
+    // CLR is active low and drops left of pin 14, so the two wires do not cross.
+    wire(g, x + 30, pinTop, x + 30, y + 24, x + 54, y + 24, x + 54, y + 30);
+    bubble(g, x + 54, y + 31);
+
+    // Q leaves the latch bottom opposite the inputs and feeds both pin rows.
+    bus(g, x + 58, y + 44, x + 58, y + 47);
+    bus(g, x + 57, y + 48, x + 137, y + 48);
+    bus(g, x + 136, y + 13, x + 136, y + 47);
+    bus(g, x + 89.5f, y + 12, x + 150.5f, y + 12);
+    for (var column : new int[] {90, 110, 130, 150}) {
+      wire(g, x + column, pinTop, x + column, y + 12);
+    }
+    for (var column : new int[] {70, 90, 110, 130}) {
+      wire(g, x + column, pinBottom, x + column, y + 48);
+    }
+  }
+
+  private static void label(Graphics g, String text, int cx, int cy) {
+    GraphicsUtil.drawText(g, text, cx, cy, GraphicsUtil.H_CENTER, GraphicsUtil.V_CENTER_OVERALL);
+  }
+
+  private static void bubble(Graphics g, int cx, int cy) {
+    g.drawOval(cx - 1, cy - 1, 2, 2);
+  }
+
+  private static void wire(Graphics g, int... points) {
+    for (var i = 2; i < points.length; i += 2) {
+      g.drawLine(points[i - 2], points[i - 1], points[i], points[i + 1]);
+    }
+  }
+
+  /** Thick bus. A corner is one polyline so the butt caps do not leave a gap. */
+  private static void bus(Graphics g, float... points) {
+    if ((points.length < 4) || (points.length % 2 != 0)) return;
+    if (!(g instanceof Graphics2D g2)) {
+      for (var i = 2; i < points.length; i += 2) {
+        g.drawLine(
+            Math.round(points[i - 2]),
+            Math.round(points[i - 1]),
+            Math.round(points[i]),
+            Math.round(points[i + 1]));
+      }
+      return;
+    }
+    final var previous = g2.getStroke();
+    g2.setStroke(new BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+    final var path = new Path2D.Float();
+    path.moveTo(points[0], points[1]);
+    for (var i = 2; i < points.length; i += 2) {
+      path.lineTo(points[i], points[i + 1]);
+    }
+    g2.draw(path);
+    g2.setStroke(previous);
   }
 
   @Override
@@ -239,41 +282,6 @@ public class Ttl74259 extends AbstractTtlGate {
 
   private static Value input(InstanceState state, byte pin) {
     return state.getPortValue(pinNrToPortNr(pin));
-  }
-
-  private static int structureX(int originX, int pins, int pin) {
-    if (pin <= pins / 2) {
-      return originX + (pin - 1) * 20 + 10;
-    }
-    return originX + (pins - pin) * 20 + 10;
-  }
-
-  private static int structureY(int originY, int bodyHeight, int pins, int pin) {
-    if (pin <= pins / 2) {
-      return originY + bodyHeight - AbstractTtlGate.PIN_HEIGHT;
-    }
-    return originY + AbstractTtlGate.PIN_HEIGHT;
-  }
-
-  private static void structureBubble(Graphics g, int centerX, int centerY) {
-    g.drawOval(centerX - 2, centerY - 2, 4, 4);
-  }
-
-  private static void structureDot(
-      Graphics g, int centerX, int centerY, TtlRegisterData data, int word, int bit) {
-    if (data == null) {
-      return;
-    }
-    final var value = data.getValue(word);
-    if (bit < 0 || bit >= value.getWidth()) {
-      return;
-    }
-    final var bitValue = value.get(bit);
-    g.setColor(bitValue.getColor());
-    g.fillOval(centerX - 3, centerY - 3, 6, 6);
-    g.setColor(Color.WHITE);
-    GraphicsUtil.drawCenteredText(g, bitValue.toDisplayString(), centerX, centerY);
-    g.setColor(Color.BLACK);
   }
 
 }
